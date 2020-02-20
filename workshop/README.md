@@ -1,11 +1,11 @@
-# Integrating Cloud Native Applications on OpenShift with Cloud Pak for Integration
+# Enterprise-grade integration within a micro-service based application on OpenShift, with Cloud Pak for Integration
 
-Welcome to our workshop! In this workshop we'll be using the Cloud Pak for Integration platform to wire together a set of micro-service applications into a running solution on OpenShift. The goals of this workshop are:
+Welcome to our workshop! In this workshop we'll be using the Cloud Pak for Integration platform to modify an existing micro-service based application to more robustly wire the micro-services together for running in an Enterprise environment on OpenShift, both for Day 0 and beyond. The goals of this workshop are:
 
 * Deploy an API Gateway using `API Connect`, to provide an API management point across the micro-services
 * Simplify data access from external data sources, such as Salesforce, using `App Connect`
-* Integrate payment flow into an existing `MQ` payment service
-* Simplify flow of status udpates to the end user with a kafka event stream, using `Event Streams`
+* Integrate the payment flow into an existing `MQ-based` payment service
+* Simplify the flow of status udpates to the end user with a kafka event stream, using `Event Streams`
 * Find performace bottlenecks in the overall flow, using `Tracing`
 
 ![Tools used in the workshop](.gitbook/images/tools-for-workshop.png)
