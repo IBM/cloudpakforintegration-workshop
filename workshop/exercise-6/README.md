@@ -1,4 +1,6 @@
-# Exercise 6: Building a custom Appsody Stack Collection in Kabanero
+# Exercise 6: Add Tracing into your application
+
+[re-write everything below this line]
 
 In this exercise, we will show how to create a custom Collection, that includes the custom Appsody Stack from the previous exercise.
 

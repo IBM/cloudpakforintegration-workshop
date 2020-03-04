@@ -8,8 +8,6 @@ Welcome to our workshop! In this workshop we'll be using the Cloud Pak for Integ
 * Simplify the flow of status udpates to the end user with a kafka event stream, using `Event Streams`
 * Find performace bottlenecks in the overall flow, using `Tracing`
 
-![Tools used in the workshop](.gitbook/images/tools-for-workshop.png)
-
 ## About this workshop
 
 The introductory page of the workshop is broken down into the following sections:
@@ -21,35 +19,32 @@ The introductory page of the workshop is broken down into the following sections
 
 ## Agenda
 
-[TODO: Rewrite Day 1 and 2 Agenda below]
+### Day 1: API and Data connectivity and management with Cloud Pak for Integeration
 
-### Day 1: Kabanero and Appsody for Developers and Operators
-
-In this first day we'll learn how to use Appsody to run the *inner loop* of the development and test cycle for a developer, and how these tools can be integrated into your favorite IDE. We'll also explore how to deploy an application to OpenShift, first manually with Appsody for dev/test purposes, and then using the standard Kabanero Tekton piplines with GitOps as part of a continual test/production cycle.
+In this first day, as well as introducing the capabilities of Cloud Pak for Integration, we'll learn how to use the API Connect and App Connect components within a micro-services based application on OpenShift.
 
 |   |   |
 | - | - |
 | [Lecture 1: What is Cloud Native?](https://ibm.box.com/s/3pvl4jdi3xifs1olzcl9np904zvk5ueo) | Learn about the technologies that underpin Cloud Native applications |
-| [Lecture 2: Kabanero Overview](https://ibm.box.com/s/6jl4b7sj8xqgh7rvxtea5ykpsjyu1siz) | Learn about Kabanero. An open source project to rapidly create Cloud Native applications |
-| [Exercise 1: Introduction to Appsody and Codewind](exercise-1/README.md) | Install the Appsody component of Kabanero into the IDE with Codewind, Learn about the developer flow, building your first application with Appsody |
-| [Exercise 2: Using Appsody CLI to develop, test, and debug applications](exercise-2/README.md) | Use the Appsody CLI to quickly create frontend and backend applications for a sample application using two different technologies (Spring and nodejs express) |
-| [Exercise 3: Deploying to OpenShift with Appsody](exercise-3/README.md) | Deploy the built applications to IBM Managed OpenShift with Appsody for dev/test purposes |
-| [Lecture 3: Adding value with IBM Cloud Pak for Applications](https://ibm.box.com/s/y4wh104vdos1vw5kdjwwuhebf8jgq580) | Learn about how IBM Cloud Pak for Applications bundles everything together |
-| [Exercise 4: Use Tekton and Kabanero Pipelines to continuously deploy](exercise-4/README.md) | Deploy the built applications to IBM Managed OpenShift using GitOps to trigger a Tekton pipeline |
+| [Lecture 2: Introduction to Cloud Pak for Integration](TBD) | Learn about the set of solutions that enable you to rapidly integrate Cloud Native applications |
+| [Exercise 1: Introduction to the example Bee Travels application](exercise-1/README.md) | Install and run the example micro-services based application, ahead of starting to implement enterprise-grade integration capabilities |
+| [Lecture 3: Introduction to API Connect](TBD) | Learn about how API Connect can provided a management point for all the APIs in your application |
+| [Exercise 2: Add an API Management point to the application](exercise-2/README.md) | Introduce a common management point for all the APIs, with routing and logging for all calls to the Bee Travels application|
+| [Lecture 4: Introduction to App Connect](TBD) | Learn about how App Connect can easy the connection of data sources (wherever they live) to your application |
+| [Exercise 3: Use App Connect to easily integrate an external data source](exercise-3/README.md) | Integrate Salesforce CRM data into the Bee Travels application |
 
-### Day 2: Customizing Stacks, Pipelines in Collections
+### Day 2: Adding Events, as well as Tracing to the application
 
-In the second day we'll learn about the Kabanero open source project and how to productionize our applications with custom Appsody Stacks, custom Collections, and custom Tekton pipelines.
+In the second day we'll learn about how to add different classes of events to the application, as well as adding traching capabilities so we can keep track of what is going on.
 
 |   |   |
 | - | - |
-| [Lecture 4: Customizing Appsody and Kabanero](https://ibm.box.com/s/kbuympaqftxswyi1aoswdlqussmqf1ba) | Learn all about the stacks and repos |
-| [Exercise 6: Building a custom Collection](exercise-6/README.md) | Create a collection that will contain custom appsody stacks and pipelines |
-| [Exercise 5: Customizing an existing Appsody Stack](exercise-5/README.md) | Create a custom stack, to be hosted in our custom repository |
-| [Exercise 7: Using a custom Collection with Appsody](exercise-7/README.md) | Learn how to manage these custom stacks and how to make them available to developers |
-| [Lecture 5: Tekton Overview](https://ibm.box.com/s/tg0f6nhs91trlzkb5pfnh5e1rdzg4wm6) | Learn all Tekton CI/CD and how Kabanero uses it |
-| [Exercise 8: Create a custom Tekton Task and Pipleline](exercise-8/README.md) | Build a pipeline that will fit into a custom Collection |
-| [Exercise 9: Deploy an application with a custom Stack, custom Collection, and custom Pipeline](exercise-9/README.md) | Build and deploy an application using the custom stack, collection and pipelines built by the Architects' and Operators' tracks |
+| [Lecture 5: Introduction to MQ](TBD) | Learn all about the types of events most suitable for MQ, and how to go about integrating that into your application |
+| [Exercise 4: Add a payment flow from your application into MQ](exercise-4/README.md) | Integrate an existing MQ payment queue into the Bee Travels application |
+| [Lecture 6: Introduction to Event Streams](TBD) | Learn all about the types of events most suitable for Event Streams & Kafka, and how to go about integrating that into your application |
+| [Exercise 5: Add a customer notification event process into your application using Event Streams](exercise-5/README.md) | Add a Kafka event stream into the Bee Travels application |
+| [Lecture 7: Introduction to Tracing with Cloud Pak for Integration](TBD) | Learn how to build distributed tracing into your application |
+| [Exercise 6: Add Tracing into your application](exercise-6/README.md) | Add distributed tracing into the Bee Travels application |
 
 ## Compatability
 
@@ -79,4 +74,4 @@ Cloud Pak for Integration includes components to enable you to manage:
 
 This workshop was primarily written by [Henry Nash](https://github.com/henrynash) and [Steve Martinelli](https://github.com/stevemar). Many other IBMers have contributed to help shape, test, and contribute to the workshop.
 
-* [A N Other](https://github.com/GregDritschler): For his [Funcky Shirts](https://github.com/IBM/appsody-sample-quote-app)
+* [A N Other](https://github.com/GregDritschler): For his [Funky Shirts](https://github.com/IBM/appsody-sample-quote-app)
