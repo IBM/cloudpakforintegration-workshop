@@ -1,4 +1,6 @@
-# Exercise 3: Deploying to OpenShift with Appsody
+# Exercise 3: Use App Connect to easily integrate an external data source
+
+[re-write everything below this line]
 
 In [Exercise 2](../exercise-2/README.md) you were running the insurance quote application under "appsody control" in Local Rapid Development Mode (sometimes called the *inner loop* of development). In this exercise, we will show how to deploy the same application to OpenShift using Appsody. Appsody provides the functionaliy to build a standard Docker image for your applicaiton (including all the components from stack), for deployment to Docker or Kubernetes, enabling additional testings within these environment. In particular:
 

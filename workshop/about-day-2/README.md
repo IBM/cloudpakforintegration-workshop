@@ -1,15 +1,14 @@
 # Workshop Day 2
 
-## Day 2: Customizing Stacks, Pipelines in Collections
+## Day 2: Adding Events, as well as Tracing to the application
 
-In the second day we'll learn about the Kabanero open source project and how to productionize our applications with custom Appsody Stacks, custom Collections, and custom Tekton pipelines.
+In the second day we'll learn about how to add different classes of events to the application, as well as adding traching capabilities so we can keep track of what is going on.
 
 | Section | Description |
 | - | - |
-| **[Lecture 4: Customizing Appsody and Kabanero](https://ibm.box.com/s/kbuympaqftxswyi1aoswdlqussmqf1ba)** | Learn about the stacks and repos |
-| **[Exercise 5: Customizing an existing Appsody Stack](../exercise-5/README.md)** | Create a custom stack, to be hosted in our custom repository |
-| **[Exercise 6: Building a custom Collection](../exercise-6/README.md)** | Create a collection that will contain custom appsody stacks and pipelines |
-| **[Exercise 7: Using a custom Collection with Appsody](../exercise-7/README.md)** | Test the developer experience with the custom appsody stack in the collection |
-| **[Lecture 5: Tekton Overview](https://ibm.box.com/s/tg0f6nhs91trlzkb5pfnh5e1rdzg4wm6)** | Learn about Tekton CI/CD and how Kabanero uses it |
-| **[Exercise 8: Create a custom Tekton Task and Pipleline](../exercise-8/README.md)** | Build a pipeline that will fit into a custom Collection |
-| **[Exercise 9: Deploy an application with a custom Stack, custom Collection, and custom Pipeline](../exercise-9/README.md)** | Build and deploy an application using the custom stack, collection and pipelines built by the Architects' and Operators' tracks |
+| **[Lecture 5: Introduction to MQ](TBD)** | Learn all about the types of events most suitable for MQ, and how to go about integrating that into your application |
+| **[Exercise 4: Add a payment flow from your application into MQ](exercise-4/README.md)** | Integrate an existing MQ payment queue into the Bee Travels application |
+| **[Lecture 6: Introduction to Event Streams](TBD)** | Learn all about the types of events most suitable for Event Streams & Kafka, and how to go about integrating that into your application |
+| **[Exercise 5: Add a customer notification event process into your application using Event Streams](exercise-5/README.md)** | Add a Kafka event stream into the Bee Travels application |
+| **[Lecture 7: Introduction to Tracing with Cloud Pak for Integration](TBD)** | Learn how to build distributed tracing into your application |
+| **[Exercise 6: Add Tracing into your application](exercise-6/README.md)** | Add distributed tracing into the Bee Travels application |

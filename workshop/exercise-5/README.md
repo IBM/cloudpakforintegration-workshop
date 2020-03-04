@@ -1,4 +1,6 @@
-# Exercise 5: Customizing an existing Appsody Stack
+# Exercise 5: Add a customer notification event process into your application using Event Streams
+
+[re-write everything below this line]
 
 The goals for this day are to customize each of the pre-configured asset from Day 1, meaning we will:
 

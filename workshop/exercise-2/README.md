@@ -1,4 +1,6 @@
-# Exercise 2: Using Appsody CLI to develop/test/debug applications
+# Exercise 2: Add an API Management point to the application
+
+[re-write everything below this line]
 
 In this exercise, we will show how to create a sample insurance quote application using Appsody. Appsody is an open source project that provides the following tools you can use to build cloud-native applications:
 

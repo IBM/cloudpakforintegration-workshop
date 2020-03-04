@@ -1,4 +1,6 @@
-# Exercise 4: Use Tekton and Kabanero Pipelines to continuously deploy
+# Exercise 4: Add a payment flow from your application into MQ
+
+[re-write everything below this line]
 
 In this exercise we're going to take our insurance quote application from exercise 3 and instead of deploying it as a stand alone app, we will push the code up to a GitHub repo and use Tekton pipelines to automatically deploy the app to our OpenShift cluster and speed up your deployment process.
 

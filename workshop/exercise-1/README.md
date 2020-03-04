@@ -1,4 +1,6 @@
-# Exercise 1: Introduction to Appsody and Codewind
+# Exercise 1: Introduction to the example Bee Travels Application
+
+[re-write everything below this line]
 
 In this exercise, we will introduce Appsody, which is the underpinning development flow in Kabanero, along with its integration into IDEs using Codewind. In particular you will become experienced with:
 
