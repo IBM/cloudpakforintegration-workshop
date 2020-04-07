@@ -2,282 +2,239 @@
 
 [re-write everything below this line]
 
-In this exercise, we will show how to create a sample insurance quote application using Appsody. Appsody is an open source project that provides the following tools you can use to build cloud-native applications:
-
-* a command-line interface to develop containerized applications, test them locally, and then build and deploy them to Kubernetes
-* a set of pre-configured "stacks" and templates for popular open source runtimes (such as Node.js and Spring Boot) on which to build applications
+In this exercise, we will show how to ... :
 
 When you have completed this exercise, you will understand how to
 
-* create a frontend web application and a backend REST application using the Appsody Node.js Express and Spring Boot stacks
-* test the applications locally in a containerized environment
-
-![Tools used during Exercise 2](images/ex2.png)
-
-> **IMPORTANT** This example is used as the basis for the rest of the day 1 workshop, it's crucial to ensure it is working properly before continuing to the next exercise.
-
-## Application architecture
-
-![architecture](images/architecture.png)
-
-1. The user enters the URL of the frontend application into a browser. The frontend application displays an insurance quote form in response.
-2. The user fills in the form and clicks a button to submit it. The frontend application validates the form data and sends a REST request to the backend application.
-3. The backend application uses the [Dacadoo Health Score API](https://info.dacadoo.com/) to compute a health score from the form data and then computes a quote from that.
-
-## Prerequisites
-
-You should have already carried out the prerequisites defined in the [Pre-work](../pre-work/README.md) section.
-
-In addition to the pre-reqs above, we need to clone the repo: <https://github.com/IBM/cloudpakforapps-workshop>
-
-We recommend putting this repo in your user home, i.e.:
-
-```bash
-cd ~
-git clone https://github.com/IBM/cloudpakforapps-workshop
-```
+* Created an API by importing an OpenAPI definition for an existing REST service.
+* Configured a ClientID/API Key for security set up a proxy to the existing API.
+* Tested the API in the API Connect developer toolkit.
 
 ## Steps
 
-1. [Create the frontend application and run it locally](#1-create-the-frontend-application-and-run-it-locally)
-1. [Create the backend application and run it locally](#2-create-the-backend-application-and-run-it-locally)
+1. [Download the OpenAPI definition file for the external Stock Quote service](#step-1-download-the-openapi-definition-file-for-the-external-stock-quote-service)
 
-### 1. Create the frontend application and run it locally
+1. [Import the OpenAPI definition file into API Manager](#step-2-import-the-openapi-definition-file-into-api-manager)
 
-The frontend application is written in Node.js Express. First let's initialize an Appsody project that uses the Node.js Express stack. Create a directory somewhere outside where you cloned this project and run the `appsody init` command shown below.
+1. [Configure the API](#step-3-configure-the-api)
 
-```bash
-cd ~/appsody-apps
-mkdir quote-frontend
-cd quote-frontend
-appsody init kabanero/nodejs-express
-```
+1. [Test the API](#step-4-test-the-api)
 
-After `appsody init` completes, list the content of the directory. You'll see that Appsody has created a starter application for you.
+1. [Create a new OpenShift project for the Stock Trader app](#step-5-create-a-new-openshift-project-for-the-stock-trader-application)
 
-```bash
-.
-├── app.js
-├── package-lock.json
-├── package.json
-└── test
-    └── test.js
-```
+1. [Prepare for Installation](#step-6-prepare-for-installation)
 
-It's possible to run this application on your workstation immediately.
+1. [Install the Stock Trader app](#step-7-install-the-stock-trader-app)
 
-```bash
-appsody run
-```
+1. [Verify that the Stock Trader app is calling your API successfully](#step-8-verify-that-the-stock-trader-app-is-calling-your-api-successfully)
 
-You can see the output of the application by navigating to `http://localhost:3000` in a browser window.
+1. [Summary](#summary)
 
-Appsody builds a containerized version of the application for you and runs it in Docker. You can enter `http://localhost:3000` in a browser to see the default endpoint served by the application.
+## Step 1: Download the OpenAPI definition file for the external Stock Quote service
 
-The Node.js Express stack also provides out-of-the-box health checking, application metrics endpoints and performance monitoring. In development containers (i.e. during Rapid Local Development Mode), it also provides an analysis dashboard.
+1.1 In your browser right click on  the following link, right click and select **Save Link As ...** from the context menu. Save the file *stock-quote-api.yaml* to  your local system.
 
-* Health endpoint: <http://localhost:3000/health>
-* Liveness endpoint: <http://localhost:3000/live>
-* Readiness endpoint: <http://localhost:3000/ready>
-* Metrics endpoint: <http://localhost:3000/metrics>
-* Dashboard endpoint: <http://localhost:3000/appmetrics-dash> (development only)
+   [stock-quote-api.yaml](https://raw.githubusercontent.com/IBMStockTraderLite/stocktrader-cp4I/master/apic/stock-quote-api.yaml)
 
-While the containerized application is running you can edit the application and your changes will be reflected in the running container. You can test this by editing the app.js module and changing the message returned by the default endpoint. Watch the `appsody run` console session for the application to restart. Then re-enter `http://localhost:3000` in your browser and you will see the new message.
+## Step 2: Import the OpenAPI definition file into API Manager
 
-We're going to replace the starter code with the insurance quote frontend application. First you must edit the `package.json` file and add the following to the `dependencies` section:
+2.1 Go to the browser tab with the API Manager Portal and click on the **Develop APIs and Products tile**
 
-```json
-{
-  .
-  .
-  "dependencies": {
-    "body-parser": "^1.19.0",
-    "config": "^3.2.0",
-    "express-validator": "^6.2.0",
-    "pug": "^2.0.0",
-    "request": "^2.88.0"
-  },
-  .
-  .
-  .
-}
-```
+   ![Develop APIs and Products tile](images/api-manager.png)
 
-The Node.js Express stack installs the package dependencies into the containerized application. However it won't do this when the containerized application is already running. You must stop the current application by entering `appsody stop` in a separate window, and then re-run `appsody run` to start it back up.
+2.2 Click **ADD->API**
 
-Now copy the files from the `quote-frontend` directory in the cloned git repo to your Appsody project, for example:
+  ![Add API](images/add-api.png)
 
-```bash
-cp -R ~/cloudpakforapps-workshop/exercise-frontend/* .
-```
+2.3 On the next screen select **Existing OpenAPI** under **Import** and then click **Next**.
 
-The resulting directory structure of your Appsody project should look like this:
+  ![Existing OpenAPI](images/existing-api.png)
 
-```bash
-.
-└── config
-    ├── custom-environment-variables.json
-    └── development.json
-└── test
-    └── test.js
-└── views
-    └── quote.pug
-├── app.js
-├── package-lock.json
-├── package.json
-└── quote.js
-```
+2.4 Now choose **stock-quote-api.yaml** fromyour local file system and click **Next**.
 
-Watch for the container to restart and then refresh your browser again. You will see a form appear.
+  ![Choose file](images/choose-file.png)
 
-![Sample web form](images/screenshot.png)
+2.5 **Do not** select **Activate API**. Click **Next**
 
-You can fill in the form and hit the button to submit it and a response will appear. In this case the frontend application is not sending a request to the backend application. Instead it is configured to use a mock endpoint for testing purposes in development mode. This works as follows.
+  ![Choose file](images/activate-api.png)
 
-* `quote.js` uses the [config](https://www.npmjs.com/package/config) module to get the value for the backend URL.
-* When the application runs in development mode, the config module uses `config/development.json` to find the value for the backend URL.
+2.6 The API should be imported successfully as shown below. Click **Edit API**.
 
-This file sets the URL to the mock endpoint.
+  ![Edit API](images/edit-api.png)
 
-```json
-{
-    "backendUrl": "http://localhost:3000/quote/test"
-}
-```
+## Step 3: Configure the API
 
-* When the application runs in production mode (which we'll see later), the config module uses `config/custom-environment-variables.json` to find the value for the backend URL.
+After importing the existing API, the first step is to configure basic security before exposing it to other developers. By creating a client key  you are able to identify the app using the services. Next, we will define the backend endpoints where the API is actually running. API Connect supports pointing to multiple backend endpoints to match your multiple build stage environments.
 
-This file sets the URL from the `BACKEND_URL` environment variable.
+3.1 In the Edit API screen click **Security Definitions**
 
-```json
-{
-    "backendUrl": "BACKEND_URL"
-}
-```
+3.2 In the **Security Definition** section, click the **Add** button on the right. This will open a new view titled **API Security Definition**.
 
-Press `Ctrl-C` in the window where the application is running to stop it.
+3.2 In the **Name** field, type `client-id`.
 
-Appsody provides a way to run automated tests against the containerized application.
+3.3 Under **Type**, choose **API Key**. This will reveal additional settings.
 
-```bash
-appsody test
-```
+3.4 For **Located In** choose **Header**. For **Key Type** choose **Client ID**. Your screen should look like the image below.
 
-This runs tests that come packaged with the stack (such as tests of the health and metrics endpoints), and of course you can add your own tests of your application as well. Look at tests that call `GET /quote` and `POST /quote` in `test/test.js` to how the frontend application is tested.
+  ![Edit API complete](images/edit-api-complete.png)
 
-### 2. Create the backend application and run it locally
+3.5 Click the **Save** button to return to the **Security Definitions** section.
 
-The backend application is written in Spring Boot. Let's initialize an Appsody project that uses the Spring Boot 2 stack. Create a directory somewhere outside where you cloned this project and run the `appsody init` command shown below.
+3.6 Click **Security** in the left menu. Click **Add**. Select the **client-id** as shown below and then click **Save**.
 
-```bash
-cd ~/appsody-apps
-mkdir quote-backend
-cd quote-backend
-appsody init kabanero/java-spring-boot2
-```
+  ![Security](images/security.png)
 
-After `appsody init` completes, list the content of the directory. You'll see that Appsody has created a starter application for you.
+3.7 Next you'll the define the endpoint for the external API. Click on **Properties** in the left menu.
 
-```bash
-.
-├── src/main/java/application/LivenessEndpoint.java
-├──                          /Main.java
-├── src/main/resources/public/index.html
-├──                   /application.properties
-├── test/java/application/MainTests.java
-├── target/* (compiled code)
-├── .appsody-config.yaml
-├── .gitignore
-└── pom.xml
-```
+3.8 Click on the **target-url** property. Click **Add**.
 
-It's possible to run this application on your workstation immediately.
+3.9 Choose the **sandbox** catalog and for the URL copy and paste the following URL:
+
+    https://stock-trader-quote.us-south.cf.appdomain.cloud
+
+   ![Target URL](images/target-url.png)
+
+3.10 Click **Save** to complete the configuration.
+
+## Step 4: Test the API
+
+In the API designer, you have the ability to test the API immediately after creation in the **Assemble** view.
+
+4.1 On the top Navigation, click **Assemble**.
+
+  ![Assemble](images/assemble.png)
+
+4.2 Click **proxy** in the flow designer. Note the window on the right with the configuration. It calls the **target-url** with the same request path sent to the API Connect endpoint.
+
+  ![Proxy](images/proxy.png)
+
+4.3 Click the play icon as indicated in the image below.
+
+  ![Play icon](images/play-icon.png)
+
+4.4 Click **Activate API** to publish the API to the gateway for testing.
+
+  ![Activate API](images/activate-for-test.png)
+
+4.5 After the API is published, your screen should look like the image below.
+
+  ![API Published](images/api-published.png)
+
+4.6 Under **Operation** choose get **/stock-quote/djia**.
+
+4.7 Note that your **client-id** is prefilled for you.
+
+4.8 Scroll all the way to the bottom of the browser window and click **Invoke**.
+
+  ![Invoke API](images/invoke-api.png)
+
+4.9 If this is the first test of the API, you may  see a certificate exception. Simply click on the URL and choose the option to proceed.
+
+4.10 Go back to the test view and click **Invoke** again.
+
+4.11 Now you should see a Response section with Status code 200 OK and the Body displaying the details of the Dow Industrial average.
+
+  ![Return from API call](images/response.png)
+
+4.12 Scroll up in the test view until you see the **Client ID**. Copy the value to to a local text file so it can be used in the Stock Trader application later (**Note:** this is a shortcut to the regular process of publishing the API and then subscribing to it as a consumer).
+
+  ![Copy Client ID](images/client-id.png)
+
+4.13 Next we'll get the endpoint for your API. Click on the **Home** icon (top left) and then click on the **Manage Catalogs** tile.
+
+  ![Manage Catalogs](images/manage-catalogs.png)
+
+4.14 Click on the **Sandbox** tile.
+
+4.15 Click on the **Settings** icon and then on **API Endpoints**. Copy the gateway URL and put it in the same file that you used for the **Client ID**
+
+  ![Gateway URL](images/gateway-url.png)
+
+## Step 5: Create a new OpenShift project for the Stock Trader application
+
+5.1 In the IBM Cloud Shell set an environment variable for the  *studentid* assigned to you by the instructors (e.g. **user001**)
 
 ```bash
-appsody run
+export STUDENTID=user???
 ```
 
-Appsody builds a containerized version of the application for you and runs it in Docker. You can enter `http://localhost:8080` in a browser to see the default endpoint served by the application.
-
-The Spring Boot 2 stack also provides out-of-the-box health checking and application metrics endpoints.
-
-* Health endpoint: <http://localhost:8080/actuator/health>
-* Liveness endpoint: <http://localhost:8080/actuator/liveness>
-* Metrics endpoint: <http://localhost:8080/actuator/metrics>
-* Prometheus endpoint: <http://localhost:8080/actuator/prometheus>
-
-We're going to replace the starter code with the insurance quote backend application. Edit the `pom.xml` file and add the following dependency to the dependencies section.
-
-```xml
-  <dependencies>
-    .
-    .
-    .
-    <dependency>
-        <groupId>org.projectlombok</groupId>
-        <artifactId>lombok</artifactId>
-        <version>1.18.8</version>
-    </dependency>
-  </dependencies>
-```
-
-Now copy the files from the `quote-backend` directory in the cloned git repo to your Appsody project, for example:
+5.2 Create a new OpenShift project
 
 ```bash
-cp -R ~/cloudpakforapps-workshop/exercise-backend/* .
+oc new-project trader-$STUDENTID
 ```
 
-The resulting directory structure of your Appsody project should look like this:
+## Step 6: Prepare for installation
+
+Like a typical  Kubernetes app, Stock Trader use secrets to  store sensitive data  needed by one  or more microservices to access external  services and other microservices. You'll run a script to store your API Connect endpoint and apikey as secrets that the Stock Trader application references to get this information.
+
+6.1 From the  IBM Cloud Shell terminal
 
 ```bash
-.
-├── src/main/java/application/LivenessEndpoint.java
-├──                          /Main.java
-├── src/main/resources/public/index.html
-├──                   /application.properties
-├──                   /application.yaml
-├── test/java/application/MainTests.java
-├── test/java/application/QuoteTests.java
-├── target/* (compiled code)
-├── .appsody-config.yaml
-├── .gitignore
-├── backend-input.json
-└── pom.xml
+git clone https://github.com/IBMStockTraderLite/stocktrader-cp4i.git
 ```
 
-You can test the backend API using [curl](https://curl.haxx.se/download.html). The file `backend-input.json` contains sample input for the API. Issue the `curl` command from the project directory.
+6.2 Go to the directory required to run the setup scripts
 
 ```bash
-curl -X POST -d @backend-input.json  -H "Content-Type: application/json"  http://localhost:8080/quote
+cd stocktrader-cp4i/scripts
 ```
 
-You should see output similar to the following:
+6.3 Run the following command, substituting your API Connect endpoint URL and API Key that saved previously.
 
 ```bash
-$ curl -X POST -d @backend-input.json  -H "Content-Type: application/json"  http://localhost:8080/quote
-{"quotedAmount":30,"basis":"mocked backend computation"}
+./setupAPIConnectAccess.sh [YOUR API CONNECT EXTERNAL URL] [YOUR API KEY]
 ```
 
-In this case the backend application is not sending a request to the Dacadoo health score API. Instead it is configured to use a mock endpoint for testing purposes in development mode. This works as follows:
+The output should look like the following
 
-* `src/main/java/application/Quote.java` uses `@Value("${DACADOO_URL}")` and `@Value("${DACADOO_APIKEY}")` to get the values of the Dacadoo Health Score API endpoint URL and the API key.
-* `src/main/resources/application.yaml` defines mock values for the URL and API key.
+![Setup API Connect Access](images/api-connect-access.png)
 
-  ```yaml
-  DACADOO_URL: http://localhost:8080/mockscore
-  DACADOO_APIKEY: TEST
-  ```
+## Step 7: Install the Stock Trader app
 
-* When the application runs in production mode (which we'll see later), environment variables can be used to set the URL and API key. Environment variables override the values in the `application.yaml` file.
+You'll install Stock Trader using an OpenShift template.
 
-Press `Ctrl-C` in the window where the application is running to stop it.
-
-You can use `appsody test` to run automated tests for this application.
+7.1 Run the following script
 
 ```bash
-appsody test
+./initialInstall.sh
+```
+7.2 Verify that the output looks like the following:
+
+![Initial install](images/initial-install.png)
+
+7.3 Wait for all the pods to start. Run the following command repeatedly until all the pods are in the *Ready* state as shown below
+
+```bash
+oc get pods | grep -v deploy
 ```
 
-Look at [quote-backend/src/test/java/application/QuoteTests.java](quote-backend/src/test/java/application/QuoteTests.java) to see the tests for the backend application.
+![Pods running](images/pods-running.png)
 
-**Congratulations**! We have tested out our sample application locally and are ready to move on to the next step, deploying it!
+7.4 Initialize the database pods by running the following command
+
+```bash
+./createDbTables.sh
+```
+
+![Create db tables](images/create-db-tables.png)
+
+## Step 8: Verify that the Stock Trader app is calling your API successfully
+
+You will verify the configuration that you created that points at the API you created in API Connect.
+
+8.1 From the command line run the following script:
+
+```bash
+./showTradrURL.sh
+```
+
+8.2 Copy the URL that is output and access it with your browser
+
+8.3 Log in using the username `stock` and the password `trader`
+
+  ![Stock Trader Login](images/stock-trader-login.png)
+
+8.4 If the DJIA summary has data then you know that the API you created in API Connect is working !
+
+  ![DJIA Summary Working](images/djia-success.png)
