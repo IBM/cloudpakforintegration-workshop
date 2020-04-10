@@ -8,9 +8,9 @@
 ## Workshop
 
 * [Exercise: Introduction to the sample application](exercise-stock-trader/README.md)
-* [Exercise: Integrate with Event Streams](exercise-event-streams/README.md)
-* [Exercise: Integrate with API Connect](exercise-api-connect/README.md)
 * [Exercise: Integrate with App Connect](exercise-app-connect/README.md)
+* [Exercise: Integrate with API Connect](exercise-api-connect/README.md)
+* [Exercise: Integrate with Event Streams](exercise-event-streams/README.md)
 * [Exercise: Integrate with MQ](exercise-mq/README.md)
 
 ## Lectures

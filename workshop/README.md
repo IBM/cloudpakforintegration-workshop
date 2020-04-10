@@ -6,6 +6,8 @@ Welcome to our workshop! In this workshop we'll be using the Cloud Pak for Integ
 * Simplify data access from external data sources, such as Salesforce, using `App Connect`
 * Integrate the payment flow with `MQ` or `Event Streams`
 
+![Cloud Pak for Integration](.gitbook/images/cp4int.png)
+
 ## About this workshop
 
 The introductory page of the workshop is broken down into the following sections:
@@ -27,8 +29,6 @@ Cloud Pak for Integration includes components to enable you to manage:
 | **Event streaming** | Use Apache Kafka to deliver messages more easily and reliably and to react to events in real time. Provide more personalized customer experiences by responding to events before the moment passes |
 | **High-speed data transfer** | Send large files and data sets virtually anywhere, reliably and at maximum speed. Accelerate collaboration and meet the demands of complex global teams, without compromising performance or security |
 | **Secure gateway** | Create persistent, security-rich connections between your on-premises and cloud environments. Quickly set up and manage gateways, control access on a per-resource basis, configure TLS encryption and mutual authentication, and monitor all of your traffic |
-
-![Cloud Pak for Integration](.gitbook/images/cp4int.png)
 
 ## Credits
 
