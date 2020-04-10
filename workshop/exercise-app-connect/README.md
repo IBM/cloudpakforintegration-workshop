@@ -67,11 +67,17 @@ Configure the OAuth settings
 
 Scroll down to the bottom of the web page and click **Save**
 
+![OAuth key and secret](images/oauth-key-and-secret.png)
+
 Copy the **Consumer Key** and **Consumer Secret** to a text file. You will need them later to connect to Salesforce
 
 Check your email for the email address that you use as your Salesforce username. You should have received an email from Salesforce with the subject **Your new Salesforce security token**. Copy the **Security Token** to the same text file that you used for the **Consumer Key** and **Consumer Secret**
 
 ![Security token](images/sfsectoken.png)
+
+> **NOTE** To force a **Security Token** reset, go to the account **Settings** and click on **Reset My Security Token**.
+
+![Force Security Token Reset](images/reset-security-token.png)
 
 ### 3. Setup connectivity to Salesforce in App Connect Designer
 
@@ -103,13 +109,7 @@ Enter the following values referring to the text file from the previous section 
 
 ![Filled in Salesforce Connection](images/sfconnectionform.png)
 
-Click on **Connect**. The connection will be given a default name of the form *Account n*. Click on the 3 vertical dots next to the connection name and select **Rename Account**
-
-![Rename account](images/renameaccount.png)
-
-Enter the username you used to login to App Connect Designer as the new account name (e.g. *user005*) and click on **Rename Account**.
-
-![Rename account](images/renameaccount2.png)
+Click on **Connect**. If successful, the connection will be given a default name of the form *Account n*.
 
 ### 4. Create the flow in App Connect Designer
 
