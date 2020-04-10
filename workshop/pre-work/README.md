@@ -38,7 +38,7 @@ From the IBM Cloud console, click the IBM Cloud Shell icon. A session will start
 
 From here, you can access pre-installed CLIs like `git`, `kubectl`, and many others.
 
-![Copy the login credentials](images/cloud-shell.png)
+![Using the IBM Cloud Shell](images/cloud-shell.png)
 
 ## 3. CLIs
 
