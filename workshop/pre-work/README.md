@@ -10,11 +10,11 @@ Click the *Run VM(s)* button to start all of the virtual machines that are used 
 
 Open the browser on the *Developer Machine* VM and click the *IBM Cloud Pak for Integration* bookmark in the bookmarks bar at the top. You might receive a login screen, to log into the console use the credentials **admin** and **passw0rd**.
 
-From the console overview page, click *View Instances* to see the list of instances available. The list of installed instances includes: API Connect, App Connect, MQ, and Event Streams.
+From the console overview page, click *View Instances* to see the list of instances available. The list of installed instances includes: **API Connect**, **App Connect**, **MQ**, and **Event Streams**.
 
 ![List of installed instances](images/cp4i-overview.png)
 
-## Non-skytap Environments
+## On IBM Cloud
 
 > These requirements are for workshops running on IBM Cloud
 
