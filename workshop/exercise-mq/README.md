@@ -36,4 +36,6 @@ Scroll down to the bottom of page, make a note of the queue manager hostname and
 
 ![MQ connection info](images/mq-connection-info.png)
 
-**MORE TO COME**
+### MORE TO COME
+
+Work in progress...
