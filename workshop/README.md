@@ -4,7 +4,7 @@ Welcome to our workshop! In this workshop we'll be using the Cloud Pak for Integ
 
 * Deploy an API Gateway using `API Connect`, to provide an API management point across the micro-services
 * Simplify data access from external data sources, such as Salesforce, using `App Connect`
-* Integrate the payment flow into an existing `MQ-based` payment service
+* Integrate the payment flow with `MQ` or `Event Streams`
 
 ## About this workshop
 
@@ -32,6 +32,4 @@ Cloud Pak for Integration includes components to enable you to manage:
 
 ## Credits
 
-This workshop was primarily written by [Henry Nash](https://github.com/henrynash) and [Steve Martinelli](https://github.com/stevemar). Many other IBMers have contributed to help shape, test, and contribute to the workshop.
-
-* [A N Other](https://github.com/GregDritschler): For his [Funky Shirts](https://github.com/IBM/appsody-sample-quote-app)
+This workshop was primarily written by [David Carew](https://github.com/djccarew), [Henry Nash](https://github.com/henrynash) and [Steve Martinelli](https://github.com/stevemar).

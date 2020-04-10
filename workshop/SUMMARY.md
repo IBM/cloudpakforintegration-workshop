@@ -7,17 +7,18 @@
 
 ## Workshop
 
-* [Exercise 1: Introduction to the example Bee Travels application](exercise-1/README.md)
-* [Exercise 2: Add an API Management point to the application](exercise-2/README.md)
-* [Exercise 3: Add a payment flow from your application into MQ](exercise-3/README.md)
-* [Exercise 4: Use App Connect to easily integrate an external data source](exercise-4/README.md)
+* [Exercise: Introduction to the sample application](exercise-stock-trader/README.md)
+* [Exercise: Integrate with Event Streams](exercise-event-streams/README.md)
+* [Exercise: Integrate with API Connect](exercise-api-connect/README.md)
+* [Exercise: Integrate with App Connect](exercise-app-connect/README.md)
+* [Exercise: Integrate with MQ](exercise-mq/README.md)
 
 ## Lectures
 
-* [Lecture 1: Introduction to Cloud Pak for Integration](TBD)
-* [Lecture 2: Introduction to API Connect](TBD)
-* [Lecture 4: Introduction to Messaging with MQ and Event Streams](TBD)
-* [Lecture 3: Introduction to App Connect](TBD)
+* [Lecture: Introduction to Cloud Pak for Integration](TBD)
+* [Lecture: Introduction to API Connect](TBD)
+* [Lecture: Introduction to Messaging with MQ and Event Streams](TBD)
+* [Lecture: Introduction to App Connect](TBD)
 
 ## Workshop Resources
 
