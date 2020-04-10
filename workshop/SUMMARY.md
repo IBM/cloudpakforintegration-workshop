@@ -3,7 +3,6 @@
 ## Getting Started
 
 * [Pre-work](pre-work/README.md)
-* [Pre-req: What is Cloud Native?](https://ibm.box.com/s/3pvl4jdi3xifs1olzcl9np904zvk5ueo)
 
 ## Workshop
 
@@ -26,5 +25,6 @@
 
 ## Resources
 
+* [Lecture: What is Cloud Native?](https://ibm.box.com/s/3pvl4jdi3xifs1olzcl9np904zvk5ueo)
 * [IBM Developer](https://developer.ibm.com)
 * [Cloud Pak for Integration](https://www.ibm.com/cloud/cloud-pak-for-integration)

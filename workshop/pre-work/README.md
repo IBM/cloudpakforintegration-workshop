@@ -1,26 +1,51 @@
 # Pre-work
 
-This section is broken up into the following steps:
+## On Skytap
 
-1. [Accounts](#1-accounts)
-1. [Install Docker](#2-install-docker)
-1. [Install OpenShift CLI](#4-install-appsody-cli)
+> These requirements are for THINK2020 and runs on the [Skytap](https://cloud.skytap.com/) platform.
+
+Click the *Run VM(s)* button to start all of the virtual machines that are used for this lab. Once the virtual machine starts, click the *Developer Machine* tile to start your lab exercise. To log into the Linux desktop use the credentials **ibmuser** and **engageibm**
+
+![Start the VMs and log into the Developer Machine](images/skytap.png)
+
+Open the browser on the *Developer Machine* VM and click the *IBM Cloud Pak for Integration* bookmark in the bookmarks bar at the top. You might receive a login screen, to log into the console use the credentials **admin** and **passw0rd**.
+
+From the console overview page, click *View Instances* to see the list of instances available. The list of installed instances includes: API Connect, App Connect, MQ, and Event Streams.
+
+![List of installed instances](images/cp4i-overview.png)
+
+## Non-skytap Environments
+
+> These requirements are for workshops running on IBM Cloud
 
 ## 1. Accounts
 
 The following accounts are needed for this workshop:
 
-* [Github](https://github.com)
 * [IBM Cloud](https://cloud.ibm.com)
 
-## 2. Install Docker
+## 2. IBM Cloud Shell
 
-A key part of the Appsody development experience is Rapid Local Development Mode, where the code you develop is continuously being run in a local docker container. If you don't already have Docker installed on your machine, you should do so now:
+For this workshop we'll be using the IBM Cloud Shell. The IBM Cloud Shell is a cloud-based shell workspace that you can access through your browser. It's preconfigured with the full IBM Cloud CLI and tons of plug-ins, and other 3rd party CLIs like OpenShift's `oc`, Helm's `helm` and Kubernetes' `kubectl`.
+
+## Accessing the IBM Cloud Shell
+
+From the IBM Cloud console, click the IBM Cloud Shell icon. A session will start and automatically log you in through the IBM Cloud CLI.
+
+> **NOTE** Make sure you've selected the right account in the account list
+
+![Accessing the IBM Cloud Shell](../.gitbook/assets/access-shell.png)
+
+From here, you can access pre-installed CLIs like `git`, `kubectl`, and many others.
+
+![Copy the login credentials](../.gitbook/assets/cloud-shell.png)
+
+## 3. CLIs
+
+### Docker
 
 * [Install Docker for macOS](https://docs.docker.com/docker-for-mac/install/)
 * [Install Docker for Windows](https://docs.docker.com/docker-for-windows/install/)
-
-If you are not familiar with Docker Desktop, you can learn more about the orientation and setup [here](https://docs.docker.com/get-started/#Install-Docker-Desktop).
 
 ```bash
 docker version
@@ -33,32 +58,4 @@ $ docker version
 Client: Docker Engine - Community
  Version:           19.03.4
 ...
-```
-
-## 3. Install OpenShift CLI
-
-The OpenShift CLI allows you to manage OpenShift resources from a terminal (this workshop requries version 3.11 (**not 4.x**)). This should be installed on your development machine:
-
-[Install the OpenShift CLI](https://www.okd.io/download.html)
-
-You can check that you have the correct version installed by executing the command:
-
-```bash
-oc version
-```
-
-You should see output similar to the following:
-
-```bash
-$ oc version
-oc v3.11.0+0cbc58b
-...
-```
-
-## 4. Check access to OpenShift cluster
-
-You should already have been provided with details of a managed OpenShift cluster that has been provisioned for you. Check you have access to this by using the `oc login` with the credentials the workshop administrator provides to you.
-
-```bash
-oc login <url> --token=<token>
 ```
