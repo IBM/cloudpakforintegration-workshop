@@ -30,7 +30,7 @@ The architecture of the solution you will build is shown below:
 
 * The **portfolio** microservice sits at the center of the application. This microservice:
 
-  * persists trade data  using JDBC to a MariaDB database
+  * persists trade data using JDBC to a MariaDB database
   * invokes the **stock-quote** service that invokes an API defined in API Connect in CP4I to get stock quotes
   * sends completed transactions to a local IBM MQ queue.
   * calls the **trade-history** service to get aggregated historical trade data.
@@ -67,4 +67,4 @@ Launch a browser by navigating to <http://localhost:9000>.
 
 ### 4. Stop the application
 
-**Ctrl+C** will stop docker compose.
+**Ctrl+C** will stop Docker compose.

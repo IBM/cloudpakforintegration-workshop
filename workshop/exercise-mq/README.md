@@ -4,6 +4,11 @@ In this task, you navigate to the MQ Console and check the MQ configuration. You
 
 ## Steps
 
+1. [Get MQ connection details](#1-get-mq-connection-details)
+1. [Summary](#summary)
+
+### 1. Get MQ connection details
+
 Launch the MQ service. *If a security warning is see, add an exception and proceed.*
 
 ![Launch MQ](images/cp4i-dashboard-mq.png)
@@ -36,6 +41,6 @@ Scroll down to the bottom of page, make a note of the queue manager hostname and
 
 ![MQ connection info](images/mq-connection-info.png)
 
-### MORE TO COME
+## Summary
 
-Work in progress...
+**Congratulations**! You successfully completed the following key steps in this lab:
