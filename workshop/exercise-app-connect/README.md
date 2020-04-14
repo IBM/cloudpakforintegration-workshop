@@ -1,6 +1,6 @@
 # Exercise: Use App Connect to sync Salesforce data
 
-In this lab you will create an App Connect API to push client data from the **IBM Stock Trader Lite** app to Salesforce. This will occur whenever a user interacts with the API.
+In this lab you will create an App Connect API to push client data to Salesforce. This will occur whenever a user interacts with the API.
 
 ## Steps
 
@@ -204,7 +204,7 @@ Click the **Display Token** option and copy the `oc login` command.
 In a new *Terminal* window paste the `oc login` command.
 
 ```bash
-[ibmuser@admin ~]$ oc login --token=KoSCnw....SmQz0 --server=https://api.demo.ibmdte.net:6443
+$ oc login --token=KoSCnw....SmQz0 --server=https://api.demo.ibmdte.net:6443
 Logged into "https://api.demo.ibmdte.net:6443" as "ibmadmin" using the token provided.
 
 You have access to 67 projects, the list has been suppressed. You can list all projects with 'oc projects'
@@ -213,7 +213,7 @@ You have access to 67 projects, the list has been suppressed. You can list all p
 Switch to the `ace` project:
 
 ```bash
-[ibmuser@admin ~]$ oc project ace
+$ oc project ace
 Now using project "ace" on server "https://api.demo.ibmdte.net:6443".
 ```
 
@@ -306,16 +306,18 @@ Copy the **REST API Base URL** to the clipboard
 In a Terminal copy this `curl` command:
 
 ```bash
-[ibmuser@admin Downloads]$ curl -X POST -H "Content-Type: application/json" -d '{"FirstName":"Steve", "LastName":"Martinelli", "Email":"stevemar@ca.ibm.com"}' http://user001sf2-http-ace.apps.demo.ibmdte.net:80/user001sf/Client
+curl -X POST -H "Content-Type: application/json" -d '{"FirstName":"Steve", "LastName":"Martinelli", "Email":"stevemar@ca.ibm.com"}' http://user001sf2-http-ace.apps.demo.ibmdte.net:80/user001sf/Client
+```
+
+You should see output like the example below. Verify that the ID of the new Salesforce contact is returned.
+
+```bash
+$ curl -X POST -H "Content-Type: application/json" -d '{"FirstName":"Steve", "LastName":"Martinelli", "Email":"stevemar@ca.ibm.com"}' http://user001sf2-http-ace.apps.demo.ibmdte.net:80/user001sf/Client
 
 {"ClientId":"0034R00003L1YPuQAN"}
 ```
 
-The results of the API call will be displayed. Verify that the ID of the new Salesforce contact is returned.
-
-In a new browser tab login to Salesforce
-
-Click on the **+** icon and then on **Contacts**
+In a new browser tab login to Salesforce. Click on the **+** icon and then on **Contacts**
 
 ![Salesforce contacts](images/contacts.png)
 

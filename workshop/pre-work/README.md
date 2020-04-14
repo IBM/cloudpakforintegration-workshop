@@ -18,13 +18,13 @@ From the console overview page, click *View Instances* to see the list of instan
 
 > These requirements are for workshops running on IBM Cloud
 
-## 1. Accounts
+### 1. Accounts
 
 The following accounts are needed for this workshop:
 
 * [IBM Cloud](https://cloud.ibm.com)
 
-## 2. IBM Cloud Shell
+### 2. IBM Cloud Shell
 
 For this workshop we'll be using the IBM Cloud Shell. The IBM Cloud Shell is a cloud-based shell workspace that you can access through your browser. It's preconfigured with the full IBM Cloud CLI and tons of plug-ins, and other 3rd party CLIs like OpenShift's `oc`, Helm's `helm` and Kubernetes' `kubectl`.
 
@@ -39,23 +39,3 @@ From the IBM Cloud console, click the IBM Cloud Shell icon. A session will start
 From here, you can access pre-installed CLIs like `git`, `kubectl`, and many others.
 
 ![Using the IBM Cloud Shell](images/cloud-shell.png)
-
-## 3. CLIs
-
-### Docker
-
-* [Install Docker for macOS](https://docs.docker.com/docker-for-mac/install/)
-* [Install Docker for Windows](https://docs.docker.com/docker-for-windows/install/)
-
-```bash
-docker version
-```
-
-You should see output similar to the following:
-
-```bash
-$ docker version
-Client: Docker Engine - Community
- Version:           19.03.4
-...
-```
