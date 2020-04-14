@@ -1,6 +1,6 @@
 # Exercise: Integrate MQ with
 
-In this task, you navigate to the MQ Console and check the MQ configuration. You create the queue which accepts the resulting data from the call to the "NEWORDER" API.
+In this task, you navigate to the MQ Console and check the MQ configuration. You can create a new queue that accepts incoming data.
 
 ## Steps
 

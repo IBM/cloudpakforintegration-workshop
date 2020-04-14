@@ -14,7 +14,7 @@
 
 ## Lectures
 
-<!-- * [Lecture: What is Cloud Native?](https://ibm.box.com/s/3pvl4jdi3xifs1olzcl9np904zvk5ueo) -->
+* [Lecture: What is Cloud Native?](https://ibm.box.com/s/3pvl4jdi3xifs1olzcl9np904zvk5ueo)
 * [Lecture: Introduction to Cloud Pak for Integration](TBD)
 * [Lecture: Introduction to API Connect](TBD)
 * [Lecture: Introduction to Messaging with MQ and Event Streams](TBD)

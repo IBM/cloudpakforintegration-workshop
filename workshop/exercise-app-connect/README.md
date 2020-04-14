@@ -1,12 +1,6 @@
 # Exercise: Use App Connect to sync Salesforce data
 
-In this lab you will create an App Connect flow to push client data from the **IBM Stock Trader Lite** app to Salesforce. This will occur whenever a user of the **IBM Stock Trader Lite** app creates a new portfolio for a new client. Basic information about the client is stored in the **IBM Stock Trader Lite** app and more detailed info is stored in Salesforce.
-
-The architecture of the app is shown below:
-
-![Architecture diagram](images/architecture.png)
-
-The **portfolio** microservice invokes the REST endpoint of the new flow whenever a new client is created and this results in a new contact being created for the new user in Salesforce.
+In this lab you will create an App Connect API to push client data from the **IBM Stock Trader Lite** app to Salesforce. This will occur whenever a user interacts with the API.
 
 ## Steps
 

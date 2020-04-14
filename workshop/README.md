@@ -1,10 +1,10 @@
-# Enterprise-grade integration within a micro-service based application on OpenShift, with Cloud Pak for Integration
+# Enterprise-grade integration with Cloud Pak for Integration
 
 Welcome to our workshop! In this workshop we'll be using the Cloud Pak for Integration platform to modify an existing micro-service based application to more robustly wire the micro-services together for running in an Enterprise environment on OpenShift, both for Day 0 and beyond. The goals of this workshop are:
 
 * Deploy an API Gateway using `API Connect`, to provide an API management point across the micro-services
 * Simplify data access from external data sources, such as Salesforce, using `App Connect`
-* Integrate the payment flow with `MQ` or `Event Streams`
+* Integrate with `MQ` or `Event Streams`
 
 ![Cloud Pak for Integration](.gitbook/images/cp4int.png)
 
