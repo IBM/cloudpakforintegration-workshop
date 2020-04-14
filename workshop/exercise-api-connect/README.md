@@ -170,7 +170,7 @@ Next you'll the define the endpoint for the external API. Click on **Properties*
 
 Scroll down to the button and choose the **Sandbox** catalog and for the URL copy and paste the following URL:
 
-`https://stock-trader-quote.us-south.cf.appdomain.cloud`
+`https://user001sf-http-ace.apps.demo.ibmdte.net`
 
 ![Target URL](images/target-url.png)
 
