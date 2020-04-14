@@ -170,7 +170,7 @@ Next you'll the define the endpoint for the external API. Click on **Properties*
 
 Scroll down to the button and choose the **Sandbox** catalog and for the URL copy and paste the following URL:
 
-`https://user001sf-http-ace.apps.demo.ibmdte.net`
+`https://gwy.icp-proxy.apps.demo.ibmdte.net/org-1/sandbox`
 
 ![Target URL](images/target-url.png)
 
@@ -184,7 +184,7 @@ On the top Navigation, click **Assemble**.
 
 ![Assemble](images/assemble.png)
 
-Click **proxy** in the flow designer. Note the window on the right with the configuration. It calls the **target-url** with the same request path sent to the API Connect endpoint.
+Click **proxy** in the flow designer. Note the window on the right with the configuration. It calls the **target-url** with the same request path sent to the API Connect endpoint. Ensure the **URL** is set to `$(target-url)$(request.path)`.
 
 ![Proxy](images/proxy.png)
 
@@ -200,9 +200,9 @@ After the API is published, your screen should look like the image below.
 
 ![API Published](images/api-published.png)
 
-Under **Operation** choose get **/stock-quote/djia**.
+Under **Operation** choose **post /Client**.
 
-Note that your **client-id** is prefilled for you.
+Note that your **Client ID** is prefilled for you.
 
 Scroll all the way to the bottom of the browser window and click **Invoke**.
 
@@ -212,23 +212,9 @@ If this is the first test of the API, you may see a certificate exception. Simpl
 
 Go back to the test view and click **Invoke** again.
 
-Now you should see a Response section with Status code 200 OK and the Body displaying the details of the Dow Industrial average.
+Now you should see a Response section with Status code 201 OK and the body displaying the new client's ID in Salesforce.
 
 ![Return from API call](images/response.png)
-
-Scroll up in the test view until you see the **Client ID**. Copy the value to to a local text file so it can be used in the Stock Trader application later (**Note:** this is a shortcut to the regular process of publishing the API and then subscribing to it as a consumer).
-
-![Copy Client ID](images/client-id.png)
-
-Next we'll get the endpoint for your API. Click on the **Home** icon (top left) and then click on the **Manage Catalogs** tile.
-
-![Manage Catalogs](images/manage-catalog.png)
-
-Click on the **Sandbox** tile.
-
-Click on the **Settings** icon and then on **API Endpoints**. Copy the gateway URL and put it in the same file that you used for the **Client ID**
-
-![Gateway URL](images/gateway-url.png)
 
 ## Summary
 
