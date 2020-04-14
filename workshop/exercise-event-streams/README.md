@@ -1,188 +1,144 @@
 # Exercise: Using IBM Event Streams for near real-time data replication
 
-In this lab you will use IBM MQ and IBM Event Streams to replicate data from a transactional database to a reporting database. The pattern used allows for seamless horizontal scaling to minimize the latency between the time the transaction is committed to the transactional database and when it is available to be queried in the reporting database.
+In this lab you will use IBM Event Streams to replicate data from a transactional database to a reporting database. The pattern used allows for seamless horizontal scaling to minimize the latency between the time the transaction is committed to the transactional database and when it is available to be queried in the reporting database. Applications connect to Event Streams topics and write to and read from them. Topics are known groupings of related data. Topics are created and configured by the Event Streams administrator.
 
-* The **event-producer** microservice consumes the transaction data from IBM MQ and sends it to a topic in Event Streams. By scaling this service horizontally you can decrease the latency between the time the transaction is committed to the transactional database and when it is available to be queried in the reporting database,
+* The **event-producer** microservice consumes the transaction data from an application and sends it to a topic in Event Streams. By scaling this service horizontally you can decrease the latency between the time the transaction is committed to the transactional database and when it is available to be queried in the reporting database.
 
-* The **event-consumer** microservice receives the transaction data from Event Streams and calls the **trade-history** service to publish the data to the reporting database. By scaling this service horizontally you can decrease the latency between the time the transaction is committed to the transactional database and when it is available to be queried in the reporting database.
+* The **event-consumer** microservice receives the transaction data from Event Streams and reads it. By scaling this service horizontally you can decrease the latency between the time the transaction is committed to the transactional database and when it is available to be queried in the reporting database.
 
 ## Steps
 
-1. [Create a topic in the Event Streams Management Console](#1-create-a-topic-in-the-event-streams-management-console)
-1. [Get credentials for your Event Streams topic](#2-get-credentials-for-your-event-streams-topic)
-1. [Upload the Java truststore to the IBM Cloud Shell](#3-upload-the-java-truststore-to-the-ibm-cloud-shell)
-1. [Add messaging components to the Stock Trader app](#4-add-messaging-components-to-the-stock-trader-app)
-1. [Generate some test data with the Stock Trader app](#5-generate-some-test-data-with-the-stock-trader-app)
-1. [Verify transaction data was replicated to the Trade History database](#6-verify-transaction-data-was-replicated-to-the-trade-history-database)
-1. [Examine the messages sent to your Event Streams topic](#7-examine-the-messages-sent-to-your-event-streams-topic)
+1. [Create a topic in Event Streams](#1-create-a-topic-in-event-streams)
+1. [Generate a starter application to send and receive data](#2-generate-a-starter-application-to-send-and-receive-data)
+1. [Run the starter application](#3-run-the-starter-application)
+1. [Use the Event Streams Toolbox to view messages](#4-use-the-event-streams-toolbox-to-view-messages)
 1. [Summary](#summary)
 
 ### 1. Create a topic in the Event Streams Management Console
 
-Access the Event Streams Management Console using the URL provided to you by your instructors.
+In a new browser tab open the **Cloud Pak for Integration** tab and under **View Instances** click on the link for **Event Streams**.
 
-Sign in with the credentials provided to you by your instructors.
+![Launch Event Streams](images/cp4i-dashboard-event-streams.png)
 
-Click on the **Create a topic** tile
+In the Event Streams interface, click **Create topic**.
 
 ![Create a topic](images/create-topic.png)
 
-Name the topic `stocktrader-user???` where `user???` is your assigned student id. For example if your student id is `user002` then name the topic `stocktrader-user002`. Click **Next**.
+Enter `eslabtopic` as the topic name and click **Next**.
 
-Leave the default for the number of partitions and click **Next**.
+![Topic name](images/topic-name.png)
 
-Leave the default for message retention and click **Next**.
+> **NOTE**: This lab is preconfigured to connect to that specific topic. You can view the full range of configuration options by setting the Show all available options to on. However, this tutorial only focuses on the core set.
 
-Change the Replication factor to 1 and click **Create topic**.
+Set the number of partitions to **three** and click **Next**.
 
-![Replication factor](images/replication-factor.png)
+![Topic partitions](images/topic-partitions.png)
 
-You should see your new topic listed.
+Define the message retention time. Set it to **10 minutes** for this lab. Click **Next**.
 
-### 2. Get credentials for your Event Streams topic
+![Topic retention time](images/topic-retention.png)
 
-From the Event Streams Management Console click **Connect to this cluster**.
+Define the number of replicas for your topic. Select the default setting of **Replication factor: 3** and **Minimum in-sync replicas: 2**. Click **Create topic**.
 
-![Connect to cluster](images/connect-to-cluster.png)
+![Topic replicas](images/topic-replicas.png)
 
-Click on the icon next to the **Bootstrap server** hostname to copy it to the clipboard.
+The Topics page is displayed. Your new topic is displayed along with a completion notification. You can now connect the starter application to Event Streams.
 
-![Copy bootstrap hostname](images/copy-bootstrap-hostname.png)
+![New topic](images/new-topic.png)
 
-Create a local file and paste the bootstrap server hostname into it. You'll need this later to connect the Stock Trader application to your Event Streams topic.
+### 2. Generate a starter application to send and receive data
 
-Click **Generate API key**
+We'll now learn how to generate and run a starter application. Using the starter application, you can see how producing and consuming applications connect to a topic and send messages. Data sent by the producer can be viewed in the topic in Event Streams. You can then view the same data in the consuming application.
 
-![Generate API key](images/generate-api-key.png)
+Event Streams includes several tools that can be used to test Event Streams and help with the development of Event Steams-based applications. To start we'll click on the **Toolbox** icon in the primary navigation on the left.
 
-Name the application `stocktrader-user???` where `user???` is your assigned student id. For example if your student id is `user002` then name the application`stocktrader-user002`.
+![Launch Toolbox](images/launch-toolbox.png)
 
-Select **Produce and consume** for the capabilities of the API Key. Click **Next**.
+Go to the **Generate starter application** section and click **Find out more**. The Generate starter application page is displayed where you can configure and generate an application, run a liberty profile server, and send and receive messages.
 
-![API Key capabilities](images/api-key-capabilities.png)
+![Generate Starter Application](images/generate-starter-app.png)
 
-Enter the name of your topic e.g. `stocktrader-user002`. Click **Next**.
+Click **Configure and generate application** to open the configuration panel for the starter application and configure the application as follows:
 
-Click **Generate API key**
+* Application name: `eslabtester`.
+* Ensure both **Produce messages** and **Consume messages** are selected.
+* Select Existing topic, choose `eslabtopic`.
+* Click **Generate starter application**.
 
-Click **Copy API key** and paste the API Key into the same file that you used to save the bootstrap hostname.
+![Starter application configuration](images/app-config.png)
 
-![Copy API Key](images/copy-api-key.png)
+Event Streams will begin to generate the starter application. When it has been generated, click **Download application** to begin downloading the starter application.
 
-Click on the download icon to download the Java truststore needed for Java applications to connect to Event Streams
+![Download starter application](images/download-starter-app.png)
 
-![Download Java truststore](images/download-java-truststore.png)
+> **NOTE**: Remember to choose to **Save the file** instead of opening the file.
 
-This will prompt you to save the file **es-cert.jks** locally. Save the file.
+### 3. Run the starter application
 
-Keep this browser tab open for later on in the lab.
-
-### 3. Upload the Java truststore to the IBM Cloud Shell
-
-In the IBM Cloud Shell browser tab, click on the upload icon
-
-![Upload icon](images/upload-icon.png)
-
-Select the file **es-cert.jks** that you downloaded in the previous step and follow the prompts to upload it to the IBM Cloud Shell.
-
-### 4. Add messaging components to the Stock Trader app
-
-you haven't previously cloned the Github repo with the Stock Trader app deployment artifacts, run the following command in the IBM Cloud Shell
+Open a terminal run the following command to move and unzip the start application:
 
 ```bash
-git clone https://github.com/IBMStockTraderLite/stocktrader-cp4i.git
+cd ~/Downloads
+mkdir eslabtester
+mv IBMEventStreams_eslabtester.zip eslabtester
+cd eslabtester
+unzip IBMEventStreams_eslabtester.zip
 ```
 
-Go to the directory required to run the setup scripts
+Run the following command to disable URL checking in Java:
 
 ```bash
-cd stocktrader-cp4i/scripts
+export JAVA_OPTIONS=Djdk.net.URLClassPath.disableClassPathURLCheck=true
 ```
 
-Run the following command, substituting the Bootstrap hostname and API Key that you saved earlier. Note that the third parameter is the Java truststore file that you just uploaded.
+Now run this command to start the application:
 
 ```bash
-./addMessaging.sh [BOOTSTRAP SERVER HOSTNAME] [YOUR API KEY] ../../es-cert.jks
+mvn install liberty:run-server
 ```
 
-The output should look like the following:
-
-![Add messaging script](images/add-messaging-script.png)
-
-Wait for all the pods to start. Run the following command repeatedly until all the pods are in the *Ready* state as shown below
+When the message `The server defaultServer is ready to run a smarter planet` is displayed, the application is ready and running. <!-- TODO -->
 
 ```bash
-oc get pods | grep -v deploy
+$ mvn install liberty:run-server
+...
+The server defaultServer is ready to run a smarter planet
 ```
 
-![Pods running](images/pods-running.png)
+Open the starter application by going to <http://localhost:9080> in a browser. This page represents the producing application on the left of the screen and the consuming application on the right.
 
-### 5. Generate some test data with the Stock Trader app
+In the application perform the following:
 
-From the command line run the following script:
+* Type a message in the **Custom payload string** field.
+* Click **play** on the producer
+* See messages appearing in the consuming application as they are consumed from the Event Streams topic.
+* Look at the **Offset**.
+* Stop the Producer by clicking the **Pause** button.
 
-```bash
-./showTradrURL.sh
-```
+![Running application](images/running-application.png) <!-- TODO -->
 
-Copy the URL that is output and access it with your browser
+### 4. Use the Event Streams Toolbox to view messages
 
-Log in using the username `stock` and the password `trader`
+Return to the **Generate starter application** page and click **Toolbox**.
 
-Click on **Add Client**
+![Launch Toolbox](images/launch-toolbox-from-starter.png)
 
-![Add Client](images/add-client.png)
+Click **Topics** in the primary navigation on the left and select your `eslabtopic` topic.
 
-Click on the Portfolio ID of the added client
+![Go to Topics](images/view-topics.png)
 
-![Portfolio Details](images/portfolio-id.png)
+Use the Event Streams dashboard to evaluate the messages produced, for example, information such as the **Average message size produced per second** and the **Average number of messages produced per second**.
 
-Click **Buy Stock**. Select a company and enter the number of shares. Click **Buy shares**.
+![Dashboard](images/es-dashboard.png) <!-- TODO -->
 
-Do 2 or 3 more transactions (either buy or sell).
+Click **Monitoring** in the primary navigation on the left to view the rate of incoming and outgoing data.
 
-![Buy or sell](images/buying-selling.png)
-
-### 6. Verify transaction data was replicated to the Trade History database
-
-From the IBM Cloud Shell terminal, run the following command to show the Trader History service URL for listing trade data
-
-```bash
-./showHistoryURL.sh
-```
-
-Copy the URL that is output and access it with your browser
-
-Verify that trade data in JSON format is shown and the **xactionsrc** fields is set to `Event Streams` indicating that this data was propagated to the Trade History database via IBM MQ and Event Streams.
-
-![Trade History data](images/trade-history-data.png)
-
-### 7. Examine the messages sent to your Event Streams topic
-
-In this step you'll examine the data sent to your Event Streams topic.
-
-From the Event Streams Management Console click on the topics icon
-
-![Topics icon](images/topics-icon.png)
-
-Click on your topic name
-
-![Topic Name](images/topic-name.png)
-
-Click on **Messages** and then select an individual message to see the details.
-
-![Messages](images/topic-messages.png)
-
-Details of the message you selected should appear at the right
-
-![Message Details](images/message-details.png)
+![Monitoring](images/es-monitoring.png) <!-- TODO -->
 
 ## Summary
 
 **Congratulations**! You successfully completed the following key steps in this lab:
 
-* Created an Event Streams topic
-* Retrieved all the credentials needed to access the topic from an application .
-* Configured the Stock Trader app to use your topic
-* Generated transactions in the Stock Trader app and verified that the data is being replicated via Event Streams.
+* Created an Event Streams topic.
+* Generated a starter application.
 * Examined messages sent to your topic in the Event Streams Management console.
