@@ -33,3 +33,95 @@ This version is designed to be used for educational purposes only on a Red Hat O
 * The **trade-history** service exposes an API to query the historical data in PostgreSQL and is called by the **portfortio** to get aggregated historical data.
 
 * The **stock-quote** service queries an external service to get real time stock quotes via an API Connect proxy.
+
+## Installing the Stock Trader App
+
+### 1. Create a new OpenShift project for the Stock Trader application
+
+In the IBM Cloud Shell set an environment variable for the *studentid* assigned to you by the instructors (e.g. **user001**):
+
+```bash
+export STUDENTID=user???
+```
+
+Create a new OpenShift project
+
+```bash
+oc new-project trader-$STUDENTID
+```
+
+### 2. Prepare for installation
+
+Like a typical Kubernetes app, Stock Trader use secrets to store sensitive data needed by one or more microservices to access external services and other microservices. You'll run a script to store your API Connect endpoint and apikey as secrets that the Stock Trader application references to get this information.
+
+From the IBM Cloud Shell terminal
+
+```bash
+git clone https://github.com/IBMStockTraderLite/stocktrader-cp4i.git
+```
+
+Go to the directory required to run the setup scripts
+
+```bash
+cd stocktrader-cp4i/scripts
+```
+
+Run the following command, substituting your API Connect endpoint URL and API Key that saved previously.
+
+```bash
+./setupAPIConnectAccess.sh [YOUR API CONNECT EXTERNAL URL] [YOUR API KEY]
+```
+
+The output should look like the following
+
+![Setup API Connect Access](images/api-connect-access.png)
+
+### 3. Install the Stock Trader app
+
+You'll install Stock Trader using an OpenShift template.
+
+Run the following script
+
+```bash
+./initialInstall.sh
+```
+
+Verify that the output looks like the following:
+
+![Initial install](images/initial-install.png)
+
+Wait for all the pods to start. Run the following command repeatedly until all the pods are in the *Ready* state as shown below
+
+```bash
+oc get pods | grep -v deploy
+```
+
+![Pods running](images/pods-running.png)
+
+Initialize the database pods by running the following command
+
+```bash
+./createDbTables.sh
+```
+
+![Create db tables](images/create-db-tables.png)
+
+### 4. Verify that the Stock Trader app is calling your API successfully
+
+You will verify the configuration that you created that points at the API you created in API Connect.
+
+From the command line run the following script:
+
+```bash
+./showTradrURL.sh
+```
+
+Copy the URL that is output and access it with your browser
+
+Log in using the username `stock` and the password `trader`
+
+![Stock Trader Login](images/stock-trader-login.png)
+
+If the DJIA summary has data then you know that the API you created in API Connect is working!
+
+![DJIA Summary Working](images/djia-success.png)

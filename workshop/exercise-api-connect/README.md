@@ -10,25 +10,109 @@ When you have completed this exercise, you will understand how to
 
 ## Steps
 
-1. [Download the OpenAPI definition file for the external Stock Quote service](#1-download-the-openapi-definition-file-for-the-external-stock-quote-service)
-1. [Import the OpenAPI definition file into API Manager](#2-import-the-openapi-definition-file-into-api-manager)
-1. [Configure the API](#3-configure-the-api)
-1. [Test the API](#4-test-the-api)
-1. [Create a new OpenShift project for the Stock Trader app](#5-create-a-new-openshift-project-for-the-stock-trader-application)
-1. [Prepare for Installation](#6-prepare-for-installation)
-1. [Install the Stock Trader app](#7-install-the-stock-trader-app)
-1. [Verify that the Stock Trader app is calling your API successfully](#8-verify-that-the-stock-trader-app-is-calling-your-api-successfully)
+1. [Download the OpenAPI definition file](#1-download-the-openapi-definition-file)
+1. [Create a Topology](#2-create-a-topology)
+1. [Create an Organization](#3-create-an-organization)
+1. [Add a Gateway to the Catalog](#4-add-a-gateway-to-the-catalog)
+1. [Import the OpenAPI definition file](#5-import-the-openapi-definition-file)
+1. [Configure the API](#6-configure-the-api)
+1. [Test the API](#7-test-the-api)
 1. [Summary](#summary)
 
-### 1. Download the OpenAPI definition file for the external Stock Quote service
+### 1. Download the OpenAPI definition file
 
-In your browser right click on the following link, right click and select **Save Link As ...** from the context menu. Save the file *stock-quote-api.yaml* to your local system.
+In your browser right click on the OpenAPI document link and select **Save Link As ...** from the context menu.
 
-[stock-quote-api.yaml](https://raw.githubusercontent.com/IBMStockTraderLite/stocktrader-cp4I/master/apic/stock-quote-api.yaml)
+![Download OpenAPI Spec](images/download-api.png)
 
-### 2. Import the OpenAPI definition file into API Manager
+### 2. Create a Topology
 
-Go to the browser tab with the API Manager Portal and click on the **Develop APIs and Products tile**
+From the hamburger menu click on the API Connect service, right click the kebab menu, and click **Manage**.
+
+![Manage API Connect](images/manage-api-connect.png)
+
+Click **Configure Topology**.
+
+![Configure Topology](images/configure-topology.png)
+
+Click **Register Service**.
+
+![Register Service](images/register-service.png)
+
+Click **DataPower Gateway**.
+
+![Create Gateway](images/create-dp-gateway.png)
+
+In the config menu...
+
+* **Details**
+  * *Title*: `Gateway 1`
+* **Management Endpoint**
+  * *Endpoint*: `https://gws.icp-proxy.apps.demo.ibmdte.net`
+* **API Invocation Endpoint**
+  * *Endpoint*: `https://gwy.icp-proxy.apps.demo.ibmdte.net`
+
+![Gateway Endpoints](images/gateway-endpoints.png)
+
+Click **Save** on the bottom of the page.
+
+### 3. Create an Organization
+
+From the hamburger menu click on the API Connect service, right click the kebab menu, and click **Manage**.
+
+![Manage API Connect](images/manage-api-connect.png)
+
+Click **Manage Organizations**.
+
+![Manage Organization](images/manage-organization.png)
+
+* Click on **Add** and choose **Create organization**
+
+![Create Organization](images/create-org.png)
+
+In the config menu...
+
+* **Provider Organization**
+  * *Title*: `Org 1`
+* **Owner**
+  * *User registry*: `API Manager Local User Registry`
+  * Create a new user by giving it a `username`, `password`, `first name`, and `email`.
+
+![Organization Details](images/org-details.png)
+
+* Click **Create**
+
+> **NOTE** You may see an error message `504 Gateway Time-out`, but that's OK.
+
+### 4. Add a Gateway to the Catalog
+
+In a new browser tab open the **Cloud Pak for Integration** tab and under **View Instances** click on the link for **API Connect**.
+
+![Launch API Connect](images/cp4i-dashboard-api-connect.png)
+
+You will be prompted to login, choose to login with **API Manager Local User Regitry**, and use the new username and password you just created.
+
+![Manage API Connect](images/apic-login.png)
+
+Click on **Manage Catalogs**.
+
+![Manage Catalogs](images/manage-catalog.png)
+
+Click on the **Sandbox** tile.
+
+![Edit Sandbox Catalog](images/sandbox-catalog.png)
+
+From the **Settings** (gear icon), choose the **Gateway Services** menu option, and add `Gateway-1` as the default.
+
+![Add Gateway Services](images/add-gateway-services.png)
+
+### 5. Import the OpenAPI definition file
+
+In a new browser tab open the **Cloud Pak for Integration** tab and under **View Instances** click on the link for **API Connect**.
+
+![Launch API Connect](images/cp4i-dashboard-api-connect.png)
+
+Click on the **Develop APIs and Products tile**
 
 ![Develop APIs and Products tile](images/api-manager.png)
 
@@ -40,45 +124,51 @@ On the next screen select **Existing OpenAPI** under **Import** and then click *
 
 ![Existing OpenAPI](images/existing-api.png)
 
-Now choose **stock-quote-api.yaml** fromyour local file system and click **Next**.
+Now choose **user001sf.json** from your local file system and click **Next**.
 
 ![Choose file](images/choose-file.png)
 
 **Do not** select **Activate API**. Click **Next**
 
-![Choose file](images/activate-api.png)
+![Do NOT Activate API](images/activate-api.png)
 
 The API should be imported successfully as shown below. Click **Edit API**.
 
 ![Edit API](images/edit-api.png)
 
-### 3. Configure the API
+### 6. Configure the API
 
-After importing the existing API, the first step is to configure basic security before exposing it to other developers. By creating a client key you are able to identify the app using the services. Next, we will define the backend endpoints where the API is actually running. API Connect supports pointing to multiple backend endpoints to match your multiple build stage environments.
+After importing the existing API, the first step is to configure basic security before exposing it to other developers.
 
-In the Edit API screen click **Security Definitions**
+In the **Edit API** screen update the following properties:
 
-In the **Security Definition** section, click the **Add** button on the right. This will open a new view titled **API Security Definition**.
+In the **Schemes** section, select both **HTTP** and **HTTPS**, and choose to **Save** the changes. This will remove any immediate errors from initially importing the file.
 
-In the **Name** field, type `client-id`.
+![Update Schemes](images/http-https.png)
 
-Under **Type**, choose **API Key**. This will reveal additional settings.
+Click on **Security Definitions** and choose the **clientIdHeader** defintion.
 
-For **Located In** choose **Header**. For **Key Type** choose **Client ID**. Your screen should look like the image below.
+![Update Schemes](images/sec-def-client-id.png)
+
+Ensure the following properties are set:
+
+* **Type** is set to **API Key**.
+* **Located In** is set to **Header**
+* **Key Type** is set to **Client ID**
 
 ![Edit API complete](images/edit-api-complete.png)
 
 Click the **Save** button to return to the **Security Definitions** section.
 
-Click **Security** in the left menu. Click **Add**. Select the **client-id** as shown below and then click **Save**.
+Click **Security** in the left menu. Click **Add**. Select the **clientIdHeader** as shown below and then click **Save**.
 
 ![Security](images/security.png)
 
-Next you'll the define the endpoint for the external API. Click on **Properties** in the left menu.
+Next you'll the define the endpoint for the external API. Click on **Properties** in the left menu and choose the **target-url** property
 
-Click on the **target-url** property. Click **Add**.
+![Security](images/properties-target-url.png)
 
-Choose the **sandbox** catalog and for the URL copy and paste the following URL:
+Scroll down to the button and choose the **Sandbox** catalog and for the URL copy and paste the following URL:
 
 `https://stock-trader-quote.us-south.cf.appdomain.cloud`
 
@@ -86,7 +176,7 @@ Choose the **sandbox** catalog and for the URL copy and paste the following URL:
 
 Click **Save** to complete the configuration.
 
-### 4. Test the API
+### 7. Test the API
 
 In the API designer, you have the ability to test the API immediately after creation in the **Assemble** view.
 
@@ -132,7 +222,7 @@ Scroll up in the test view until you see the **Client ID**. Copy the value to to
 
 Next we'll get the endpoint for your API. Click on the **Home** icon (top left) and then click on the **Manage Catalogs** tile.
 
-![Manage Catalogs](images/manage-catalogs.png)
+![Manage Catalogs](images/manage-catalog.png)
 
 Click on the **Sandbox** tile.
 
@@ -140,96 +230,6 @@ Click on the **Settings** icon and then on **API Endpoints**. Copy the gateway U
 
 ![Gateway URL](images/gateway-url.png)
 
-### 5. Create a new OpenShift project for the Stock Trader application
-
-In the IBM Cloud Shell set an environment variable for the *studentid* assigned to you by the instructors (e.g. **user001**):
-
-```bash
-export STUDENTID=user???
-```
-
-Create a new OpenShift project
-
-```bash
-oc new-project trader-$STUDENTID
-```
-
-### 6. Prepare for installation
-
-Like a typical Kubernetes app, Stock Trader use secrets to store sensitive data needed by one or more microservices to access external services and other microservices. You'll run a script to store your API Connect endpoint and apikey as secrets that the Stock Trader application references to get this information.
-
-From the IBM Cloud Shell terminal
-
-```bash
-git clone https://github.com/IBMStockTraderLite/stocktrader-cp4i.git
-```
-
-Go to the directory required to run the setup scripts
-
-```bash
-cd stocktrader-cp4i/scripts
-```
-
-Run the following command, substituting your API Connect endpoint URL and API Key that saved previously.
-
-```bash
-./setupAPIConnectAccess.sh [YOUR API CONNECT EXTERNAL URL] [YOUR API KEY]
-```
-
-The output should look like the following
-
-![Setup API Connect Access](images/api-connect-access.png)
-
-### 7. Install the Stock Trader app
-
-You'll install Stock Trader using an OpenShift template.
-
-Run the following script
-
-```bash
-./initialInstall.sh
-```
-
-Verify that the output looks like the following:
-
-![Initial install](images/initial-install.png)
-
-Wait for all the pods to start. Run the following command repeatedly until all the pods are in the *Ready* state as shown below
-
-```bash
-oc get pods | grep -v deploy
-```
-
-![Pods running](images/pods-running.png)
-
-Initialize the database pods by running the following command
-
-```bash
-./createDbTables.sh
-```
-
-![Create db tables](images/create-db-tables.png)
-
-### 8. Verify that the Stock Trader app is calling your API successfully
-
-You will verify the configuration that you created that points at the API you created in API Connect.
-
-From the command line run the following script:
-
-```bash
-./showTradrURL.sh
-```
-
-Copy the URL that is output and access it with your browser
-
-Log in using the username `stock` and the password `trader`
-
-![Stock Trader Login](images/stock-trader-login.png)
-
-If the DJIA summary has data then you know that the API you created in API Connect is working!
-
-![DJIA Summary Working](images/djia-success.png)
-
 ## Summary
 
-**Congratulations**! You successfully completed the following key steps in this lab:
+**Congratulations**! You successfully completed this part of the lab!
