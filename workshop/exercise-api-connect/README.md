@@ -128,51 +128,15 @@ Now choose **user001sf.json** from your local file system and click **Next**.
 
 ![Choose file](images/choose-file.png)
 
-**Do not** select **Activate API**. Click **Next**
-
-![Do NOT Activate API](images/activate-api.png)
-
-The API should be imported successfully as shown below. Click **Edit API**.
+Choose the default values in the next few panels. You'll reach the **Summary** panel and the API should be imported successfully as shown below. Click **Edit API**.
 
 ![Edit API](images/edit-api.png)
 
 ### 6. Configure the API
 
-After importing the existing API, the first step is to configure basic security before exposing it to other developers.
+After importing the API you'll be given an opporunity to add or modify existing properties
 
-In the **Edit API** screen update the following properties:
-
-In the **Schemes** section, select both **HTTP** and **HTTPS**, and choose to **Save** the changes. This will remove any immediate errors from initially importing the file.
-
-![Update Schemes](images/http-https.png)
-
-Click on **Security Definitions** and choose the **clientIdHeader** defintion.
-
-![Update Schemes](images/sec-def-client-id.png)
-
-Ensure the following properties are set:
-
-* **Type** is set to **API Key**.
-* **Located In** is set to **Header**
-* **Key Type** is set to **Client ID**
-
-![Edit API complete](images/edit-api-complete.png)
-
-Click the **Save** button to return to the **Security Definitions** section.
-
-Click **Security** in the left menu. Click **Add**. Select the **clientIdHeader** as shown below and then click **Save**.
-
-![Security](images/security.png)
-
-Next you'll the define the endpoint for the external API. Click on **Properties** in the left menu and choose the **target-url** property
-
-![Security](images/properties-target-url.png)
-
-Scroll down to the button and choose the **Sandbox** catalog and for the URL copy and paste the following URL:
-
-`https://gwy.icp-proxy.apps.demo.ibmdte.net/org-1/sandbox`
-
-![Target URL](images/target-url.png)
+![API Overview](images/api-overview.png)
 
 Click **Save** to complete the configuration.
 
@@ -196,25 +160,21 @@ Click **Activate API** to publish the API to the gateway for testing.
 
 ![Activate API](images/activate-for-test.png)
 
-After the API is published, your screen should look like the image below.
+After the API is published, find the **Operation** field and choose **post /Client**. Note that your **Client ID** is prefilled for you.
 
-![API Published](images/api-published.png)
+![Choose a POST operation](images/operation.png)
 
-Under **Operation** choose **post /Client**.
+Choose to **Generate** data for a request and **REMOVE the Client ID**. Scroll all the way to the bottom of the browser window and click **Invoke**.
 
-Note that your **Client ID** is prefilled for you.
-
-Scroll all the way to the bottom of the browser window and click **Invoke**.
-
-![Invoke API](images/invoke-api.png)
+![Invoke API](images/invoke.png)
 
 If this is the first test of the API, you may see a certificate exception. Simply click on the URL and choose the option to proceed.
 
 Go back to the test view and click **Invoke** again.
 
-Now you should see a Response section with Status code 201 OK and the body displaying the new client's ID in Salesforce.
+Now you should see a Response section with status code `201 Created` and the body displaying the new Salesforce client ID.
 
-![Return from API call](images/response.png)
+![Return from API call](images/results.png)
 
 ## Summary
 
