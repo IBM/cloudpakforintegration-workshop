@@ -6,7 +6,6 @@
 
 ## Workshop
 
-<!-- * [Exercise: Introduction to the sample application](exercise-stock-trader/README.md) -->
 * [Exercise: Leverage App Connect to create a new API that syncs with Salesforce](exercise-app-connect/README.md)
 * [Exercise: Use API Connect to publish your API](exercise-api-connect/README.md)
 * [Exercise: Produce and consume messages with Event Streams](exercise-event-streams/README.md)
@@ -15,10 +14,10 @@
 ## Lectures
 
 * [Lecture: What is Cloud Native?](https://ibm.box.com/s/3pvl4jdi3xifs1olzcl9np904zvk5ueo)
-* [Lecture: Introduction to Cloud Pak for Integration](TBD)
+* [Lecture: Cloud Pak for Integration Overview](https://ibm.ent.box.com/file/645410893675)
 * [Lecture: Introduction to App Connect](TBD)
-* [Lecture: Introduction to API Connect](TBD)
-* [Lecture: Introduction to Messaging with MQ and Event Streams](TBD)
+* [Lecture: Introduction to API Connect](https://ibm.ent.box.com/file/645409192838)
+* [Lecture: Application Messaging with MQ and Event Streams](https://ibm.ent.box.com/file/645421127695)
 
 ## Workshop Resources
 
