@@ -2,9 +2,9 @@
 
 Welcome to our workshop! In this workshop we'll be looking at various parts of the Cloud Pak for Integration platform. The goals of this workshop are:
 
-* Deploy an API Gateway using `API Connect`, to provide an API management point across the micro-services,
-* Simplify data access from external data sources, such as Salesforce, using `App Connect`,
-* Produce and consume messages with `Event Streams`.
+* Leveraging **App Connect** to create a new API that syncs with Salesforce,
+* Using **API Connect** to publish our new API,
+* Producing and consuming messages with **Event Streams**.
 
 ![Cloud Pak for Integration](.gitbook/images/cp4int.png)
 
