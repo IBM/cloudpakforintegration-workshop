@@ -1,10 +1,10 @@
-# Exercise: Add an API Management point to the application
+# Exercise: Publish your API, using API Connect
 
-In this exercise, we will show how to use API Connect to create and test an API.
+In this exercise, we will show how to use API Connect to publish API.
 
 When you have completed this exercise, you will understand how to
 
-* Created an API by importing an OpenAPI definition for an existing REST service.
+* Created a managed API endpoint, by importing an OpenAPI definition for an existing REST service.
 * Configured a ClientID/API Key for security set up a proxy to the existing API.
 * Tested the API in the API Connect developer toolkit.
 
