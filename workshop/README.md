@@ -3,7 +3,7 @@
 Welcome to our workshop! In this workshop we'll be looking at various parts of the Cloud Pak for Integration platform. The goals of this workshop are:
 
 * Create a new API that syncs with Salesforce, using **App Connect**
-* Publish your new API, Using **API Connect**
+* Publish your new API, using **API Connect**
 * Producing and consuming messages with **Event Streams**.
 
 ![Cloud Pak for Integration](.gitbook/images/cp4int.png)
