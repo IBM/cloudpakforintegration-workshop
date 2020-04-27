@@ -1,11 +1,20 @@
-# Exercise: Publish your API, using API Connect
+# Exercise: Create and publish a managed API endpoint for an existing REST service, using API Connect
 
-In this exercise, we will show how to use API Connect to publish API.
+As you build your server applications with REST interfaces, you need to consider how these interfaces are exposed to other developers. While it is technically possible to simply give them a direct URL to the component in question, typically you will want to take a much more managed approach to formally publishing a URL endpoint. For instance, you need to consider:
+
+* How can you horizontally scale the resources running your API endpoint?
+* How can you monitor and manage the endpoint?
+* How will you enable transition to new versions of your API, deprecating old versions over time
+* How can you secure the traffic to the endpoint?
+
+While you could implement the above directly in your service along with your code, it is good practice to separate the above functionality - particularly if you have multiple services. Having a standard way of implementing the above will bring consistency to the experience received by developers using your API. This is the goal of the API Connect component of Cloud Pak for Integration.
+
+In this exercise, we will show you how to use API Connect to accomplish some of above, by creating and publishing a new, managed API endpoint for the REST service you built with App Connect in the [previous exercise](../exercise-app-connect/README.md)
 
 When you have completed this exercise, you will understand how to
 
 * Created a managed API endpoint, by importing an OpenAPI definition for an existing REST service.
-* Configured a ClientID/API Key for security set up a proxy to the existing API.
+* Publish the new API endpoint
 * Tested the API in the API Connect developer toolkit.
 
 ## Steps
