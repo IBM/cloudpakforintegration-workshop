@@ -7,7 +7,7 @@
 ## Workshop
 
 * [Exercise: Create a new API that syncs with Salesforce, using App Connect](exercise-app-connect/README.md)
-* [Exercise: Publish your API, using API Connect](exercise-api-connect/README.md)
+* [Exercise: Create and publish a managed API endpoint for an existing REST service, using API Connect](exercise-api-connect/README.md)
 * [Exercise: Produce and consume messages with Event Streams](exercise-event-streams/README.md)
 <!-- * [Exercise: Integrate with MQ](exercise-mq/README.md) -->
 
