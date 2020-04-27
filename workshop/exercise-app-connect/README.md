@@ -1,6 +1,6 @@
-# Exercise: Use App Connect to sync Salesforce data
+# Exercise: Create a new API that syncs with Salesforce, using App Connect
 
-In this lab you will create an App Connect API to push client data to Salesforce. This will occur whenever a user interacts with the API.
+A common requirement, when developing enterprise applications, is the need to access existing data sources in other external servies - for example exchanging data with a SaaS application. A good design practice is to enable this by creating a bespoke API that provides just the specific access you need. In this lab you will create an API to push client data to Salesforce, using App Connect. This will occur whenever a user interacts with the API.
 
 ## Steps
 

@@ -1,4 +1,4 @@
-# Exercise: Using IBM Event Streams for near real-time data replication
+# Exercise: Provide near real-time data replication, using IBM Event Streams
 
 In this lab you will use IBM Event Streams to replicate data from a transactional database to a reporting database. The pattern used allows for seamless horizontal scaling to minimize the latency between the time the transaction is committed to the transactional database and when it is available to be queried in the reporting database. Applications connect to Event Streams topics and write to and read from them. Topics are known groupings of related data. Topics are created and configured by the Event Streams administrator.
 
