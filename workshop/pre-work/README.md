@@ -4,11 +4,19 @@
 
 > These requirements are for THINK2020 and runs on the [Skytap](https://cloud.skytap.com/) platform.
 
-Click the *Run VM(s)* button to start all of the virtual machines that are used for this lab. Once the virtual machine starts, click the *Developer Machine* tile to start your lab exercise. To log into the Linux desktop use the credentials **ibmuser** and **engageibm**
+Click the *Run VM(s)* button to start all of the virtual machines that are used for this lab. Once the virtual machine starts, click the *Developer Machine* tile to start your lab exercise. 
 
 ![Start the VMs and log into the Developer Machine](images/skytap.png)
 
-Open the browser on the *Developer Machine* VM and click the *IBM Cloud Pak for Integration* bookmark in the bookmarks bar at the top. You might receive a login screen, to log into the console use the credentials **admin** and **passw0rd**.
+Below is a list of usernames and passwords that are specific to the Skytap environment, keep them handy as you'll need them throughout the workshop.
+
+| **Platform** | **Username** | **Password** |
+| - | - | - |
+| Linux desktop | `ibmuser` | `engageibm` |
+| IBM Cloud Pak for Integration Console | `admin` | `passw0rd` |
+| OpenShift cluster | `ibmadmin` | `engageibm` |
+
+Open the browser on the *Developer Machine* VM and click the *IBM Cloud Pak for Integration* bookmark in the bookmarks bar at the top. If prompted to login, use the password above for the *IBM Cloud Pak for Integration Console*
 
 From the console overview page, click *View Instances* to see the list of instances available. The list of installed instances includes: **API Connect**, **App Connect**, **MQ**, and **Event Streams**.
 
