@@ -67,32 +67,13 @@ Click **Configure and generate application** to open the configuration panel for
 
 ![Starter application configuration](images/app-config.png)
 
-Event Streams will begin to generate the starter application. When it has been generated, click **Download application** to begin downloading the starter application.
+Event Streams will begin to generate the starter application. When it has been generated, click **Download application** to begin downloading the starter application. **NOTE** Choose to **Save the file** instead of opening the file.
 
 ![Download starter application](images/download-starter-app.png)
 
-> **NOTE**: Remember to choose to **Save the file** instead of opening the file.
-
 ### 3. Run the starter application
 
-Before we launch the application we have to update the Maven version that is pre-installed.
-
-Open a terminal and run the following commands to upgrade Maven to 3.6.3.
-
-```bash
-cd ~
-wget https://httpd-mirror.sergal.org/apache/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.zip
-unzip apache-maven-3.6.3-bin.zip
-export PATH=~/apache-maven-3.6.3/bin:$PATH
-```
-
-Ensure Maven is at the right version (>3.6.0) by running
-
-```bash
-mvn --version
-```
-
-From the terminal run the following commands to move and unzip the start application:
+Open a terminal and run the following commands to move and unzip the start application:
 
 ```bash
 cd ~/Downloads
@@ -100,12 +81,6 @@ mkdir eslabtester
 mv IBMEventStreams_eslabtester.zip eslabtester
 cd eslabtester
 unzip IBMEventStreams_eslabtester.zip
-```
-
-Run the following command to disable URL checking in Java:
-
-```bash
-export JAVA_OPTIONS=Djdk.net.URLClassPath.disableClassPathURLCheck=true
 ```
 
 Now run this command to start the application:
