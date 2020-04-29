@@ -124,9 +124,13 @@ Return to the **Generate starter application** page and click **Toolbox**.
 
 ![Launch Toolbox](images/launch-toolbox-from-starter.png)
 
-Click **Topics** in the primary navigation on the left and select your `eslabtopic` topic.
+Click **Topics** in the primary navigation on the left to view a list of all topics.
 
 ![Go to Topics](images/view-topics.png)
+
+Click on the **eslabtopic** topic that you created earlier
+
+![Clik on eslabtopic](images/eslabtopic.png)
 
 Use the Event Streams dashboard to evaluate the messages produced, for example, information such as the **Average message size produced per second** and the **Average number of messages produced per second**.
 
