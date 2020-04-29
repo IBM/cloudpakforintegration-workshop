@@ -2,7 +2,7 @@
 
 A common requirement, when developing enterprise applications, is the need to access existing data sources in other external servies - for example exchanging data with a SaaS application. A good design practice is to enable this by creating a bespoke API that provides just the specific access you need. In this lab you will create an API to push client data to Salesforce, using App Connect. This will occur whenever a user interacts with the API.
 
-For this exercise, we want to create an API that can be called with details of a new contact (i.e. First Name, Last name and Email), which will result in a new **Contact** record being created in Salesforce. The API should return a ClientID for the new contact, and a code of 200 if successful.
+For this exercise, we want to create an API that can be called with details of a new contact (i.e. First Name, Last name and Email), which will result in a new **Contact** record being created in Salesforce. The API should return a ClientID for the new contact, and a code of 201 if successful.
 
 ## Steps
 
@@ -11,7 +11,7 @@ For this exercise, we want to create an API that can be called with details of a
 1. [Setup connectivity to Salesforce in App Connect Designer](#3-setup-connectivity-to-salesforce-in-app-connect-designer)
 1. [Create the flow in App Connect Designer](#4-create-the-flow-in-app-connect-designer)
 1. [Save your Salesforce credentials as a Kubernetes secret](#5-save-your-salesforce-credentials-as-a-kubernetes-secret)
-1. [Create an Integration Server instance and deploy your flow](#6-create-an-integration-server-instance-and-deploy-your-flow)
+1. [Create an Integration Server instance to run your flow](#6-create-an-integration-server-instance-and-deploy-your-flow)
 1. [Test your App Connect Flow](#7-test-your-app-connect-flow)
 1. [Summary](#summary)
 
@@ -91,11 +91,9 @@ In a new browser tab in the desktop VM, open the **Cloud Pak for Integration** t
 
 ![App Designer Catalog](images/appdesignercatalog.png)
 
-Scroll down to find the **Salesforce** entry and expand it. If there are existing connections shown in a drop down list select **Add a new account ...** from that list.
+Scroll down to find the **Salesforce** entry and expand it. If this is the first time you have created a connection, click on **Connect**. If there are already existing connections shown in a drop down list, select **Add a new account ...** from that list.
 
 ![New Salesforce Connection](images/addanewaccount.png)
-
-> **NOTE** If there are no existing connection shown click on **Connect**
 
 Enter the following values referring to the text file from the previous section where you saved your Salesforce credentials.
 
@@ -197,21 +195,23 @@ Save the file to a folder of your choosing.
 
 ### 5. Save your Salesforce credentials as a Kubernetes secret
 
-When you flow is running in an Integration Server, it will need access to the same authentication credentials we used when we tested the flow in the App Connect Designer. Since we are running on Kubernetes, the standard way you do this is to create a Kubernetes secret containing this information in the OpenShift cluster running Cloud Pak for Integration. You will do this using the OpenShift CLI.
+When your flow is running in an Integration Server, it will need access to the same authentication credentials we used when we tested the flow in the App Connect Designer. Since we are running on Kubernetes, the standard way you do this is to create a Kubernetes secret containing this information in the OpenShift cluster running Cloud Pak for Integration. You will do this using the OpenShift CLI.
 
-In order to use the OpenShift CLI against you cluster, you first need to get an authentication token for it. To do this, navigate to the OpenShift console in a new tab in the browser running in the desktop VM. Click the profile on the top right and choose the **Copy Login Command** option.
+In order to use the OpenShift CLI against you cluster, you first need to get an authentication token for it. To do this, navigate to the OpenShift console in a new tab in the browser running in the desktop VM. If you are asked to login to the cluster, choose **htpasswd** and use the pre-filled credentials
+
+![Choose htpasswd](images/htpasswd.png)
+
+You can then click the profile on the top right and choose the **Copy Login Command** option.
 
 ![Copy Login Command](images/copylogincommand.png)
 
-You'll be forced to choose a login method, choose **htpasswd** and use the pre-filled credentials.
-
-![Choose htpasswd](images/htpasswd.png)
+You will be forced, again, to choose a login method, choose **htpasswd** and use the pre-filled credentials, as before.
 
 Click the **Display Token** option and copy the `oc login` command.
 
 ![Copy Login with Token](images/oclogin.png)
 
-In the Linux desktop on the desktop VM, open a new *Terminal* window (you can find this in the **Applications** menu on the top left of the screen to do this). Paste in the `oc login` command and run it:
+In the Linux environment on the desktop VM, open a new *Terminal* window (you can find this in the **Applications** menu on the top left of the screen to do this). Paste in the `oc login` command and run it:
 
 ```bash
 $ oc login --token=KoSCnw....SmQz0 --server=https://api.demo.ibmdte.net:6443
@@ -252,9 +252,9 @@ Once updated with your correct values, run the following command to create the s
 oc create secret generic sfcred --from-file=credentials=sfcred.yaml
 ```
 
-### 6. Create an Integration Server instance and deploy your flow
+### 6. Create an Integration Server instance to run your flow
 
-In this step you'll create an Integration Server instance and deploy your flow to it.
+In this step you'll create an Integration Server instance to run your flow.
 
 In a new browser tab open the **Cloud Pak for Integration** tab and under **View Instances** click on the link for **App Connect Dashboard**.
 
@@ -295,7 +295,7 @@ The bottom half of the dialog should look like the following:
 
 ![Bottom Half](images/bottomhalf.png)
 
-> **NOTE**: The name of the integation server will be `user001sf`, rather than that shown in the above picture.
+> **NOTE**: The name of the secret will be `sfcred`, rather than that shown in the above picture.
 
 Click **Create**. The status of the server will be eventually shown. Wait until the server status shows as **Started**. Note you may have to refresh the page to see the status change.
 
@@ -320,10 +320,10 @@ Copy the **REST API Base URL** to the clipboard
 You can now execute an API call to this URL to post the details of a new contact (which should result in this being inserted into Salesforce). In a Terminal you should run the following `curl` command (with your own URL subsituted):
 
 ```bash
-curl -X POST -H "Content-Type: application/json" -d '{"FirstName":"Steve", "LastName":"Martinelli", "Email":"stevemar@ca.ibm.com"}' <your URL here>
+curl -X POST -H "Content-Type: application/json" -d '{"FirstName":"Steve", "LastName":"Martinelli", "Email":"stevemar@ca.ibm.com"}' <your URL here>/Client
 ```
 
-You should see output like the example below. Verify that the ID of the new Salesforce contact is returned.
+You should see output like the example below:
 
 ```bash
 $ curl -X POST -H "Content-Type: application/json" -d '{"FirstName":"Steve", "LastName":"Martinelli", "Email":"stevemar@ca.ibm.com"}' http://user001sf2-http-ace.apps.demo.ibmdte.net:80/user001sf/Client
