@@ -21,9 +21,9 @@ When you have completed this exercise, you will understand how to
 
 All the steps below are carried out on the desktop Linux OS VM.
 
-1. [Define what your API will call, by importing the OpenAPI definition for your REST service](#1-download-the-openapi-definition-file)
-1. [Configure the API](#6-configure-the-api)
-1. [Test the API](#7-test-the-api)
+1. [Define what your API will call, by importing the OpenAPI definition for your REST service](#1-define-what-your-api-will-call-by-importing-the-openapi-definition-for-your-rest-service)
+1. [Configure the API](#2-configure-the-api)
+1. [Test the API](#3-test-the-api)
 1. [Summary](#summary)
 
 ### 1. Define what your API will call, by importing the OpenAPI definition for your REST service
@@ -64,7 +64,7 @@ Choose the default values in the next few panels. You'll reach the **Summary** p
 
 ![Edit API](images/edit-api.png)
 
-### 3. Configure the API
+### 2. Configure the API
 
 After importing the API you'll be given an opporunity to add or modify existing properties
 
@@ -72,7 +72,7 @@ After importing the API you'll be given an opporunity to add or modify existing 
 
 Click **Save** to complete the configuration.
 
-### 4. Test the API
+### 3. Test the API
 
 In the API designer, you have the ability to test the API immediately after creation in the **Assemble** view.
 
