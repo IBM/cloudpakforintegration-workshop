@@ -19,105 +19,28 @@ When you have completed this exercise, you will understand how to
 
 ## Steps
 
-1. [Download the OpenAPI definition file](#1-download-the-openapi-definition-file)
-1. [Create a Topology](#2-create-a-topology)
-1. [Create an Organization](#3-create-an-organization)
-1. [Add a Gateway to the Catalog](#4-add-a-gateway-to-the-catalog)
-1. [Import the OpenAPI definition file](#5-import-the-openapi-definition-file)
-1. [Configure the API](#6-configure-the-api)
-1. [Test the API](#7-test-the-api)
+All the steps below are carried out on the desktop Linux OS VM.
+
+1. [Define what your API will call, by importing the OpenAPI definition for your REST service](#1-define-what-your-api-will-call-by-importing-the-openapi-definition-for-your-rest-service)
+1. [Configure the API](#2-configure-the-api)
+1. [Test the API](#3-test-the-api)
 1. [Summary](#summary)
 
-### 1. Download the OpenAPI definition file
+### 1. Define what your API will call, by importing the OpenAPI definition for your REST service
 
-In your browser right click on the OpenAPI document link and select **Save Link As ...** from the context menu.
+In the [previous exercise](../exercise-app-connect/README.md) you created a REST service for synchronizing data with Salesforce. This is the service for which you are going to build a new, managed API endpoint. The first thing you need to do is import, into API Connect, the OpenAPI definition for the API you created as part of this service. This is going to be what your new, managed API endpoint will call to satisfy requests it receives.
 
-![Download OpenAPI Spec](images/download-api.png)
+To obtain the OpenAPI specification for your existing REST service, in the App Connect Dashboard click on the tile for your existing server:
 
-### 2. Create a Topology
+![Running server](images/servertile.png)
 
-From the hamburger menu click on the API Connect service, right click the kebab menu, and click **Manage**.
+Click on the API tile to see the details of the flow's API
 
-![Manage API Connect](images/manage-api-connect.png)
+![API tile](images/apitile.png)
 
-Click **Configure Topology**.
+You should see the details of your flow's API. In your your browser, right click on the **OpenAPI document** link and select **Save Link As ...** from the context menu (alternatively you can click on the link and select **Save** from the menu bar).
 
-![Configure Topology](images/configure-topology.png)
-
-Click **Register Service**.
-
-![Register Service](images/register-service.png)
-
-Click **DataPower Gateway**.
-
-![Create Gateway](images/create-dp-gateway.png)
-
-In the config menu...
-
-* **Details**
-  * *Title*: `Gateway 1`
-* **Management Endpoint**
-  * *Endpoint*: `https://gws.icp-proxy.apps.demo.ibmdte.net`
-* **API Invocation Endpoint**
-  * *Endpoint*: `https://gwy.icp-proxy.apps.demo.ibmdte.net`
-
-![Gateway Endpoints](images/gateway-endpoints.png)
-
-Click **Save** on the bottom of the page.
-
-### 3. Create an Organization
-
-From the hamburger menu click on the API Connect service, right click the kebab menu, and click **Manage**.
-
-![Manage API Connect](images/manage-api-connect.png)
-
-Click **Manage Organizations**.
-
-![Manage Organization](images/manage-organization.png)
-
-* Click on **Add** and choose **Create organization**
-
-![Create Organization](images/create-org.png)
-
-In the config menu...
-
-* **Provider Organization**
-  * *Title*: `Org 1`
-* **Owner**
-  * *User registry*: `API Manager Local User Registry`
-  * Create a new user by giving it a `username`, `password`, `first name`, and `email`.
-
-![Organization Details](images/org-details.png)
-
-* Click **Create**
-
-> **NOTE** You may see an error message `504 Gateway Time-out`, but that's OK.
-
-### 4. Add a Gateway to the Catalog
-
-In a new browser tab open the **Cloud Pak for Integration** tab and under **View Instances** click on the link for **API Connect**.
-
-![Launch API Connect](images/cp4i-dashboard-api-connect.png)
-
-You will be prompted to login, choose to login with **API Manager Local User Regitry**, and use the new username and password you just created.
-
-![Manage API Connect](images/apic-login.png)
-
-Click on **Manage Catalogs**.
-
-![Manage Catalogs](images/manage-catalog.png)
-
-Click on the **Sandbox** tile.
-
-![Edit Sandbox Catalog](images/sandbox-catalog.png)
-
-From the **Settings** (gear icon), choose the **Gateway Services** menu option, and add `Gateway-1` as the default.
-
-![Add Gateway Services](images/add-gateway-services.png)
-
-### 5. Import the OpenAPI definition file
-
-In a new browser tab open the **Cloud Pak for Integration** tab and under **View Instances** click on the link for **API Connect**.
+Now you can import this into API Connect as the API for your new managed endpoint to call. In a new browser tab open the **Cloud Pak for Integration** tab and under **View Instances** click on the link for **API Connect**.
 
 ![Launch API Connect](images/cp4i-dashboard-api-connect.png)
 
@@ -141,7 +64,7 @@ Choose the default values in the next few panels. You'll reach the **Summary** p
 
 ![Edit API](images/edit-api.png)
 
-### 6. Configure the API
+### 2. Configure the API
 
 After importing the API you'll be given an opporunity to add or modify existing properties
 
@@ -149,7 +72,7 @@ After importing the API you'll be given an opporunity to add or modify existing 
 
 Click **Save** to complete the configuration.
 
-### 7. Test the API
+### 3. Test the API
 
 In the API designer, you have the ability to test the API immediately after creation in the **Assemble** view.
 
