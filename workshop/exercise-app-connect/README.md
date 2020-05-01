@@ -81,7 +81,7 @@ Copy both the username and the security token to the same scratchpad or text fil
 
 ### 3. Setup connectivity to Salesforce in App Connect Designer
 
-App Connect Designer is a component of Cloud Pak for Integration that provides an authoring environment in which you can create, test, and share flows for an API. You can share your flows by using the export and import functions, or by adding them to an Asset Repository for reuse.
+In App Connect, you create a *flow* to describe what happens when someone calls your API and how you might want to manipulate this data in order to map it to a call to the external service (in this case Salesforce). App Connect Designer is the component of Cloud Pak for Integration that provides an authoring environment in which you can create, test, and share flows for an API. You can share your flows by using the export and import functions, or by adding them to an Asset Repository for reuse.
 
 In a new browser tab in the desktop VM, open the **Cloud Pak for Integration** tab and under **View Instances** click on the link for **App Connect Designer**.
 
@@ -111,9 +111,7 @@ Click on **Connect**. If successful, the connection will be given a default name
 
 ### 4. Create the flow in App Connect Designer
 
-In App Connect, you can create a flow for what happens when someone calls your API and you need to manipulate this data in order to map it to a call to the external service, in this case Salesforce. At a minimum, you typically need to provide the mapping of data fields between that your API is exposing and what the eternal service is expecting.
-
-To create a flow in App Connect Designer, click the **Settings** icon and then select **Dashboard**:
+In a flow, at a minimum, you typically need to provide the mapping of data fields between that your API is exposing and what the eternal service is expecting. To create a flow in App Connect Designer, click the **Settings** icon and then select **Dashboard**:
 
 ![Dashboard](images/dashboard.png)
 

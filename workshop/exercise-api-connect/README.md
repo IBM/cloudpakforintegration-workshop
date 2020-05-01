@@ -21,14 +21,14 @@ When you have completed this exercise, you will understand how to
 
 All the steps below are carried out on the desktop Linux OS VM.
 
-1. [Define what your API will call, by importing the OpenAPI definition for your REST service](#1-define-what-your-api-will-call-by-importing-the-openapi-definition-for-your-rest-service)
+1. [Describe the API for which you want to create a managed endpoint, by importing an OpenAPI specification](#1-define-what-your-api-will-call-by-importing-the-openapi-definition-for-your-rest-service)
 1. [Configure the API](#2-configure-the-api)
 1. [Test the API](#3-test-the-api)
 1. [Summary](#summary)
 
-### 1. Define what your API will call, by importing the OpenAPI definition for your REST service
+### 1. Describe the API for which you want to create a managed endpoint, by importing an OpenAPI specification
 
-In the [previous exercise](../exercise-app-connect/README.md) you created a REST service for synchronizing data with Salesforce. This is the service for which you are going to build a new, managed API endpoint. The first thing you need to do is import, into API Connect, the OpenAPI definition for the API you created as part of this service. This is going to be what your new, managed API endpoint will call to satisfy requests it receives.
+In the [previous exercise](../exercise-app-connect/README.md) you created a REST service for synchronizing data with Salesforce. This is the service for which you are going to build a new, managed API endpoint. The first thing you need to do is import, into API Connect, the OpenAPI definition for the API you created as part of this service.  By deafult, this will become both the external API structure you publish, as well as the service API the managed endpoint will call to satisfy requests it receives.
 
 To obtain the OpenAPI specification for your existing REST service, in the App Connect Dashboard click on the tile for your existing server:
 
@@ -44,7 +44,9 @@ Now you can import this into API Connect as the API for your new managed endpoin
 
 ![Launch API Connect](images/cp4i-dashboard-api-connect.png)
 
-Click on the **Develop APIs and Products tile**
+You may be asked to log into API Connect, in which case you should select to log in using the **IBM Common Services user registry**.
+
+Once loaded, click on the **Develop APIs and Products tile**
 
 ![Develop APIs and Products tile](images/api-manager.png)
 
@@ -52,7 +54,7 @@ Click **ADD->API**
 
 ![Add API](images/add-api.png)
 
-On the next screen select **Existing OpenAPI** under **Import** and then click **Next**.
+On the next screen select **From Existing OpenAPI Service** under **Create** and then click **Next**.
 
 ![Existing OpenAPI](images/existing-api.png)
 
@@ -63,6 +65,8 @@ Now choose **user001sf.json** from your local file system and click **Next**.
 Choose the default values in the next few panels. You'll reach the **Summary** panel and the API should be imported successfully as shown below. Click **Edit API**.
 
 ![Edit API](images/edit-api.png)
+
+> **NOTE**: Importing an OpenAPI specification is just one of the generic ways you can define an API in API Connect. It enables you to build a managed endpoint for your REST service however it was created - which is why this method is used in this workshop. As an aside, there is an alternative method, if the service was created in App Connect. You can push an API defintion direct from App Connect to API Connect (without having to save off the OpenAPI specification) - using the **Share REST APIs** option in the **...** menu from the appropriate flow item in the **App Connect Dashboard**.
 
 ### 2. Configure the API
 
@@ -80,9 +84,9 @@ On the top Navigation, click **Assemble**.
 
 ![Assemble](images/assemble.png)
 
-Click **proxy** in the flow designer. Note the window on the right with the configuration. It calls the **target-url** with the same request path sent to the API Connect endpoint. Ensure the **URL** is set to `$(target-url)$(request.path)`.
+Click **Invoke** in the flow designer. Note the window on the right with the configuration. It calls the **target-url** with the same request path sent to the API Connect endpoint. Ensure the **URL** is set to `$(target-url)$(request.path)`.
 
-![Proxy](images/proxy.png)
+![Invoke target](images/invoke-target.png)
 
 Click the play icon as indicated in the image below.
 
