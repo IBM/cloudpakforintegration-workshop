@@ -4,7 +4,7 @@
 
 > These requirements are for THINK2020 and runs on the [Skytap](https://cloud.skytap.com/) platform.
 
-Click the *Run VM(s)* button to start all of the virtual machines that are used for this lab. Once the virtual machine starts, click the *Developer Machine* tile to start your lab exercise. 
+Click the *Run VM(s)* button to start all of the virtual machines that are used for this lab. Once the virtual machine starts, click the *Developer Machine* tile to start your lab exercise.
 
 ![Start the VMs and log into the Developer Machine](images/skytap.png)
 
