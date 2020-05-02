@@ -13,11 +13,11 @@
 
 ## Lectures
 
-* [Lecture: What is Cloud Native?](https://ibm.box.com/s/3pvl4jdi3xifs1olzcl9np904zvk5ueo)
-* [Lecture: Cloud Pak for Integration Overview](https://ibm.ent.box.com/file/645410893675)
-* [Lecture: Introduction to App Connect](https://ibm.ent.box.com/file/645398187943)
-* [Lecture: Introduction to API Connect](https://ibm.ent.box.com/file/645409192838)
-* [Lecture: Application Messaging with MQ and Event Streams](https://ibm.ent.box.com/file/645421127695)
+* [Lecture: What is Cloud Native?](https://ibm.box.com/s/ep7bgjnqc76t19l9x9pvkwk0bx1p7mcp)
+* [Lecture: Cloud Pak for Integration Overview](https://ibm.box.com/s/1wi06b4gsnyoohjts5pjgh1t0uysio3e)
+* [Lecture: Introduction to App Connect](https://ibm.box.com/s/9v7s3rz63euzm50yt4jmicd8lrfcmdmi)
+* [Lecture: Introduction to API Connect](https://ibm.box.com/s/5ba4cv0kei0xgvfotfsp7fx76viimab4)
+* [Lecture: Application Messaging with MQ and Event Streams](https://ibm.box.com/s/k5v3gkrijvposgwey7k08lkj46zy9ny4)
 
 ## Workshop Resources
 
