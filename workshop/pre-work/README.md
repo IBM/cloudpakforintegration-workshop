@@ -22,6 +22,7 @@ From the console overview page, click *View Instances* to see the list of instan
 
 ![List of installed instances](images/cp4i-overview.png)
 
+<!--
 ## On IBM Cloud
 
 > These requirements are for workshops running on IBM Cloud
@@ -47,3 +48,4 @@ From the IBM Cloud console, click the IBM Cloud Shell icon. A session will start
 From here, you can access pre-installed CLIs like `git`, `kubectl`, and many others.
 
 ![Using the IBM Cloud Shell](images/cloud-shell.png)
+-->
