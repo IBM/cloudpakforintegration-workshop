@@ -62,7 +62,7 @@ Now choose **user001sf.json** from your local file system and click **Next**.
 
 ![Choose file](images/choose-file.png)
 
-Choose the default values in the next few panels. You'll reach the **Summary** panel and the API should be imported successfully as shown below. Click **Edit API**.
+Choose the default values in the next few panels. You will notice that by default your API will have security added to it (which will be terminated at your endpoint), helping to secure calls that eventually will reach your REST service running in App Connect. You'll reach the **Summary** panel and the API should be imported successfully as shown below. Click **Edit API**.
 
 ![Edit API](images/edit-api.png)
 
