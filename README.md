@@ -1,5 +1,5 @@
 # Cloud Pak for Integration Workshop
 
-> The workshop is hosted at: [https://ibm-developer.gitbook.io/cloudpakforintegration-workshop/](https://ibm-developer.gitbook.io/cloudpakforintegration-workshop/)
+> The workshop is hosted at: [https://ibm.github.io/cloudpakforintegration-workshop/](https://ibm.github.io/cloudpakforintegration-workshop/)
 
-!["cp4int"](workshop/.gitbook/images/cp4int.png)
+!["cp4int"](docs/assets/images/cp4int.png)

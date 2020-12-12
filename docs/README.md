@@ -6,7 +6,7 @@ Welcome to our workshop! In this workshop we'll be looking at various parts of t
 * Create and publish a managed API endpoint for an existing REST service, using **API Connect**
 * Producing and consuming messages with **Event Streams**.
 
-![Cloud Pak for Integration](.gitbook/images/cp4int.png)
+![Cloud Pak for Integration](assets/images/cp4int.png)
 
 ## About this workshop
 
@@ -29,6 +29,16 @@ Cloud Pak for Integration includes components to enable you to manage:
 | **Event streaming** | Use Apache Kafka to deliver messages more easily and reliably and to react to events in real time. Provide more personalized customer experiences by responding to events before the moment passes |
 | **High-speed data transfer** | Send large files and data sets virtually anywhere, reliably and at maximum speed. Accelerate collaboration and meet the demands of complex global teams, without compromising performance or security |
 | **Secure gateway** | Create persistent, security-rich connections between your on-premises and cloud environments. Quickly set up and manage gateways, control access on a per-resource basis, configure TLS encryption and mutual authentication, and monitor all of your traffic |
+
+### Lectures
+
+In addition to the labs, this workshop uses the following lectures:
+
+* [What is Cloud Native?](https://ibm.box.com/s/ep7bgjnqc76t19l9x9pvkwk0bx1p7mcp)
+* [Cloud Pak for Integration Overview](https://ibm.box.com/s/1wi06b4gsnyoohjts5pjgh1t0uysio3e)
+* [Introduction to App Connect](https://ibm.box.com/s/9v7s3rz63euzm50yt4jmicd8lrfcmdmi)
+* [Introduction to API Connect](https://ibm.box.com/s/5ba4cv0kei0xgvfotfsp7fx76viimab4)
+* [Application Messaging with MQ and Event Streams](https://ibm.box.com/s/k5v3gkrijvposgwey7k08lkj46zy9ny4)
 
 ## Credits
 
