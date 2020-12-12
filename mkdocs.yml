@@ -10,15 +10,11 @@ edit_uri: edit/master/docs
 
 # Navigation
 nav:
-  - Welcome:
-    - About the workshop: README.md
-  - Workshop:
-    - Access the environment: pre-work/README.md
-    - App Connect and Salesforce: exercise-app-connect/README.md
-    - Publish with API Connect: exercise-api-connect/README.md
-    - Produce and Consume with Event Streams: exercise-event-streams/README.md
-  - Instructors:
-    - About this workshop: instructor-guide/README.md
+  - About the workshop: README.md
+  - Access the environment: pre-work/README.md
+  - App Connect and Salesforce: exercise-app-connect/README.md
+  - Publish with API Connect: exercise-api-connect/README.md
+  - Produce and Consume with Event Streams: exercise-event-streams/README.md
 
 ## DO NOT CHANGE BELOW THIS LINE
 
@@ -34,8 +30,8 @@ theme:
   icon:
     logo: material/library
   features:
-    - navigation.tabs
-    #- navigation.instant
+    #- navigation.tabs
+    - navigation.instant
   palette:
     scheme: default
     primary: blue
