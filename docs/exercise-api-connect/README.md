@@ -4,7 +4,7 @@ In this lab you will create a new API using the OpenAPI definition of an existin
 
 The architecture of the app is shown below:
 
-![Architecture diagram](images/architecture.png)
+[![](images/architecture.png)](images/architecture.png)
 
 * **Tradr** is a Node.js UI for the portfolio service
 
