@@ -2,7 +2,7 @@
 
 In this lab you will create a new API using the OpenAPI definition of an existing RESTful web-service that  gets realtime stock quotes. You will then test the deployed API by deploying the *IBM Trader Lite* application which is a simple stock trading sample, written as a set of microservices. The app uses the API definition that you will create to get realtime stock quotes.
 
-The architecture of the app is shown below (image test):
+The architecture of the app is shown below:
 
 [![](images/architecture.png)](images/architecture.png)
 
@@ -40,46 +40,50 @@ API Connect requires the [Firefox](https://www.mozilla.org/en-US/firefox/new/) b
 
 1.1 In your browser right click on  the following link, right click and select **Save Link As ...** from the context menu. Save the file *stock-quote-api.yaml* to  your local system.
 
+**Note:** You can click on any image in the instructions below to zoom in and see more details. When you do that just click on your  browser's back button to return to the previous state.
+
    [stock-quote-api.yaml](https://raw.githubusercontent.com/IBMStockTraderLite/traderlite-cp4i/master/apic/stock-quote-api.yaml)
 
 
 ## Step 2: Import the OpenAPI definition file into API Manager
 
+
+
 2.1 Go to your Workshop Information page and click on the API Connect component link. (**Note:** if you no longer have the Workshop Information page available see:  TODO - put link to instructions here).
 
-  ![Navigate to API Connect](images/nav-to-apic.png)
+  [![](images/nav-to-apic.png)](images/nav-to-apic.png)
 
   **Note:** This API Connect installation use self-signed certificates so you will have to click through any browser warning and continue to the URL.
 
 2.2 Click on **Common Services user registry**
 
-  ![API Manager User Registry](images/apic-csur.png)
+  [![](images/apic-csur.png)](images/apic-csur.png)
 
 2.3 Login with the credentials for API Connect on the Workshop Information Page
 
 2.4 Click on the **Develop APIs and Products tile**
 
-   ![Develop APIs and Products tile](images/api-manager.png)
+   [![](images/api-manager.png)](images/api-manager.png)
 
 2.5 Click **Add API**
 
-  ![Add API](images/add-api.png)
+  [![](images/add-api.png)](images/add-api.png)
 
 2.6 On the next screen select **Existing OpenAPI** under **Import** and then click **Next**.
 
-  ![Existing OpenAPI](images/existing-api.png)
+  [![](images/existing-api.png)](images/existing-api.png)
 
 2.7 Now choose **stock-quote-api.yaml** from your local file system and click **Next**.
 
-  ![Choose file](images/choose-file.png)
+  [![](images/choose-file.png)](images/choose-file.png)
 
 2.8 **Do not** select **Activate API**. Click **Next**
 
-  ![Choose file](images/activate-api.png)
+  [![](images/activate-api.png)](images/activate-api.png)
 
 2.9 The API should be imported successfully as shown below. Click **Edit API**.
 
-  ![Edit API](images/edit-api.png)
+  [![](images/edit-api.png)](images/edit-api.png)
 
 ## Step 3: Configure the API
 
@@ -87,7 +91,7 @@ After importing the existing API, the first step is to configure basic security 
 
 3.1 Scroll down in  the  Edit API screen and replace the **Host** address with `$(catalog.host)` to indicate that you want calls to the external API to go through API Connect.
 
-  ![Catalog Host](images/catalog-host.png)   
+  [![](images/catalog-hostname.png)](images/catalog-host.png)   
 
 3.2 Click **Save**
 
@@ -103,13 +107,13 @@ After importing the existing API, the first step is to configure basic security 
 
 3.8 Enter `X-IBM-Client-Id` as the **Parameter Name**.  Your screen should now look like the image below.
 
-  ![Edit API complete](images/edit-api-complete.png)   
+  [![](images/edit-api-complete.png)](images/edit-api-complete.png)   
 
 3.9 Click the **Save** button to return to the **Security Definitions** section.
 
 3.10 Click **Security** in the left menu. Click **Add**. Select the **client-id** as shown below and then click **Save**.
 
-  ![Security](images/security.png)
+  [![](images/security.png)](images/security.png)
 
 3.11 Next you'll define the endpoint for the external API. Click on **Properties** in the left menu.
 
@@ -119,7 +123,7 @@ After importing the existing API, the first step is to configure basic security 
 
     https://stock-trader-quote.us-south.cf.appdomain.cloud
 
-   ![Target URL](images/target-url.png)
+  [![](images/target-url.png)](images/target-url.png)
 
 3.14 Click **Save** to complete the configuration.
 
@@ -129,29 +133,29 @@ In the API designer, you have the ability to test the API immediately after crea
 
 4.1 On the top Navigation, click **Assemble**.
 
-  ![Assemble](images/assemble.png)
+  [![](images/assemble.png)](images/assemble.png)
 
 4.2 Click **invoke** in the flow designer. Note the window on the right with the configuration. The **invoke** node calls the **target-url** (ie the external service).
 
-  ![Invoke](images/invoke.png)
+  [![](images/invoke.png)](images/invoke.png)
 
 4.3 Modify the **URL** field to include the request path passed in by the caller as well by appending `$(request.path)` to the **URL**.
 
-  ![Invoke edited](images/invoke-edited.png)   
+  [![](images/invoke-edited.png)](images/invoke-edited.png)   
 
 4.3 Click **Save**
 
 4.4 Click the play icon as indicated in the image below.
 
-  ![Play icon](images/play-icon.png)
+  [![](images/play-icon.png)](images/play-icon.png)
 
 4.5 Click **Activate API** to publish the API to the gateway for testing.
 
-  ![Activate API](images/activate-for-test.png)
+  [![](images/activate-for-test.png)](images/activate-for-test.png)
 
 4.6 After the API is published, click on the **Test** tab  
 
-  ![API Published](images/api-published.png)
+  [![](images/api-published.png)](images/api-published.png)
 
 4.7 The **Request** should be prefilled with the GET request to  **/stock-quote/djia**.
 
@@ -159,35 +163,35 @@ In the API designer, you have the ability to test the API immediately after crea
 
 4.9 Click **Send**.
 
-  ![Invoke API](images/invoke-api.png)
+  [![](images/invoke-api.png)](images/invoke-api.png)
 
 4.10 If this is the first test of the API, you may  see a certificate exception. Simply click on the link provided. This will open a new tab and allow you to click through to accept the  self signed certificate
 
-  ![Certificate exception](images/cert-exception.png)
+  [![](images/cert-exception.png)](images/cert-exception.png)
 
 4.11 Go back to the previous tab  and click **Send** again.
 
 4.12 Now you should see a **Response** section with Status code `200 OK` and the **Body** displaying the details of the *Dow Jones Industrial Average*.
 
-  ![Return from API call](images/response.png)
+  [![](images/response.png)](images/response.png)
 
 4.13 Click on the downward facing arrow right beneath the **Send** button
 
-  ![Expand request](images/expand-request.png)
+  [![](images/expand-request.png)](images/expand-request.png)
 
 4.14  Copy the value of the  **Client ID**  to a local text file so it can be used in the Stock Trader application later (**Note:** this is a shortcut to the regular process of publishing the API and then subscribing to it as a consumer).
 
-  ![Copy Client ID](images/client-id.png)
+  [![](images/client-id.png)](images/client-id.png)
 
 4.14 Next we'll get the endpoint for your API. Click on the **Home** icon (top left) and then click on the **Manage Catalogs** tile.
 
-  ![Manage Catalogs](images/manage-catalogs.png)
+  [![](images/manage-catalogs.png)](images/manage-catalogs.png)
 
 4.15 Click on the **Sandbox** tile.
 
 4.16 Click on the **Catalog settings** tab and then on **API Endpoints**. Copy the gateway URL and put it in the same file that you used for the **Client ID**
 
-  ![Gateway URL](images/gateway-url.png)
+  [![](images/gateway-url.png)](images/gateway-url.png)
 
 ## Step 5: Install TraderLite app
 
@@ -195,38 +199,38 @@ In the API designer, you have the ability to test the API immediately after crea
 
 5.2 Click on **Projects** in the left navigation and then click on the **student001**  project in the list
 
-  ![TraderLite project](images/select-traderlite-project.png)
+  [![](images/select-traderlite-project.png)](images/select-traderlite-project.png)
 
 5.3 Click on **Installed Operators** in the left navigation and then click on the **TraderLite Operator** in the list.
 
-  ![TraderLite Operator](images/select-traderlite-operator.png)
+  [![](images/select-traderlite-operator.png)](images/select-traderlite-operator.png)
 
 5.4 Click the **Create Instance** to start the installation of the TraderLite app.
 
-  ![TraderLite Create Instance](images/traderlite-create-instance.png)
+  [![](images/traderlite-create-instance.png)](images/traderlite-create-instance.png)
 
 5.5 Name the instance *traderlite*  and replace the **API Connect URL**  and **API Connect ClientId** with the respective values you saved in the previous section. Click **Create**
 
-  ![TraderLite Create Values](images/traderlite-create-values.png)
+  [![](images/traderlite-create-values.png)](images/traderlite-create-values.png)
 
 5.6 In the left navigation select **Pods** and then wait for all the TraderLite pods to have a status of **Running** and be in the **Ready** state.
 
-  ![TraderLite Create Values](images/traderlite-pods-ready.png)
+  [![](images/traderlite-pods-ready.png)](images/traderlite-pods-ready.png)
 
 
 ## Step 6: Verify that the Trader Lite app is calling your API successfully
 
 6.1 In your OpenShift console  click on **Routes** in the left navigation and then click on the icon next to the url for the **tradr** app (the UI for TraderLite)
 
-   ![Run tradr](images/traderlite-run-tradr.png)
+  [![](images/traderlite-run-tradr.png)](images/traderlite-run-tradr.png)
 
 6.2 Log in using the username `stock` and the password `trader`
 
- ![Stock Trader Login](images/stock-trader-login.png)
+  [![](images/stock-trader-login.png)](images/stock-trader-login.png)
 
 6.3 If the DJIA summary has data then congratulations ! It means that the API you created in API Connect is working !
 
- ![DJIA Summary Working](images/djia-success.png)
+  [![](images/djia-success.png)](images/djia-success.png)
 
 
 ## Summary
