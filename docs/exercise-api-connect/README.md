@@ -2,7 +2,7 @@
 
 In this lab you will create a new API using the OpenAPI definition of an existing RESTful web-service that  gets realtime stock quotes. You will then test the deployed API by deploying the *IBM Trader Lite* application which is a simple stock trading sample, written as a set of microservices. The app uses the API definition that you will create to get realtime stock quotes.
 
-The architecture of the app is shown below:
+The architecture of the app is shown below (image test):
 
 [![](images/architecture.png)](images/architecture.png)
 
