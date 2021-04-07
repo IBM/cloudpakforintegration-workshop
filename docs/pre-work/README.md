@@ -1,51 +1,31 @@
 # Pre-work
 
-## On Skytap
-
-> These requirements are for THINK2020 and runs on the [Skytap](https://cloud.skytap.com/) platform.
-
-Click the *Run VM(s)* button to start all of the virtual machines that are used for this lab. Once the virtual machine starts, click the *Developer Machine* tile to start your lab exercise.
-
-![Start the VMs and log into the Developer Machine](images/skytap.png)
-
-Below is a list of usernames and passwords that are specific to the Skytap environment, keep them handy as you'll need them throughout the workshop.
-
-| **Platform** | **Username** | **Password** |
-| - | - | - |
-| Linux desktop | `ibmuser` | `engageibm` |
-| IBM Cloud Pak for Integration Console | `admin` | `passw0rd` |
-| OpenShift cluster | `ibmadmin` | `engageibm` |
-
-Open the browser on the *Developer Machine* VM and click the *IBM Cloud Pak for Integration* bookmark in the bookmarks bar at the top. If prompted to login, use the password above for the *IBM Cloud Pak for Integration Console*
-
-From the console overview page, click *View Instances* to see the list of instances available. The list of installed instances includes: **API Connect**, **App Connect**, **MQ**, and **Event Streams**.
-
-![List of installed instances](images/cp4i-overview.png)
-
-<!--
 ## On IBM Cloud
 
-> These requirements are for workshops running on IBM Cloud
+> These requirements are for an IBM Cloud deployment on OpenShift 4.6 provisioned by the developer advocates from [IBM Developer](https://developer.ibm.com).
 
-### 1. Accounts
+1. Open [https://cloud.ibm.com](https://cloud.ibm.com) in a new browser tab.
 
-The following accounts are needed for this workshop:
+2. Select *Clusters*.
 
-* [IBM Cloud](https://cloud.ibm.com)
+![Select clusters](images/cloud-dashboard.png)
 
-### 2. IBM Cloud Shell
+3. Select the cluster that was assigned to you for the workshop.
 
-For this workshop we'll be using the IBM Cloud Shell. The IBM Cloud Shell is a cloud-based shell workspace that you can access through your browser. It's preconfigured with the full IBM Cloud CLI and tons of plug-ins, and other 3rd party CLIs like OpenShift's `oc`, Helm's `helm` and Kubernetes' `kubectl`.
+![Select cluster](images/cloud-account.png)
 
-## Accessing the IBM Cloud Shell
+4. Click on *OpenShift web console* to launch the console.
 
-From the IBM Cloud console, click the IBM Cloud Shell icon. A session will start and automatically log you in through the IBM Cloud CLI.
+![Open console](images/open-console.png)
 
-> **NOTE** Make sure you've selected the right account in the account list
+5. In the left navigation select *Projects* (in the *Home* section) and then select the *student001* project.
 
-![Accessing the IBM Cloud Shell](images/access-shell.png)
+![Select project](images/select-project.png)
 
-From here, you can access pre-installed CLIs like `git`, `kubectl`, and many others.
+6. In the left navigation select *Routes* (in the *Networking* section) and then click on the *Location* link for the *workshop-info* route.
 
-![Using the IBM Cloud Shell](images/cloud-shell.png)
--->
+![Launch Workshop Info](images/launch-workshop-info.png)
+
+7. The will launch your Workshop Info page. Keep this tab open for the rest of the workshop as it has all the information and links needed for you to complete the lab exercises. 
+
+![Workshop Info Page](images/workshop-info-page.png)
