@@ -2,9 +2,9 @@
 
 Welcome to our workshop! In this workshop we'll be looking at various parts of the Cloud Pak for Integration platform. The goals of this workshop are:
 
-* Create a new API that syncs with Salesforce, using **App Connect**
-* Create and publish a managed API endpoint for an existing REST service, using **API Connect**
-* Producing and consuming messages with **Event Streams**.
+* Create, deploy and test a new API using the **API Connect Developer Toolkit**
+* Using **App Connect**  to bidirectionally sync  Salesforce data with an application
+* Using **Apache Kafka** for near realtime data replication
 
 ![Cloud Pak for Integration](assets/images/cp4int.png)
 
@@ -34,11 +34,10 @@ Cloud Pak for Integration includes components to enable you to manage:
 
 In addition to the labs, this workshop uses the following lectures:
 
-* [What is Cloud Native?](https://ibm.box.com/s/ep7bgjnqc76t19l9x9pvkwk0bx1p7mcp)
 * [Cloud Pak for Integration Overview](https://ibm.box.com/s/1wi06b4gsnyoohjts5pjgh1t0uysio3e)
 * [Introduction to App Connect](https://ibm.box.com/s/9v7s3rz63euzm50yt4jmicd8lrfcmdmi)
 * [Introduction to API Connect](https://ibm.box.com/s/5ba4cv0kei0xgvfotfsp7fx76viimab4)
-* [Application Messaging with MQ and Event Streams](https://ibm.box.com/s/k5v3gkrijvposgwey7k08lkj46zy9ny4)
+* [Application Messaging with MQ and Apache Kafka](https://ibm.box.com/s/k5v3gkrijvposgwey7k08lkj46zy9ny4)
 
 ## Credits
 

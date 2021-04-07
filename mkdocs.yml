@@ -12,9 +12,9 @@ edit_uri: edit/master/docs
 nav:
   - About the workshop: README.md
   - Access the environment: pre-work/README.md
-  - App Connect and Salesforce: exercise-app-connect/README.md
   - Publish with API Connect: exercise-api-connect/README.md
-  - Produce and Consume with Event Streams: exercise-event-streams/README.md
+  - App Connect and Salesforce: exercise-app-connect/README.md
+  - Data replication with Kafka: exercise-event-streams/README.md
 
 ## DO NOT CHANGE BELOW THIS LINE
 

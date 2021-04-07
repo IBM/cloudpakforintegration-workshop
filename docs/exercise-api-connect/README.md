@@ -1,117 +1,240 @@
-# Exercise: Create and publish a managed API endpoint for an existing REST service, using API Connect
+# Exercise - Create, deploy and test a new API using the API Connect Developer Toolkit
 
-As you build your server applications with REST interfaces, you need to consider how these interfaces are exposed to other developers. While it is technically possible to simply give them a direct URL to the component in question, typically you will want to take a much more managed approach to formally publishing a URL endpoint. For instance, you need to consider:
+In this lab you will create a new API using the OpenAPI definition of an existing RESTful web-service that  gets realtime stock quotes. You will then test the deployed API by deploying the *IBM Trader Lite* application which is a simple stock trading sample, written as a set of microservices. The app uses the API definition that you will create to get realtime stock quotes.
 
-* How can you horizontally scale the resources running your API endpoint?
-* How can you monitor and manage the endpoint?
-* How will you enable transition to new versions of your API, deprecating old versions over time
-* How can you secure the traffic to the endpoint?
+The architecture of the app is shown below:
 
-While you could implement the above directly in your service along with your code, it is good practice to separate the above functionality - particularly if you have multiple services. Having a standard way of implementing the above will bring consistency to the experience received by developers using your API. This is the goal of the API Connect component of Cloud Pak for Integration.
+![Architecture diagram](images/architecture.png)
 
-In this exercise, we will show you how to use API Connect to accomplish some of above, by creating and publishing a new, managed API endpoint for the REST service you built with App Connect in the [previous exercise](../exercise-app-connect/README.md)
+* **Tradr** is a Node.js UI for the portfolio service
 
-When you have completed this exercise, you will understand how to
+* The **portfolio** microservice sits at the center of the application. This microservice:
+   * persists trade data  using JDBC to a MariaDB database
+   * invokes the **stock-quote** service that invokes an API defined in API Connect in CP4I to get stock quotes
+   * calls the **trade-history** service to store trade data in a PostgreSQL database that can be queried for reporting purposes.
+   * calls the **trade-history** service to get aggregated historical trade data.
 
-* Created a managed API endpoint, by importing an OpenAPI definition for an existing REST service.
-* Publish the new API endpoint
-* Tested the API in the API Connect developer toolkit.
 
-## Steps
+This lab is broken up into the following steps:
 
-All the steps below are carried out on the desktop Linux OS VM.
+1. [Prerequisites](#prerequisites)
 
-1. [Describe the API for which you want to create a managed endpoint, by importing an OpenAPI specification](#1-define-what-your-api-will-call-by-importing-the-openapi-definition-for-your-rest-service)
-1. [Configure the API](#2-configure-the-api)
-1. [Test the API](#3-test-the-api)
+1. [Download the OpenAPI definition file for the external Stock Quote service](#step-1-download-the-openapi-definition-file-for-the-external-stock-quote-service)
+
+1. [Import the OpenAPI definition file into API Manager](#step-2-import-the-openapi-definition-file-into-api-manager)
+
+1. [Configure the API](#step-3-configure-the-api)
+
+1. [Test the API](#step-4-test-the-api)
+
+1. [Install the Trader Lite app](#step-5-install-the-trader-lite-app)
+
+1. [Verify that the Trader Lite app is calling your API successfully](#step-6-verify-that-the-trader-lite-app-is-calling-your-api-successfully)
+
 1. [Summary](#summary)
 
-### 1. Describe the API for which you want to create a managed endpoint, by importing an OpenAPI specification
+## Prerequisites
+API Connect requires the [Firefox](https://www.mozilla.org/en-US/firefox/new/) browser in order to use the testing capabilities during API development (Step #4 of this lab) so it is recommended that you complete this entire lab using Firefox.
 
-In the [previous exercise](../exercise-app-connect/README.md) you created a REST service for synchronizing data with Salesforce. This is the service for which you are going to build a new, managed API endpoint. The first thing you need to do is import, into API Connect, the OpenAPI definition for the API you created as part of this service.  By deafult, this will become both the external API structure you publish, as well as the service API the managed endpoint will call to satisfy requests it receives.
+## Step 1: Download the OpenAPI definition file for the external Stock Quote service
 
-To obtain the OpenAPI specification for your existing REST service, in the App Connect Dashboard click on the tile for your existing server:
+1.1 In your browser right click on  the following link, right click and select **Save Link As ...** from the context menu. Save the file *stock-quote-api.yaml* to  your local system.
 
-![Running server](images/servertile.png)
+   [stock-quote-api.yaml](https://raw.githubusercontent.com/IBMStockTraderLite/traderlite-cp4i/master/apic/stock-quote-api.yaml)
 
-Click on the API tile to see the details of the flow's API
 
-![API tile](images/apitile.png)
+## Step 2: Import the OpenAPI definition file into API Manager
 
-You should see the details of your flow's API. In your your browser, right click on the **OpenAPI document** link and select **Save Link As ...** from the context menu (alternatively you can click on the link and select **Save** from the menu bar).
+2.1 Go to your Workshop Information page and click on the API Connect component link. (**Note:** if you no longer have the Workshop Information page available see:  TODO - put link to instructions here).
 
-Now you can import this into API Connect as the API for your new managed endpoint to call. In a new browser tab open the **Cloud Pak for Integration** tab and under **View Instances** click on the link for **API Connect**.
+  ![Navigate to API Connect](images/nav-to-apic.png)
 
-![Launch API Connect](images/cp4i-dashboard-api-connect.png)
+  **Note:** This API Connect installation use self-signed certificates so you will have to click through any browser warning and continue to the URL.
 
-You may be asked to log into API Connect, in which case you should select to log in using the **IBM Common Services user registry**.
+2.2 Click on **Common Services user registry**
 
-Once loaded, click on the **Develop APIs and Products tile**
+  ![API Manager User Registry](images/apic-csur.png)
 
-![Develop APIs and Products tile](images/api-manager.png)
+2.3 Login with the credentials for API Connect on the Workshop Information Page
 
-Click **ADD->API**
+2.4 Click on the **Develop APIs and Products tile**
 
-![Add API](images/add-api.png)
+   ![Develop APIs and Products tile](images/api-manager.png)
 
-On the next screen select **From Existing OpenAPI Service** under **Create** and then click **Next**.
+2.5 Click **Add API**
 
-![Existing OpenAPI](images/existing-api.png)
+  ![Add API](images/add-api.png)
 
-Now choose **user001sf.json** from your local file system and click **Next**.
+2.6 On the next screen select **Existing OpenAPI** under **Import** and then click **Next**.
 
-![Choose file](images/choose-file.png)
+  ![Existing OpenAPI](images/existing-api.png)
 
-Choose the default values in the next few panels. You will notice that by default your API will have security added to it (which will be terminated at your endpoint), helping to secure calls that will then be re-directed to your REST service running in App Connect. You'll reach the **Summary** panel and the API should be imported successfully as shown below. Click **Edit API**.
+2.7 Now choose **stock-quote-api.yaml** from your local file system and click **Next**.
 
-![Edit API](images/edit-api.png)
+  ![Choose file](images/choose-file.png)
 
-> **NOTE**: Importing an OpenAPI specification is just one of the generic ways you can define an API in API Connect. It enables you to build a managed endpoint for your REST service however it was created - which is why this method is used in this workshop. As an aside, there is an alternative method, if the service was created in App Connect. You can push an API defintion direct from App Connect to API Connect (without having to save off the OpenAPI specification) - using the **Share REST APIs** option in the **...** menu from the appropriate flow item in the **App Connect Dashboard**.
+2.8 **Do not** select **Activate API**. Click **Next**
 
-### 2. Configure the API
+  ![Choose file](images/activate-api.png)
 
-After importing the API you'll be given an opporunity to add or modify existing properties
+2.9 The API should be imported successfully as shown below. Click **Edit API**.
 
-![API Overview](images/api-overview.png)
+  ![Edit API](images/edit-api.png)
 
-Click **Save** to complete the configuration.
+## Step 3: Configure the API
 
-### 3. Test the API
+After importing the existing API, the first step is to configure basic security before exposing it to other developers. By creating a client key  you are able to identify the app using the services. Next, we will define the backend endpoints where the API is actually running. API Connect supports pointing to multiple backend endpoints to match your multiple build stage environments.
+
+3.1 Scroll down in  the  Edit API screen and replace the **Host** address with `$(catalog.host)` to indicate that you want calls to the external API to go through API Connect.
+
+  ![Catalog Host](images/catalog-host.png)   
+
+3.2 Click **Save**
+
+3.3 In the Edit API screen click **Security Definitions** in the left navigation
+
+3.4 In the **Security Definition** section, click the **Add** button on the right. This will open a new view titled **API Security Definition**.
+
+3.5 In the **Name** field, type `client-id`.
+
+3.6 Under **Type**, choose **API Key**. This will reveal additional settings.
+
+3.7 For **Located In** choose **Header**. For **Key Type** choose **Client ID**
+
+3.8 Enter `X-IBM-Client-Id` as the **Parameter Name**.  Your screen should now look like the image below.
+
+  ![Edit API complete](images/edit-api-complete.png)   
+
+3.9 Click the **Save** button to return to the **Security Definitions** section.
+
+3.10 Click **Security** in the left menu. Click **Add**. Select the **client-id** as shown below and then click **Save**.
+
+  ![Security](images/security.png)
+
+3.11 Next you'll define the endpoint for the external API. Click on **Properties** in the left menu.
+
+3.12 Click on the **target-url** property. Click **Add**.
+
+3.13 Choose the **sandbox** catalog and for the URL copy and paste the following URL:
+
+    https://stock-trader-quote.us-south.cf.appdomain.cloud
+
+   ![Target URL](images/target-url.png)
+
+3.14 Click **Save** to complete the configuration.
+
+## Step 4: Test the API
 
 In the API designer, you have the ability to test the API immediately after creation in the **Assemble** view.
 
-On the top Navigation, click **Assemble**.
+4.1 On the top Navigation, click **Assemble**.
 
-![Assemble](images/assemble.png)
+  ![Assemble](images/assemble.png)
 
-Click **Invoke** in the flow designer. Note the window on the right with the configuration. It calls the **target-url** with the same request path sent to the API Connect endpoint. Ensure the **URL** is set to `$(target-url)$(request.path)`.
+4.2 Click **invoke** in the flow designer. Note the window on the right with the configuration. The **invoke** node calls the **target-url** (ie the external service).
 
-![Invoke target](images/invoke-target.png)
+  ![Invoke](images/invoke.png)
 
-Click the play icon as indicated in the image below.
+4.3 Modify the **URL** field to include the request path passed in by the caller as well by appending `$(request.path)` to the **URL**.
 
-![Play icon](images/play-icon.png)
+  ![Invoke edited](images/invoke-edited.png)   
 
-Click **Activate API** to publish the API to the gateway for testing.
+4.3 Click **Save**
 
-![Activate API](images/activate-for-test.png)
+4.4 Click the play icon as indicated in the image below.
 
-After the API is published, find the **Operation** field and choose **post /Client**. Note that your **Client ID** is prefilled for you.
+  ![Play icon](images/play-icon.png)
 
-![Choose a POST operation](images/operation.png)
+4.5 Click **Activate API** to publish the API to the gateway for testing.
 
-Choose to **Generate** data for a request and **REMOVE the Client ID**. Scroll all the way to the bottom of the browser window and click **Invoke**.
+  ![Activate API](images/activate-for-test.png)
 
-![Invoke API](images/invoke.png)
+4.6 After the API is published, click on the **Test** tab  
 
-If this is the first test of the API, you may see a certificate exception. Simply click on the URL and choose the option to proceed.
+  ![API Published](images/api-published.png)
 
-Go back to the test view and click **Invoke** again.
+4.7 The **Request** should be prefilled with the GET request to  **/stock-quote/djia**.
 
-Now you should see a Response section with status code `201 Created` and the body displaying the new Salesforce client ID.
+4.8 Note that your **client-id** is prefilled for you.
 
-![Return from API call](images/results.png)
+4.9 Click **Send**.
+
+  ![Invoke API](images/invoke-api.png)
+
+4.10 If this is the first test of the API, you may  see a certificate exception. Simply click on the link provided. This will open a new tab and allow you to click through to accept the  self signed certificate
+
+  ![Certificate exception](images/cert-exception.png)
+
+4.11 Go back to the previous tab  and click **Send** again.
+
+4.12 Now you should see a **Response** section with Status code `200 OK` and the **Body** displaying the details of the *Dow Jones Industrial Average*.
+
+  ![Return from API call](images/response.png)
+
+4.13 Click on the downward facing arrow right beneath the **Send** button
+
+  ![Expand request](images/expand-request.png)
+
+4.14  Copy the value of the  **Client ID**  to a local text file so it can be used in the Stock Trader application later (**Note:** this is a shortcut to the regular process of publishing the API and then subscribing to it as a consumer).
+
+  ![Copy Client ID](images/client-id.png)
+
+4.14 Next we'll get the endpoint for your API. Click on the **Home** icon (top left) and then click on the **Manage Catalogs** tile.
+
+  ![Manage Catalogs](images/manage-catalogs.png)
+
+4.15 Click on the **Sandbox** tile.
+
+4.16 Click on the **Catalog settings** tab and then on **API Endpoints**. Copy the gateway URL and put it in the same file that you used for the **Client ID**
+
+  ![Gateway URL](images/gateway-url.png)
+
+## Step 5: Install TraderLite app
+
+5.1 In a separate browser tab go to the OpenShift console URL  for the cluster assigned to you by for the workshop.
+
+5.2 Click on **Projects** in the left navigation and then click on the **student001**  project in the list
+
+  ![TraderLite project](images/select-traderlite-project.png)
+
+5.3 Click on **Installed Operators** in the left navigation and then click on the **TraderLite Operator** in the list.
+
+  ![TraderLite Operator](images/select-traderlite-operator.png)
+
+5.4 Click the **Create Instance** to start the installation of the TraderLite app.
+
+  ![TraderLite Create Instance](images/traderlite-create-instance.png)
+
+5.5 Name the instance *traderlite*  and replace the **API Connect URL**  and **API Connect ClientId** with the respective values you saved in the previous section. Click **Create**
+
+  ![TraderLite Create Values](images/traderlite-create-values.png)
+
+5.6 In the left navigation select **Pods** and then wait for all the TraderLite pods to have a status of **Running** and be in the **Ready** state.
+
+  ![TraderLite Create Values](images/traderlite-pods-ready.png)
+
+
+## Step 6: Verify that the Trader Lite app is calling your API successfully
+
+6.1 In your OpenShift console  click on **Routes** in the left navigation and then click on the icon next to the url for the **tradr** app (the UI for TraderLite)
+
+   ![Run tradr](images/traderlite-run-tradr.png)
+
+6.2 Log in using the username `stock` and the password `trader`
+
+ ![Stock Trader Login](images/stock-trader-login.png)
+
+6.3 If the DJIA summary has data then congratulations ! It means that the API you created in API Connect is working !
+
+ ![DJIA Summary Working](images/djia-success.png)
+
 
 ## Summary
 
-**Congratulations**! You successfully completed this part of the lab!
+Congratulations ! You successfully completed the following key steps in this lab:
+
+* Created an API by importing an OpenAPI definition for an existing REST service.
+* Configured a  ClientID/API Key  for security set up a proxy to the existing API.
+* Tested the API in the API Connect developer toolkit.
+* Deployed the Trader Lite app and configured it to use the API you created.
+* Tested the Trader Lite app to make sure it successfully uses your API.
