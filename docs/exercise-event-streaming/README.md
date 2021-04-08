@@ -39,6 +39,8 @@ The *TraderLite* needs to be up and running on your cluster. If you've completed
 
 In this section you will modify the TraderLite app to start storing transactions as MQ messages,  without setting up the KafkaConnect part that will move the transactions out of MQ, into Kafka and then into MongoDB. This demonstrates how MQ can serve as a reliable store and forward  buffer especially  during temporary network disruption.
 
+>**Note:** You can click on any image in the instructions below to zoom in and see more details. When you do that just click on your  browser's back button to return to the previous state.
+
 1.1 Go to the OpenShift console of your assigned cluster. Select the **student001** project. In the navigation on the left select **Installed Operators** and select the **TraderLite Operator**
 
   [![](images/traderlite-operator.png)](images/traderlite-operator.png)

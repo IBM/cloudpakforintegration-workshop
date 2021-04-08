@@ -38,7 +38,7 @@ API Connect requires the [Firefox](https://www.mozilla.org/en-US/firefox/new/) b
 
 ## Step 1: Download the OpenAPI definition file for the external Stock Quote service
 
-**Note:** You can click on any image in the instructions below to zoom in and see more details. When you do that just click on your  browser's back button to return to the previous state.
+>**Note:** You can click on any image in the instructions below to zoom in and see more details. When you do that just click on your  browser's back button to return to the previous state.
 
 1.1 In your browser right click on  the following link, right click and select **Save Link As ...** from the context menu. Save the file *stock-quote-api.yaml* to  your local system.
 
@@ -47,7 +47,6 @@ API Connect requires the [Firefox](https://www.mozilla.org/en-US/firefox/new/) b
 
 
 ## Step 2: Import the OpenAPI definition file into API Manager
-
 
 
 2.1 Go to your Workshop Information page and click on the API Connect component link. (**Note:** if you no longer have the Workshop Information page available see:  TODO - put link to instructions here).
