@@ -138,15 +138,15 @@ In this section you will configure the TraderLite app to start moving the transa
 
 4.6 In the navigation on the left select **Installed Operators** and select the **Strimzi** operator.
 
- [![](images/strimzi-operator.png](images/strimzi-operator.png)
+  [![](images/strimzi-operator.png)](images/strimzi-operator.png)
 
 4.7 Click on the **All instances** tab and wait for the *mq-source* and *mongodb-sink* connectors to be in the *Ready* state before continuing.
 
-  [![](images/kc-status.png](images/kc-status.png)
+  [![](images/kc-status.png)](images/kc-status.png)
 
-4.8 Go back to the browser tab with the  MQ Console and verify that all the messages have been consumed  by the *mq-source* connector.
+4.8 Go back to the browser tab with the  MQ Console and verify that all the messages have been consumed by the *mq-source* connector.
 
-  [![](images/mq-empty.png](images/mq-empty.png)
+  [![](images/mq-empty.png)](images/mq-empty.png)
 
 
 ## Step 5: Verify transaction data was replicated to the Trade History database
@@ -157,11 +157,11 @@ In this section you will configure the TraderLite app to start moving the transa
 
 > **Note:** You will get a 404 (Not Found) message if you try to access this URL as is. This is because the *trade-history* microservice requires extra path information.
 
-  [![](images/trade-history.png](images/trade-history.png)
+  [![](images/trade-history.png)](images/trade-history.png)
 
 5.3 Append the string `/trades/1000` to the address you pasted - you should get back some JSON with the test transactions that you ran earlier.
 
-  [![](images/trade-history2.png](images/trade-history2.png)
+  [![](images/trade-history2.png)](images/trade-history2.png)
 
 
 ## Summary
