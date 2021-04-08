@@ -14,7 +14,7 @@ nav:
   - Access the environment: pre-work/README.md
   - Publish with API Connect: exercise-api-connect/README.md
   - App Connect and Salesforce: exercise-app-connect/README.md
-  - Data replication with Kafka: exercise-event-streams/README.md
+  - Data replication with Kafka: exercise-event-streaming/README.md
 
 ## DO NOT CHANGE BELOW THIS LINE
 
