@@ -309,7 +309,7 @@ In this step you'll create an Integration Server instance and deploy your flows 
 
 5.6 Select the **Accounts** file and leave the others unchecked. Click **Next**
 
-    [![](images/accountsfile.png)](images/accountsfile.png)
+   [![](images/accountsfile.png)](images/accountsfile.png)
 
 5.7 Name the server `sfevents` and click  **Create** . It will take a while for the server to provision so you can continue deploying the other flow. Click **Create server**
 
@@ -321,7 +321,7 @@ In this step you'll create an Integration Server instance and deploy your flows 
 
 5.11 Name the server `sfpush` and click and click **Create** .
 
-5.12 Wait for both servers be in the **Started** state.
+5.12 Wait for both servers be in the **Started** state. They will take about 2 or 3 minutes.
 
 > Note: You may have to refresh the page to get the latest server status
 
