@@ -1,349 +1,415 @@
-# Exercise: Create a new API that syncs with Salesforce, using App Connect
+# Lab - Sync Salesforce data using IBM App Connect Enterprise
 
-A common requirement, when developing enterprise applications, is the need to access existing data sources in other external servies - for example exchanging data with a SaaS application. A good design practice is to enable this by creating a bespoke API that provides just the specific access you need. In this lab you will create an API to push client data to Salesforce, using App Connect. This will occur whenever a user interacts with the API.
+In this lab you will create App Connect flows to sync  client data in the  **IBM Trader Lite** app to Salesforce. This will occur whenever a user of the  **IBM Trader Lite** app creates a  portfolio for a new client or accesses the data of an existing client.
 
-For this exercise, we want to create an API that can be called with details of a new contact (i.e. First Name, Last name and Email), which will result in a new **Contact** record being created in Salesforce. The API should return a ClientID for the new contact, and a code of 201 if successful.
+In order to accomplishment this at a minimum  2 flows are needed:
 
-## Steps
+1. A URL driven flow to push a new client to a Salesforce contact when the **IBM Trader Lite** app creates a portfolio for a new client
 
-1. [Sign up for Salesforce Developer Edition](#1-sign-up-for-salesforce-developer-edition)
-1. [Create a Salesforce Connected App](#2-create-a-salesforce-connected-app)
-1. [Setup connectivity to Salesforce in App Connect Designer](#3-setup-connectivity-to-salesforce-in-app-connect-designer)
-1. [Create the flow in App Connect Designer](#4-create-the-flow-in-app-connect-designer)
-1. [Save your Salesforce credentials as a Kubernetes secret](#5-save-your-salesforce-credentials-as-a-kubernetes-secret)
-1. [Create an Integration Server instance to run your flow](#6-create-an-integration-server-instance-and-deploy-your-flow)
-1. [Test your App Connect Flow](#7-test-your-app-connect-flow)
+2. An Event driven flow to push changes to the  **IBM Trader Lite** app whenever a contact's data is updated in Salesforce
+
+The architecture of the app is shown below:
+
+![Architecture diagram](images/architecture.png)
+
+The **portfolio** microservice invokes the REST endpoint of the new flow whenever a new client is created or read by the app and this results in a new contact being created in, or read from  Salesforce.
+
+This lab is broken up into the following sections:
+
+1. [Sign up for Salesforce Developer Edition](#section-1-sign-up-for-salesforce-developer-edition)
+
+1. [Create a Salesforce Connected App](#section-2-create-a-salesforce-connected-app)
+
+1. [Setup connectivity to Salesforce in App Connect Designer](#section-3-setup-connectivity-to-salesforce-in-app-connect-designer)
+
+1. [Create the flows in App Connect Designer](#section-4-create-the-flows-in-app-connect-designer)
+
+1. [Create an Integration Server instance and deploy your flows](#section-5-create-an-integration-server-instance-and-deploy-your-flows)
+
+1. [Get the REST endpoint of your App Connect Flow](#section-6-get-the-rest-endpoint-of-your-app-connect-flow)
+
+1. [Test your App Connect Flow with Trader Lite](#section-7-test-your-app-connect-flows-with-trader-lite)
+
 1. [Summary](#summary)
 
-### 1. Sign up for Salesforce Developer Edition
 
-In your browser go to the following URL to sign up for Salesforce Developer Edition - a full featured version of the Salesforce Lightning Platform. **Note:** If you already have access to the Salesforce Developer Edition or a paid version of Salesforce, skip to **Step 2**.
+## Section 1: Sign up for Salesforce Developer Edition
 
-[Salesforce Developer Edition signup](https://developer.salesforce.com/signup)
+1.1 In your browser go to the following URL to sign up for Salesforce Developer Edition - a full featured version of the Salesforce Lightning Platform.
 
-Enter the required information and follow the prompts to complete the signup process.
+> **Note:** If you already have access to  the Salesforce Developer Edition or a paid version of Salesforce, skip to **Step 1.2**.
 
-### 2. Create a Salesforce Connected App
+   [Salesforce Developer Edition signup](https://developer.salesforce.com/signup)
 
-In this section you'll create a *Connected App* in Salesforce so that the App Connect flow that you create later will be able to access your Salesforce data.
+1.2 Enter the required information and follow the prompts to complete the signup process.
 
-Login to [Salesforce](https://www.salesforce.com)
 
-Click on your avatar (top right) and select **Switch to Salesforce Classic** from the context menu.
 
-![Salesforce login](images/sflogin.png)
+## Section 2: Create a Salesforce Connected App
 
-Click on **Setup**.
+In this section you'll create a *Connected App* in Salesforce so that the App Connect flows that you create later will be able to access your Salesforce data.
 
-![Salesforce setup](images/sfsetup.png)
+2.1 Login to [Salesforce](https://www.salesforce.com)  
 
-In the left navigation area, scroll down to the **Build** section, expand **Create** and click on **Apps**
+2.2 Click on your avatar (top right) and select **Switch to Salesforce Classic** from the context menu.
 
-![Create App](images/sfcreateapp.png)
+  [![](images/sflogin.png)](images/sflogin.png)
 
-In the main panel, scroll down to the **Connected Apps** section and click on **New**
+2.3 Click on **Setup**.
 
-![Connected Apps](images/sfconnectedapp.png)
+  [![](images/sfsetup.png)](images/sfsetup.png)
 
-Fill in the required values for a new Connected App
+2.4 In the left navigation area, scroll down to the **Build** section, expand **Create** and click on **Apps**
 
-* Set the **Connected App Name** property to `IBM App Connect`
-* Set the **API Name** to `IBM_App_Connect`
-* Enter your email address as the **Contact Email**
+  [![](images/sfcreateapp.png)](images/sfcreateapp.png)
 
-![New Connected App](images/sfnewconnectedapp.png)
+2.5 Scroll down to the **Connected Apps** section and click on **New**
 
-In order for the external service that you are going to build to talk to Salesforce securely, it will need to be able to authenticate. For this exercise you will enable this via Oauth, so to confirm this:
+  [![](images/sfconnectedapp.png)](images/sfconnectedapp.png)
 
-* Select the **Enable OAuth Setting** check box.
-* Set the **Callback URL** to `https://www.ibm.com`
-* Under **Selected OAuth Scopes** select **Access and manage your data (api)** and click the arrow under the **Add** label
+2.6 Fill in the required values for a new Connected App
 
-![OAuth settings](images/sfoauth.png)
+   a. Set the **Connected App Name** property to `IBM App Connect`
 
-Scroll down to the bottom of the web page and click **Save**
+   b. Set the **API Name** to `IBM_App_Connect`
 
-You will typically be told that you will need to wait 2-10 mins for your changes to take effect. However, you can still click **Continue** to see the details of your new Salesforce application and continue with the steps below, while this process is going on.
+   c. Enter your email address as the **Contact Email**
 
-![OAuth key and secret](images/oauth-key-and-secret.png)
+  [![](images/sfnewconnectedapp.png)](images/sfnewconnectedapp.png)
 
-Now that Salesforce has generated the OAuth credentials, you need to copy these so you can later insert them into your own service that will call Salesforce. These credentials come in two flavors - first the credentials for this specific Salesforce connected App, and second the credentials to log into Salesforce itself.
+2.7 Configure the OAuth settings
 
-For the credentials for this specific Salesforce connected App, copy the **Consumer Key** and **Consumer Secret** to a scratchpad or text file.
+   + Select the **Enable OAuth Setting** check box.
 
-For the credentials to log into Salesforce itself, you need to save off your Salesforce username (which would have been confirmed in the Salesforce welcome email), and your login seecurity token. This token may have been sent to you in a seperate email (with the subject **Your new Salesforce security token**), otherwise you can ask Salesforce to reset the token and send you a new email, by going to the account **Settings** and click on **Reset My Security Token**.
+   + Set the **Callback URL** to `https://www.ibm.com`
 
-![Security token](images/sfsectoken.png)
+   + Under **Selected OAuth Scopes** select  **Access and manage your data (api)** and click the arrow under the **Add** label
 
-![Force Security Token Reset](images/reset-security-token.png)
+  [![](images/sfoauth.png)](images/sfoauth.png)
 
-Copy both the username and the security token to the same scratchpad or text file in which you stored the consumer key and secret - so that you have all the credentials you need for the next step.
+2.8 Scroll down to the bottom of the web page and click **Save**
 
-### 3. Setup connectivity to Salesforce in App Connect Designer
+2.9 Copy the **Consumer Key** and **Consumer Secret** to a text file.  You will need them later to connect to Salesforce.
 
-In App Connect, you create a *flow* to describe what happens when someone calls your API and how you might want to manipulate this data in order to map it to a call to the external service (in this case Salesforce). App Connect Designer is the component of Cloud Pak for Integration that provides an authoring environment in which you can create, test, and share flows for an API. You can share your flows by using the export and import functions, or by adding them to an Asset Repository for reuse.
+2.10 Click on your user name and select **My Settings**. On the left under the **Personal** section click on **Reset My Security Token**
 
-In a new browser tab in the desktop VM, open the **Cloud Pak for Integration** tab and under **View Instances** click on the link for **App Connect Designer**.
+ [![](images/reset-security-token.png)](images/reset-security-token.png)
 
-![Launch App Connect Designer](images/cp4i-dashboard-app-connect-designer.png)
+2.11 Check your email for the email address that you use as your Salesforce username. You should receive an email from  Salesforce with the subject **Your new Salesforce security token**. Copy the **Security Token** to the same text file that you used for the  **Consumer Key** and **Consumer Secret**
 
-**App Connect Designer** will prompt you to login (the user name and password should already be include). Once logged in, click the **Settings** icon and then select **Catalog**.
+  [![](images/sfsectoken.png)](images/sfsectoken.png)
 
-![App Designer Catalog](images/appdesignercatalog.png)
 
-Scroll down to find the **Salesforce** entry and expand it. If this is the first time you have created a connection, click on **Connect**. If there are already existing connections shown in a drop down list, select **Add a new account ...** from that list.
+## Section 3: Setup connectivity to Salesforce in App Connect Designer
 
-![New Salesforce Connection](images/addanewaccount.png)
+App Connect Designer is a component of Cloud Pak for Integration that provides an authoring environment in which you can create, test, and share flows for an API. You can share your flows by using the export and import functions, or by adding them to an Asset Repository for reuse.
 
-Enter the following values referring to the text file from the previous section where you saved your Salesforce credentials.
+3.1 Go to your Workshop Information page and click on the App Connect Designer component link. (**Note:** if you no longer have the Workshop Information page available see:  TODO - put link to instructions here).
 
-* For the **Login URL** enter `https://login.salesforce.com`.
-* For the **Username** enter the email you use to login to Salesforce.
-* For the **Password** enter the password you use to login to Salesforce. Then append the value of the **Security Token** (that you saved in the previous section) to the password. For example if your password is `foo` and your security token is `bar` you would enter `foobar` into the password field.
-* For the **Client Id** copy and paste the value of the **Consumer Key** (that you saved in the previous section).
-* For the **Client Secret** copy and paste the value of the **Consumer Secret** (that you saved in the previous section).
+  [![](images/nav-to-des.png)](images/nav-to-des.png)
 
-![Filled in Salesforce Connection](images/sfconnectionform.png)
+3.2 If prompted to login, select **Default authentication** and enter the credentials on the Workshop Information page
 
-Click on **Connect**. If successful, the connection will be given a default name of the form *Account n*.
+3.5 Click the **Catalog** icon
 
-> **NOTE**: If you receieve an error that the connection to Salesforce failed, then it is recommneded to re-check the credentials and try again. You can re-enter the credentials for this account by clicking on the three dots next to the account name (typically this is **Account 1**), and clicking **Update Account** from the subsequent menu. The previous details are cleared, so you will need to enter them all again.
+   [![](images/appdesignercatalog.png)](images/appdesignercatalog.png)
 
-### 4. Create the flow in App Connect Designer
+3.6 Expand **Salesforce**  and click **Connect**
 
-In a flow, at a minimum, you typically need to provide the mapping of data fields between that your API is exposing and what the eternal service is expecting. To create a flow in App Connect Designer, click the **Settings** icon and then select **Dashboard**:
+   [![](images/sfconnect.png)](images/sfconnect.png)
 
-![Dashboard](images/dashboard.png)
 
-Click **New** and select **Flows for an API**
+3.7 Enter the following values referring to the text file from  the previous section where you saved your Salesforce credentials.
 
-![New Flow](images/newflow.png)
+   + For the **Login URL** enter `https://login.salesforce.com`
 
-* Name the flow `user001sf` or some other unique name.
-* Name the model `Client`.
+   + For the **Username** enter the email you use to login to Salesforce
 
-![Flow name](images/flowname.png)
+   + For the **Password** enter the password you use to login to Salesforce. Then append the value of the  **Security Token**  (that you saved in the previous section) to the password. For example if your password is `foo` and your security token is `bar` you would enter `foobar` into the password field.
 
-In App Connect, the concept of a *model* is used, amoung other things, to define the mapping of fields and parameters. Click **Create Model**.
+   + For the **Client Id** copy and past the value of the  **Consumer Key** (that you saved in the previous section).
 
-First you will add the properties of the data that you will handle in the flow to your model.
+   + For the **Client Secret** copy and past the value of the  **Consumer Secret** (that you saved in the previous section).
 
-> **NOTE**: To make the mapping to Salesfroce easier, name the properties **exactly** as instructed (including matching case) so that your flow will work with the Salesforce app.
+   [![](images/sfconnectionform.png)](images/sfconnectionform.png)
 
-* Enter `ClientId` as the first property and then click **Add property +**
-* Enter `FirstName` as the next property and then click **Add property +**
-* Enter `LastName` as the next property and then click **Add property +**
-* Enter `Email` as the next property
+> **NOTE**: If you receieve an error that the connection to Salesforce failed, then it is recommended to re-check the credentials and try again. You can re-enter the credentials for this account by clicking on the three dots next to the account name (typically this is **Account 1**), and clicking **Update Account** from the subsequent menu. The previous details are cleared, so you will need to enter them all again.   
 
-When you're done the screen should look like the following:
+3.8 Click on **Connect**. The connection will be given a default name of the form *Account n*.
 
-![Model properties](images/modelproperties.png)
+## Section 4: Create the flows in App Connect Designer
 
-Now you need to tell App Connect what to do with these parameters (which in this case is to create a contact in Salesforce). To do this you create an *operation*, by clicking **Operations** and then select **Create Client**:
+4.1 In App Connect Designer, click the **Dashboard** icon.
 
-![Operation](images/operation.png)
+  [![](images/dashboard.png)](images/dashboard.png)
 
-Click **Implement flow**. Click on the **+** icon.
+4.2 Click  **New** and select **Flows for an API**
 
-* Scroll down to Salesforce
-* Select your account from the dropdown
-* Expand **Contacts**
-* Click **Create Contact**
+  [![](images/newflow.png)](images/newflow.png)
 
-![Implement flow](images/implementflow1.png)
+4.3 Name the flow `sfpush`   Name the model `Client`
 
-Next you'll map the properties from your model to the Salesforce Contact properties. For our API, an *Account Id* will be returned by Salesforce for our new contact, and we want to map it to a field called *Client Id* to return via our API to the caller. To ceate this mapping, click in the text box for the **Account Id** property and then click on the icon just to the right of the field. Select the **ClientId** property of your model:
+  [![](images/flowname.png)](images/flowname.png)
 
-![Map Client Id](images/mapclientid.png)
+4.4 Click **Create Model**
 
-The remaining properties have the same names as their Salesforce equivalents so click on **Auto match fields** to complete the mapping.
+4.5 Next you will add the properties of the input data for your flow.
 
-![Auto match fields](images/automatchfields.png)
+> **Note**: Name them exactly as instructed (including matching case) so that your flow will work with the *Stock Trader Lite* app.
 
-Click on **Response** to configure what will be returned by the flow. Click in the text box for the **Client Id** property and then click on the icon just to the right of the field. Select the **Contact Id** property of the **Salesforce/Create** contact menu.
+   + Enter `ClientId` as the first property and then click **Add property +**
 
-![Return data](images/responsedata.png)
+   + Enter `FirstName` as the next property and then click **Add property +**
 
-Next you'll test the flow to make sure it works. Click on the middle part of the flow and then click on the edit icon.
+   + Enter `LastName` as the next property and then click **Add property +**
 
-![Edit test parameters](images/testparams.png)
+   + Enter `Email` as the next property and then click **Add property +**
 
-Click on **Request body parameters** and then the **Object** below it. Edit the input parameters that will be used in the test.
+   + Enter `MobilePhone` as the next property
 
-* Set the **Client Id** to blank. This value will be generated by Salesforce and returned.
-* Enter a **FirstName** value.
-* Enter a **LastName** value.
-* Enter an **Email** in a valid email format
 
-![Enter test parameters](images/edittestparams.png)
+   When you're done the screen should look like the following:
 
-Click the test icon. Verify that the operation returns a 200 HTTP status code.
+   [![](images/modelproperties.png)](images/modelproperties.png)
 
-![Test status](images/teststatus.png)
+4.6 Click  **Operations** and then select **Create Client**
 
-Click **View details** to see the raw data returned from the call to Salesforce (note this is not the same as the data returned by the flow which you defined in the **Response** stage of the flow). The **Account ID** will show as an empty string. Click **Done**.
+   ![](images/operation.png)](images/operation.png)
 
-Now that we have a flow built, you need to have this deployed and running so that the API is available to be called externally. If you had built the equivilent of this flow in regular code, then you might be looking to package and deploy this in a container or VM. However, App Connect provides an *Integration Server* that will run the flow directly for you, removing this step. To do this, you'll export the flow so it can deployed in an Integration Server instance. Click the **Settings** icon and then select **Dashboard**. Click the 3 vertical dots on the tile for your new flow and select **Export ...** from the context menu.
+4.7 Click **Implement flow**
 
-![Export flow](images/exportflow.png)
+4.8 Click on the **+** icon.
 
-Select **Export for integration server (BAR)** and click **Export**
+   + Scroll down to Salesforce
 
-Save the file to a folder of your choosing.
+   + Select your account from the dropdown
 
-### 5. Save your Salesforce credentials as a Kubernetes secret
+   + Expand **Contacts**
 
-When your flow is running in an Integration Server, it will need access to the same authentication credentials we used when we tested the flow in the App Connect Designer. Since we are running on Kubernetes, the standard way you do this is to create a Kubernetes secret containing this information in the OpenShift cluster running Cloud Pak for Integration. You will do this using the OpenShift CLI.
+   + Click **Create Contact**
 
-In order to use the OpenShift CLI against you cluster, you first need to get an authentication token for it. To do this, navigate to the OpenShift console in a new tab in the browser running in the desktop VM. If you are asked to login to the cluster, choose **htpasswd** and use the pre-filled credentials
+   [![](images/implementflow1.png)](images/implementflow1.png)
 
-![Choose htpasswd](images/htpasswd.png)
+4.9 Next you'll map the properties from  your model to the Salesforce Contact properties. The properties have the same names as their Salesforce equivalents so click on **Auto match fields** to complete the mapping
 
-You can then click the profile on the top right and choose the **Copy Login Command** option.
+  [![](images/automatchfields.png)](images/automatchfields.png)
 
-![Copy Login Command](images/copylogincommand.png)
+4.10 Click on **Response** to configure what will be returned by the flow. Click in the text box for the **Client Id** property and then click on the icon just to the right of the field. Select the **Contact Id** property of the Salesforce contact.
 
-You will be forced, again, to choose a login method, choose **htpasswd** and use the pre-filled credentials, as before.
+  [![](images/responsedata.png)](images/responsedata.png)
 
-Click the **Display Token** option and copy the `oc login` command.
+4.11 Next you'll test the flow to make sure it works. Click on the middle part of the flow and then click on the edit icon.
 
-![Copy Login with Token](images/oclogin.png)
+  [![](images/testparams.png)](images/testparams.png)
 
-In the Linux environment on the desktop VM, open a new *Terminal* window (you can find this in the **Applications** menu on the top left of the screen to do this). Paste in the `oc login` command and run it:
+4.12 Click on **Request body parameters** and then edit the input parameters that will be used in the test.
 
-```bash
-$ oc login --token=KoSCnw....SmQz0 --server=https://api.demo.ibmdte.net:6443
-Logged into "https://api.demo.ibmdte.net:6443" as "ibmadmin" using the token provided.
+> **Note**: Salesforce does enforce formatting for telephone numbers and email addresses so use valid formatting for those
 
-You have access to 67 projects, the list has been suppressed. You can list all projects with 'oc projects'
-```
+  + Set the **Client Id** to blank. This value will be generated by Salesforce and returned.
 
-You are now logged into your cluster. Each of the components of Cloud Pak for Integration run in their own project namespace. The App Connect project namespace is called `ace`, so you need to switch to that project:
+  + Enter a **FirstName** value.
 
-```bash
-$ oc project ace
-Now using project "ace" on server "https://api.demo.ibmdte.net:6443".
-```
+  + Enter a **LastName** value.
 
-To create a secret, copy and paste the following text into a file (use: `nano sfcred.yaml` for instance), substituting your own values in place of the generic values.
+  + Enter an **Email** in a valid email format
 
-> **Note** that the **name** attribute must match the account name of the SalesForce connection in App Designer - by default it should be **Account 1** unless changed explicitly.
+  + Enter a **MobileNumber** in a valid format
 
-```yaml
----
-accounts:
-  salesforce:
-    - credentials:
-        authType: "oauth2Password"
-        username: "<your_sf_email_login>"
-        password: "<password_and_security_token>"
-        clientIdentity: "<consumer_key>"
-        clientSecret: "<consumer_secret>"
-      endpoint:
-        loginUrl: "https://login.salesforce.com"
-      name: "Account 1"
-```
+  [![](images/edittestparams.png)](images/edittestparams.png)
 
-Once updated with your correct values, run the following command to create the secret. The command below will name the secret `sfcred`, you'll need this name later so choose one that you will remember.
+4.13 Click the test icon. Verify that the operation returns a 200 HTTP status code.
 
-```bash
-oc create secret generic sfcred --from-file=credentials=sfcred.yaml
-```
+  [![](images/teststatus.png)](images/teststatus.png)
 
-### 6. Create an Integration Server instance to run your flow
+4.15 Click **View details** to see the raw data returned from  the call to Salesforce (note this is not the same as the data returned by the flow which you defined in the **Response** stage of the flow).
 
-In this step you'll create an Integration Server instance to run your flow.
+4.16 Click **Done**
 
-In a new browser tab open the **Cloud Pak for Integration** tab and under **View Instances** click on the link for **App Connect Dashboard**.
+4.17 Next you'll build a reverse flow. One that will call an API in the TraderLite app whenever a Salesforce contact is updated Click on the **Catalog** icon and select the **APIs**
 
-![Launch App Connect Dashboard](images/cp4i-dashboard-app-connect-dashboard.png)
+  [![](images/catalogapis.png)](images/catalogapis.png)
 
-> **NOTE**: You may get a security warning when you launch this - if you do it is OK to accept this and agree to make this warning an exception.
+4.18 In your browser right click on the following link, right click and select **Save Link As ...** from the context menu. Save the file *sfsync.json* to  your local system. This is an OpenAPI definition of the API in TraderLite that will update client data.
 
-Once loaded, click on **Create server**
+   [sfsync.json](https://raw.githubusercontent.com/IBMStockTraderLite/traderlite-cp4i/master/appconnect/sfsync.json)
 
-![Create a new integration server](images/dashboardui.png)
+4.19  Back in App Connect click on **Add your API now**
 
-Click **Add a BAR file** and select the file you exported at the end of the previous section.
+4.20  Import the file *sfsync.json*, and name the API *Salesforce sync*
 
-![Continue](images/continue.png)
+  [![](images/addapi.png)](images/addapi.png)
 
-Click **Continue**. Skip the next prompt asking to download a configuration package, by clicking **Next**.
+4.21 Click **Add API**
 
-Select **Designer** as the type of Integration that you want to run and click **Next**
+4.22 Click on the down arrow and then on **Connect**
 
-![Integration Type](images/integrationtype.png)
+  [![](images/connectapi.png)](images/connectapi.png)
 
-Change the setting for **Show everything** to **ON**.
+4.23 Accept the default values and click again **Connect** again
 
-![Show everything](images/showeverything.png)
+4.24 Click on the **Dashboard** icon
 
-Enter the following settings:
+  [![](images/dashboard2.png)](images/dashboard2.png)
 
-* In the **Details** section for the **Name** enter the name of the *Flow* from step 3, we used `user001sf`.
-* In the **Details** section for **IBM App Connect Designer flows** select **Enabled for local connectors only**
-* In the **Integration Server** section for **Name of the secret that contains the server configuration** enter `sfcred`.
-* In the **Configuration for deployments** section change the **Replica count** to 1
+4.25 Click **New** and select **Event-driven flow**
 
-The top half of the dialog should look like the following:
+4.26 Name the flow `sfevents`,  expand the Salesforce section and select **Updated contact** under **Contacts**
 
-![Top Half](images/tophalf.png)
+  [![](images/updatedcontact.png)](images/updatedcontact.png)
 
-The bottom half of the dialog should look like the following:
+4.27 Click the **+** icon and then on the **APIs** tab. Expand your **Salesforce sync** API and click on **PUT /salesforce/contacts**
 
-![Bottom Half](images/bottomhalf.png)
+  [![](images/sfsyncapi.png)](images/sfsyncapi.png)
 
-> **NOTE**: The name of the secret will be `sfcred`, rather than that shown in the above picture.
+4.28 Click in the icon right next to the **ClientId** field.
 
-Click **Create**. The status of the server will be eventually shown. Wait until the server status shows as **Started**. Note you may have to refresh the page to see the status change.
+     Map the **ClientId** field to the Salesforce **ContactId** field
 
-![Activate API](images/serverstarted.png)
+     Map the **FirstName** field to the Salesforce **FirstName** field
 
-### 7. Test your App Connect Flow
+     Map the **LastName** field to the Salesforce **LastName** field
 
-To test the API by, say, using `curl`, we first need to know the URL to call. To obtain this, in the App Connect Dashboard, click on the tile for your new server
+     Map the **Email** field to the Salesforce **Email** field
 
-![Running server](images/servertile.png)
+     Map the **MobilePhone** field to the Salesforce **MobilePhone** field
 
-Click on the API tile to see the details of the flow's API
+  [![](images/fieldsmapped.png)](images/fieldsmapped.png)
 
-![API tile](images/apitile.png)
+4.29 Click on the **Dashboard** icon at the left
 
-You should see the details of your flow's API
+4.30 Export your `sfevents` flow by clicking on the 3 period icon and selecting **Export..** from the context menu.
 
-![API Details](images/apidetails.png)
+  [![](images/exportevt.png)](images/exportevt.png)
 
-Copy the **REST API Base URL** to the clipboard
+4.31 Select **Runtime flow asset (BAR)** and click **Export**
 
-You can now execute an API call to this URL to post the details of a new contact (which should result in this being inserted into Salesforce). In a Terminal you should run the following `curl` command (with your own URL subsituted):
+4.32 Adjust the target folder if you wish and then click **Save**
 
-```bash
-curl -X POST -H "Content-Type: application/json" -d '{"FirstName":"Steve", "LastName":"Martinelli", "Email":"stevemar@ca.ibm.com"}' <your URL here>/Client
-```
+4.33 Repeat for the `sfpush` flow also selecting **Runtime flow asset (BAR)** and saving to your local system.
 
-You should see output like the example below:
+## Section 5: Create an Integration Server instance and deploy your flows
 
-```bash
-$ curl -X POST -H "Content-Type: application/json" -d '{"FirstName":"Steve", "LastName":"Martinelli", "Email":"stevemar@ca.ibm.com"}' http://user001sf2-http-ace.apps.demo.ibmdte.net:80/user001sf/Client
+In this step you'll create an Integration Server instance and deploy your flows to it.
 
-{"ClientId":"0034R00003L1YPuQAN"}
-```
+5.1 Go to your Workshop Information page and click on the **App Connect Dashboard** component link. (**Note:** if you no longer have the Workshop Information page available see:  TODO - put link to instructions here).
 
-Note how the API returns the `ClientID` as you described in your flow.
 
-In a new browser tab login to Salesforce. Click on the **+** icon and then on **Contacts**
+5.2 Select **Default Authentication** and login with your credentials if prompted
 
-![Salesforce contacts](images/contacts.png)
+5.3 Click **Create server**
 
-Verify that the new contact you created via your test is there
+  [![](images/dashboardui.png)](images/dashboardui.png)
 
-![Verify contact](images/verifycontact.png)
+5.4 Select the **Quick start designer integration** tile and click **Next**
+
+5.5 Upload the `sfevents.bar` file and click **Next**
+
+   [![](images/sfeventsbar.png)](images/sfeventsbar.png)
+
+5.6 Select the **Accounts** file and leave the others unchecked. Click **Next**
+
+    [![](images/accountsfile.png)](images/accountsfile.png)
+
+5.7 Name the server `sfevents` and click  **Create** . It will take a while for the server to provision so you can continue deploying the other flow. Click **Create server**
+
+5.8 Select the **Quick start designer integration** tile and click **Next**
+
+5.9 Upload the `sfpush.bar` file and click **Next**
+
+5.10 Select the **Accounts** file and leave the others unchecked. Click **Next**
+
+5.11 Name the server `sfpush` and click and click **Create** .
+
+5.12 Wait for both servers be in the **Started** state.
+
+> Note: You may have to refresh the page to get the latest server status
+
+  [![](images/serversdeployed.png)](images/serversdeployed.png)
+
+
+## Section 6: Get the REST endpoint of your App Connect Flow
+
+6.1 In the App Connect Dashboard click on the tile for the `sfpush` server
+
+6.2 Click on the API tile to see the details of the flow's API
+
+  [![](images/apitile.png)](images/apitile.png)
+
+6.3 You should see the details of your flow's API
+
+  [![](images/apidetails.png)](images/apidetails.png)
+
+6.4 Copy the **Endpoint** and save it in a text file.
+
+## Section 7: Test your App Connect Flows with Trader Lite
+
+7.1 Go to the OpenShift console of your assigned cluster. Select the **student001** project. In the navigation on the left select **Installed Operators** and select the **TraderLite Operator**
+
+  [![](images/traderlite-operator.png)](images/traderlite-operator.png)
+
+7.2 Click on the **TraderLite app** tab
+
+  [![](images/traderlite-crd.png)](images/traderlite-crd.png)
+
+7.3 Click on the 3 periods to the right of the existing TraderLite CRD and select **Edit TraderLite** from the context menu.
+
+  [![](images/select-traderlite-crd.png)](images/select-traderlite-crd.png)
+
+
+7.4 Scroll down to line 62 and change the **enabled**" field value to *true*  and paste the endpoint of your API flow that you saved earlier as the **url** value on line 66.
+
+  [![](images/enable-sf-integration.png)](images/enable-sf-integration.png)
+
+7.5 Click **Save**.
+
+7.6 In the navigation area on the left select **Pods** in the **Workloads** section. You should see that a new instance of the Portfolio pod has been started.
+
+  [![](images/portfolio-restart1.png)](images/portfolio-restart1.png)
+
+7.7 Wait until the new pod is in the  **Ready** state and the  previous pod has terminated before continuing.
+
+7.8 In  the left navigation  click on **Routes** (in the **Networking** category) and then click on the icon next to the url for the **tradr** app (the UI for TraderLite)
+
+  [![](images/traderlite-run-tradr.png)](images/traderlite-run-tradr.png)
+
+7.9 Log in using the username `stock` and the password `trader`
+
+  [![](images/stock-trader-login.png)](images/stock-trader-login.png)
+
+7.10 Click **Add Client** and fill in the form. You must use valid email and phone number formats to avoid  errors.
+
+  [![](images/new-client.png)](images/new-client.png)
+
+7.11 Click **Save**
+
+7.12 Click on the **Portfolio ID** of the new client to see the details of the portfolio
+
+  [![](images/new-portfolio.png)](images/new-portfolio.png)
+
+7.13 Click on the **Client Details** tab. Because the TraderLite app is now calling your *sfpush* flow whenever a new client is created, you should see a Salesforce Contact Id in the form of a link.
+
+  [![](images/client-details.png)](images/client-details.png)
+
+7.14 Click on the Contact Id link to see the contact in Salesforce (you may be prompted for your Salesforce credentials)
+
+> **Note**: If the link does not work because of geo specific URLs for Salesforce, login in to Salesforce by yourself and look at the new contact. The easiest way to find the new contact is to enter the first and last name in the search bar in Salesforce.
+
+7.15 Now test your reverse flow (i.e. when a contact is modified in Salesforce). Click on the **Edit** button for the contact and change  the mobile number. Click **Save**.
+
+  [![](images/edit-contact.png)](images/edit-contact.png)
+
+7.16 Go back to the tab with the TraderLite app and refresh the page with the Client Details. Click on the **Client Details** tab and verify that the phone number has been updated with the new value you added in Salesforce.
+
+  [![](images/updated-client-details.png)](images/updated-client-details.png)
+
 
 ## Summary
 
-**Congratulations**! You successfully completed the following key tasks in this lab:
+Congratulations ! You successfully completed the following key tasks in this lab:
 
 * Connected to Salesforce
 * Created an App Connect designer flow to push client data to Salesforce contacts.
-* Deployed the flow as an Integration Server in App Connect Dashboard
-* Tested the flow with new data.
+* Created an Event Driven flow to push Salesforce contact updates to the TraderLite App via an API call
+* Deployed the flows as Integration Servers in App Connect Dashboard
+* Tested the flow with the Trader Lite app.
