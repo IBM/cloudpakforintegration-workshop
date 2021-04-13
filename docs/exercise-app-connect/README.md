@@ -294,7 +294,6 @@ In this step you'll create an Integration Server instance and deploy your flows 
 
 5.1 Go to your Workshop Information page and click on the **App Connect Dashboard** component link. (**Note:** if you no longer have the Workshop Information page available see:  TODO - put link to instructions here).
 
-
 5.2 Select **Default Authentication** and login with your credentials if prompted
 
 5.3 Click **Create server**
@@ -355,7 +354,6 @@ In this step you'll create an Integration Server instance and deploy your flows 
 7.3 Click on the 3 periods to the right of the existing TraderLite CRD and select **Edit TraderLite** from the context menu.
 
   [![](images/select-traderlite-crd.png)](images/select-traderlite-crd.png)
-
 
 7.4 Scroll down to line 62 and change the **enabled**" field value to *true*  and paste the endpoint of your API flow that you saved earlier as the **url** value on line 66.
 
