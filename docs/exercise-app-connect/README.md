@@ -264,15 +264,15 @@ App Connect Designer is a component of Cloud Pak for Integration that provides a
 
 4.28 Click in the icon right next to the **ClientId** field.
 
-     Map the **ClientId** field to the Salesforce **ContactId** field
+   + Map the **ClientId** field to the Salesforce **ContactId** field
 
-     Map the **FirstName** field to the Salesforce **FirstName** field
+   + Map the **FirstName** field to the Salesforce **FirstName** field
 
-     Map the **LastName** field to the Salesforce **LastName** field
+   + Map the **LastName** field to the Salesforce **LastName** field
 
-     Map the **Email** field to the Salesforce **Email** field
+   + Map the **Email** field to the Salesforce **Email** field
 
-     Map the **MobilePhone** field to the Salesforce **MobilePhone** field
+   + Map the **MobilePhone** field to the Salesforce **MobilePhone** field
 
   [![](images/fieldsmapped.png)](images/fieldsmapped.png)
 
@@ -305,11 +305,11 @@ In this step you'll create an Integration Server instance and deploy your flows 
 
 5.5 Upload the `sfevents.bar` file and click **Next**
 
-   [![](images/sfeventsbar.png)](images/sfeventsbar.png)
+  [![](images/sfeventsbar.png)](images/sfeventsbar.png)
 
 5.6 Select the **Accounts** file and leave the others unchecked. Click **Next**
 
-   [![](images/accountsfile.png)](images/accountsfile.png)
+  [![](images/accountsfile.png)](images/accountsfile.png)
 
 5.7 Name the server `sfevents` and click  **Create** . It will take a while for the server to provision so you can continue deploying the other flow. Click **Create server**
 
