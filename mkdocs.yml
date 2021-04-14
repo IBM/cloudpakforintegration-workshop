@@ -11,7 +11,9 @@ edit_uri: edit/master/docs
 # Navigation
 nav:
   - About the workshop: README.md
-  - Setup access to the environment: pre-work/README.md
+  - Environment Setup:
+    - Grant Access to Cluster: pre-work/GRANTCLUSTER.md
+    - Load Workshop Info: pre-work/README.md
   - Lab - Create, deploy and test an API using API Connect: exercise-api-connect/README.md
   - Lab - Sync Salesforce data using IBM App Connect: exercise-app-connect/README.md
   - Lab - Using IBM MQ and Kafka for near realtime data replication: exercise-event-streaming/README.md
