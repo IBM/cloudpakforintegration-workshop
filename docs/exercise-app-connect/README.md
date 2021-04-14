@@ -43,6 +43,7 @@ This lab is broken up into the following sections:
 
 1.2 Enter the required information and follow the prompts to complete the signup process.
 
+> **Note**: You can click on any image in the instructions below to zoom in and see more details. When you do that just click on your browser's back button to return to the previous state.
 
 
 ## Section 2: Create a Salesforce Connected App
@@ -370,6 +371,8 @@ In this step you'll create an Integration Server instance and deploy your flows 
   [![](images/portfolio-restart1.png)](images/portfolio-restart1.png)
 
 7.7 Wait until the new pod is in the  **Ready** state and the  previous pod has terminated before continuing.
+
+> **Note**: You will know the traderlite-portfolio-xxxxx pod is in a ready state when the `Ready` column shows `1/1`. You will also see that the created column will have a recent timestamp value.*
 
 7.8 In  the left navigation  click on **Routes** (in the **Networking** category) and then click on the icon next to the url for the **tradr** app (the UI for TraderLite)
 
