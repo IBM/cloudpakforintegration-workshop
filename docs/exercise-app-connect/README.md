@@ -1,4 +1,4 @@
-# Lab - Sync Salesforce data using IBM App Connect Enterprise
+# Exercise - Sync Salesforce data using IBM App Connect Enterprise
 
 In this lab you will create App Connect flows to sync  client data in the  **IBM Trader Lite** app to Salesforce. This will occur whenever a user of the  **IBM Trader Lite** app creates a  portfolio for a new client or accesses the data of an existing client.
 
@@ -310,6 +310,8 @@ In this step you'll create an Integration Server instance and deploy your flows 
 
   [![](images/accountsfile.png)](images/accountsfile.png)
 
+> **Note**: Without *Accounts* checked, your flow will  not work when deployed . This allows the secret with your Salesforce credentials to be accessible to the deployed flow.
+
 5.7 Name the server `sfevents` and click  **Create** . It will take a while for the server to provision so you can continue deploying the other flow. Click **Create server**
 
 5.8 Select the **Quick start designer integration** tile and click **Next**
@@ -317,6 +319,8 @@ In this step you'll create an Integration Server instance and deploy your flows 
 5.9 Upload the `sfpush.bar` file and click **Next**
 
 5.10 Select the **Accounts** file and leave the others unchecked. Click **Next**
+
+> **Note**: Without *Accounts* checked, your flow will  not work when deployed . This allows the secret with your Salesforce credentials to be accessible to the deployed flow.
 
 5.11 Name the server `sfpush` and click and click **Create** .
 
