@@ -308,7 +308,7 @@ In this step you'll create an Integration Server instance and deploy your flows 
 
 5.6 Select the **Accounts** file and leave the others unchecked. Click **Next**
 
-  [![](images/accountsfile.png)](images/accountsfile.png)
+  [![](images/accountfile.png)](images/accountfile.png)
 
 > **Note**: Without *Accounts* checked, your flow will  not work when deployed . This allows the secret with your Salesforce credentials to be accessible to the deployed flow.
 
