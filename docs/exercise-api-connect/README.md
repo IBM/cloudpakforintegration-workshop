@@ -34,7 +34,7 @@ This lab is broken up into the following steps:
 1. [Summary](#summary)
 
 ## Prerequisites
-API Connect requires the [Firefox](https://www.mozilla.org/en-US/firefox/new/) browser in order to use the testing capabilities during API development (Step #4 of this lab) so it is recommended that you complete this entire lab using Firefox.
+API Connect requires the [Firefox](https://www.mozilla.org/en-US/firefox/new/) browser (version > 78.9.0) in order to use the testing capabilities during API development (Step #4 of this lab) so it is recommended that you complete this entire lab using Firefox.
 
 ## Step 1: Download the OpenAPI definition file for the external Stock Quote service
 
@@ -49,17 +49,19 @@ API Connect requires the [Firefox](https://www.mozilla.org/en-US/firefox/new/) b
 ## Step 2: Import the OpenAPI definition file into API Manager
 
 
-2.1 Go to your Workshop Information page and click on the API Connect component link. (**Note:** if you no longer have the Workshop Information page available see:  TODO - put link to instructions here).
+2.1 Go to your Workshop Information page and click on the API Connect component link. (**Note:** if you no longer have the Workshop Information page available see [these instructions](../pre-work/README.md)).
 
   [![](images/nav-to-apic.png)](images/nav-to-apic.png)
 
   **Note:** This API Connect installation use self-signed certificates so you will have to click through any browser warning and continue to the URL.
 
-2.2 Click on **Common Services user registry**
+2.2 Click on **Common Services user registry**. Then click **Default authentication**.
 
   [![](images/apic-csur.png)](images/apic-csur.png)
 
-2.3 Login with the credentials for API Connect on the Workshop Information Page
+2.3 Login with the credentials for API Connect on the Workshop Information Page. 
+
+**Note:** API Connect takes times to load the first time. Please be patient on the first screen while it initializes.
 
 2.4 Click on the **Develop APIs and Products tile**
 
@@ -179,7 +181,7 @@ In the API designer, you have the ability to test the API immediately after crea
 
   [![](images/expand-request.png)](images/expand-request.png)
 
-4.14  Copy the value of the  **Client ID**  to a local text file so it can be used in the Stock Trader application later (**Note:** this is a shortcut to the regular process of publishing the API and then subscribing to it as a consumer).
+4.14  Copy the value of the  **IBM-X-CLIENT-ID**  to a local text file so it can be used in the Stock Trader application later (**Note:** this is a shortcut to the regular process of publishing the API and then subscribing to it as a consumer).
 
   [![](images/client-id.png)](images/client-id.png)
 
