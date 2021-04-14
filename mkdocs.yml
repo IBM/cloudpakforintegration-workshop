@@ -11,10 +11,11 @@ edit_uri: edit/master/docs
 # Navigation
 nav:
   - About the workshop: README.md
-  - Access the environment: pre-work/README.md
-  - Publish with API Connect: exercise-api-connect/README.md
-  - App Connect and Salesforce: exercise-app-connect/README.md
-  - Data replication with Kafka: exercise-event-streaming/README.md
+  - Setup access to the environment: pre-work/README.md
+  - Lab - Create, deploy and test an API using API Connect: exercise-api-connect/README.md
+  - Lab - Sync Salesforce data using IBM App Connect: exercise-app-connect/README.md
+  - Lab - Using IBM MQ and Kafka for near realtime data replication: exercise-event-streaming/README.md
+  - Frequently asked questions: faq/README.md
 
 ## DO NOT CHANGE BELOW THIS LINE
 
