@@ -1,6 +1,6 @@
 # Exercise - Using IBM MQ and Kafka for near realtime data replication
 
-In this lab you will use IBM MQ and IBM Event Streams to replicate data from a transactional database to a reporting database. The pattern used allows for seamless horizontal scaling to minimize the latency between the time the transaction is committed to the transactional database and when it is available to be queried in the reporting database.
+In this lab you will use IBM MQ and Kafka to replicate data from a transactional database to a reporting database. The pattern used allows for seamless horizontal scaling to minimize the latency between the time the transaction is committed to the transactional database and when it is available to be queried in the reporting database.
 
 The architecture of the solution you will build is shown below:
 
