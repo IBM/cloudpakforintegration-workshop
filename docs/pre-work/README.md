@@ -4,7 +4,7 @@
 
 > These requirements are for an IBM Cloud deployment on OpenShift 4.6 provisioned by the developer advocates from [IBM Developer](https://developer.ibm.com).
 
-1. Open [https://cloud.ibm.com](https://cloud.ibm.com) in a new browser tab.
+1. From the [IBM Cloud (https://cloud.ibm.com)](https://cloud.ibm.com) dashboard page.
 
 2. Select *Clusters*.
 
