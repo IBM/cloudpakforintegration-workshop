@@ -225,7 +225,7 @@ App Connect Designer is a component of Cloud Pak for Integration that provides a
 
   [![](images/edittestparams.png)](images/edittestparams.png)
 
-4.13 Verify that the operation returns a 200 HTTP status code.
+4.13 Click the "Try It" icon in the above screenshot. Verify that the operation returns a 200 HTTP status code.
 
   [![](images/teststatus.png)](images/teststatus.png)
 
