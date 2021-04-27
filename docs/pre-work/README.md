@@ -11,7 +11,7 @@ You need an IBM Cloud account to be given access to a cluster.
 
 To gain access to a cluster,
 
-1. Open the URL to the [grant cluster application (https://ibm.biz/ddc-aiops-grantcluster)](https://ibm.biz/ddc-aiops-grantcluster).
+1. Open the URL for the *Grant Cluster* application given to you for this workshop.
 
 1. The grant cluster URL should open the following page,
 
