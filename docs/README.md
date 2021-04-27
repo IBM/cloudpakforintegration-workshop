@@ -28,7 +28,9 @@ Cloud Pak for Integration includes components to enable you to manage:
 | **Enterprise messaging** | Simplify, accelerate and facilitate the reliable exchange of data with a flexible and security-rich messaging solution that’s trusted by some of the world’s most successful enterprises. Ensure you receive the information you need, when you need it - and receive it only once |
 | **Event streaming** | Use Apache Kafka to deliver messages more easily and reliably and to react to events in real time. Provide more personalized customer experiences by responding to events before the moment passes |
 | **High-speed data transfer** | Send large files and data sets virtually anywhere, reliably and at maximum speed. Accelerate collaboration and meet the demands of complex global teams, without compromising performance or security |
-| **Secure gateway** | Create persistent, security-rich connections between your on-premises and cloud environments. Quickly set up and manage gateways, control access on a per-resource basis, configure TLS encryption and mutual authentication, and monitor all of your traffic |
+| **Datapower Gateway** | Provides secure and reliable gateway services for API Connect |
+| **Asset Repository** | Stores, manages, retrieves and enables search for integration assets |
+| **Operations Dashboard** | Traces transactions across Cloud Pak for Integration |
 
 ### Lectures
 
