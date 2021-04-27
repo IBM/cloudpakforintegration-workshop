@@ -34,10 +34,12 @@ Cloud Pak for Integration includes components to enable you to manage:
 
 In addition to the labs, this workshop uses the following lectures:
 
-* [Cloud Pak for Integration Overview](https://ibm.box.com/s/1wi06b4gsnyoohjts5pjgh1t0uysio3e)
-* [Introduction to App Connect](https://ibm.box.com/s/9v7s3rz63euzm50yt4jmicd8lrfcmdmi)
-* [Introduction to API Connect](https://ibm.box.com/s/5ba4cv0kei0xgvfotfsp7fx76viimab4)
-* [Application Messaging with MQ and Apache Kafka](https://ibm.box.com/s/k5v3gkrijvposgwey7k08lkj46zy9ny4)
+* [Agenda and Lab Descriptions](https://ibm.box.com/s/ch8ar0x49uyvt4c50v93rirn5f3sp5ov)
+* [Cloud Pak for Integration Overview](https://ibm.box.com/s/z1gdtuqkpudtn7ekvm2puodg3s69x9mz)
+* [Introduction to App Connect](https://ibm.box.com/s/oos20tifgywnjhu928fy73obbqz3o1ce)
+* [Introduction to API Connect](https://ibm.box.com/s/v7r9nzt8ywakreark6lt4drfy05l7tiu)
+* [Application Messaging with MQ and Apache Kafka](https://ibm.box.com/s/ke0ctse0783yng5a6q876axfnd6o99aa)
+* [Tracing Overview and Demo (optional)](https://ibm.box.com/s/tygswjuohpg4n275e2lqsshiur4ulv4i)
 
 ## Credits
 
