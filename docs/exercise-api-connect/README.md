@@ -204,7 +204,7 @@ In the API designer, you have the ability to test the API immediately after crea
 
   [![](images/traderlite-create-instance.png)](images/traderlite-create-instance.png)
 
-5.5 Name the instance *traderlite*  and replace the **API Connect URL**  and **API Connect ClientId** with the **api-gateway-service** URL and the **Client-ID** you saved in the previous section. Click **Create**
+5.5 Name the instance *traderlite*  and replace the **API Connect URL**  and **API Connect ClientId** with the **api-gateway-service** URL and the **Client-Id** you saved in the previous section. Click **Create**
 
   [![](images/traderlite-create-values.png)](images/traderlite-create-values.png)
 

@@ -12,10 +12,11 @@ You need an IBM Cloud account to be given access to a cluster.
 To gain access to a cluster,
 
 1. Open the URL for the *Grant Cluster* application given to you for this workshop.
+    >**Note:** You can click on any image in the instructions below to zoom in and see more details. When you do that just click on your  browser's back button to return to the previous state.
 
 1. The grant cluster URL should open the following page,
 
-    ![Welcome to IBM Cloud](images/welcome-to-ibm-cloud.png)
+    [![](images/welcome-to-ibm-cloud.png)](images/welcome-to-ibm-cloud.png)
 
 1. Log in to this IBM Cloud account using the `lab key` given to you for this workshop and your IBM Id to access your IBM Cloud account,
 
@@ -23,17 +24,17 @@ To gain access to a cluster,
 
 1. The instructions will ask to `Log in to this IBM Cloud account`
 
-    ![Congratulations, You have been assigned a kubernetes cluster](images/congratulations.png)
+    [![](images/congratulations.png)](images/congratulations.png)
 
 1. When you click the link to log in to the IBM Cloud account, the IBM Cloud overview page will load with an overview of all resources on the account. In the top right, you will see an active account listed. The active account should be the account on which the cluster is created, which is not your personal account. Click the account dropdown if you need to change the active account.
 
 1. From the [IBM Cloud](https://cloud.ibm.com) overview page. Select *Clusters*.
 
-    ![Select clusters](images/cloud-dashboard.png)
+    [![](images/cloud-dashboard.png)](images/cloud-dashboard.png)
 
 1. Select the cluster that was assigned to you by the grant cluster application for this workshop.
 
-    ![Select cluster](images/cloud-account.png)
+    [![](images/cloud-account.png)](images/cloud-account.png)
 
 1. Details for your cluster will load.
 
@@ -45,16 +46,16 @@ The links, credentials and other resources you will need to complete the labs in
 
 1. Click on *OpenShift web console* to launch the console.
 
-    ![Open console](images/open-console.png)
+    [![](images/open-console.png)](images/open-console.png)
 
 1. In the left navigation select *Projects* (in the *Home* section) and then select the *student001* project.
 
-    ![Select project](images/select-project.png)
+    [![](images/select-project.png)](images/select-project.png)
 
 1. In the left navigation select *Routes* (in the *Networking* section) and then click on the *Location* link for the *workshop-info* route.
 
-    ![Launch Workshop Info](images/launch-workshop-info.png)
+    [![](images/launch-workshop-info.png)](images/launch-workshop-info.png)
 
 1. The will launch your Workshop Info page. Keep this tab open for the rest of the workshop as it has all the information and links needed for you to complete the lab exercises.
 
-    ![Workshop Info Page](images/workshop-info-page.png)
+    [![](images/workshop-info-page.png)](images/workshop-info-page.png)
