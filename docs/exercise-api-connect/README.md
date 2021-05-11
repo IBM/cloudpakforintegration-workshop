@@ -59,7 +59,7 @@ API Connect requires the [Firefox](https://www.mozilla.org/en-US/firefox/new/) b
 
   [![](images/apic-csur.png)](images/apic-csur.png)
 
-2.3 Login with the credentials for API Connect on the Workshop Information Page. 
+2.3 Login with the credentials for API Connect on the Workshop Information Page.
 
 **Note:** API Connect takes times to load the first time. Please be patient on the first screen while it initializes.
 
@@ -93,7 +93,7 @@ After importing the existing API, the first step is to configure basic security 
 
 3.1 Scroll down in  the  Edit API screen and replace the **Host** address with `$(catalog.host)` to indicate that you want calls to the external API to go through API Connect.
 
-  [![](images/catalog-hostname.png)](images/catalog-host.png)   
+  [![](images/catalog-host.png)](images/catalog-host.png)   
 
 3.2 Click **Save**
 
@@ -167,37 +167,30 @@ In the API designer, you have the ability to test the API immediately after crea
 
   [![](images/invoke-api.png)](images/invoke-api.png)
 
-4.10 If this is the first test of the API, you may  see a certificate exception. Simply click on the link provided. This will open a new tab and allow you to click through to accept the  self signed certificate
+4.10 If this is the first test of the API, you may  see a certificate exception. Simply click on the link provided. This will open a new tab and allow you to click through to accept the self signed certificate. **Note**: Stop when you get a `401` error code in the new tab.
 
   [![](images/cert-exception.png)](images/cert-exception.png)
 
-4.11 Go back to the previous tab  and click **Send** again.
+
+4.11 Go back to the previous tab and click **Send** again.
 
 4.12 Now you should see a **Response** section with Status code `200 OK` and the **Body** displaying the details of the *Dow Jones Industrial Average*.
 
   [![](images/response.png)](images/response.png)
 
-4.13 Click on the downward facing arrow right beneath the **Send** button
+4.13 Next you'll get the *Client Id* and *Gateway endpoint* so you can test your API from the TraderLite app. Click on the **Endpoints** tab.
 
-  [![](images/expand-request.png)](images/expand-request.png)
+4.14  Copy the value of the  **api-gateway-service** URL and the **Client-Id**  to a local text file so it can be used in the Stock Trader application later (**Note:** this is a shortcut to the regular process of publishing the API and then subscribing to it as a consumer).
 
-4.14  Copy the value of the  **IBM-X-CLIENT-ID**  to a local text file so it can be used in the Stock Trader application later (**Note:** this is a shortcut to the regular process of publishing the API and then subscribing to it as a consumer).
+  [![](images/endpoint-client-id.png)](images/endpoint-client-id.png)
 
-  [![](images/client-id.png)](images/client-id.png)
-
-4.14 Next we'll get the endpoint for your API. Click on the **Home** icon (top left) and then click on the **Manage Catalogs** tile.
-
-  [![](images/manage-catalogs.png)](images/manage-catalogs.png)
-
-4.15 Click on the **Sandbox** tile.
-
-4.16 Click on the **Catalog settings** tab and then on **API Endpoints**. Copy the gateway URL and put it in the same file that you used for the **Client ID**
-
-  [![](images/gateway-url.png)](images/gateway-url.png)
 
 ## Step 5: Install TraderLite app
 
 5.1 In a separate browser tab go to the OpenShift console URL  for the cluster assigned to you by for the workshop.
+
+> **Note**: There is a link to your assigned cluster's console on your Workshop Information page. If you have closed it,  you can access it following the instructions in the [FAQ](https://ibm.github.io/cloudpakforintegration-workshop/faq/).
+
 
 5.2 Click on **Projects** in the left navigation and then click on the **student001**  project in the list
 
@@ -211,11 +204,13 @@ In the API designer, you have the ability to test the API immediately after crea
 
   [![](images/traderlite-create-instance.png)](images/traderlite-create-instance.png)
 
-5.5 Name the instance *traderlite*  and replace the **API Connect URL**  and **API Connect ClientId** with the respective values you saved in the previous section. Click **Create**
+5.5 Name the instance *traderlite*  and replace the **API Connect URL**  and **API Connect ClientId** with the **api-gateway-service** URL and the **Client-ID** you saved in the previous section. Click **Create**
 
   [![](images/traderlite-create-values.png)](images/traderlite-create-values.png)
 
 5.6 In the left navigation select **Pods** and then wait for all the TraderLite pods to have a status of **Running** and be in the **Ready** state.
+
+> *Note: You will know the traderlite-xxxxx pods are  in a ready state when the `Ready` column shows `1/1`.*
 
   [![](images/traderlite-pods-ready.png)](images/traderlite-pods-ready.png)
 
@@ -240,7 +235,7 @@ In the API designer, you have the ability to test the API immediately after crea
 Congratulations ! You successfully completed the following key steps in this lab:
 
 * Created an API by importing an OpenAPI definition for an existing REST service.
-* Configured a  ClientID/API Key  for security set up a proxy to the existing API.
+* Configured a ClientID/API Key for security set up a proxy to the existing API.
 * Tested the API in the API Connect developer toolkit.
 * Deployed the Trader Lite app and configured it to use the API you created.
 * Tested the Trader Lite app to make sure it successfully uses your API.
