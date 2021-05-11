@@ -12,7 +12,7 @@ You need an IBM Cloud account to be given access to a cluster.
 To gain access to a cluster,
 
 1. Open the URL for the *Grant Cluster* application given to you for this workshop.
-    >**Note:** You can click on any image in the instructions below to zoom in and see more details. When you do that just click on your  browser's back button to return to the previous state.
+    > **Note:** You can click on any image in the instructions below to zoom in and see more details. When you do that just click on your  browser's back button to return to the previous state.
 
 1. The grant cluster URL should open the following page,
 
