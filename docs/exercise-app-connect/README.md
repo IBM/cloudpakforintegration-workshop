@@ -2,7 +2,7 @@
 
 In this lab you will create App Connect flows to sync  client data in the  **IBM Trader Lite** app to Salesforce. This will occur whenever a user of the  **IBM Trader Lite** app creates a  portfolio for a new client or accesses the data of an existing client.
 
-In order to accomplishment this at a minimum  2 flows are needed:
+In order to accomplishment this at a minimum 2 flows are needed:
 
 1. A URL driven flow to push a new client to a Salesforce contact when the **IBM Trader Lite** app creates a portfolio for a new client
 
@@ -115,15 +115,19 @@ App Connect Designer is a component of Cloud Pak for Integration that provides a
 
   [![](images/nav-to-des.png)](images/nav-to-des.png)
 
-3.2 If prompted to login, select **Default authentication** and enter the credentials on the Workshop Information page
+3.2 If prompted to login enter the credentials on the Workshop Information page
+
+> **Note** You will be sharing this instance of App Connect Designer with other students so you will see their work as you navigate through the tool. You will use a naming scheme for the artifacts that you create that starts with your assigned username (e.g. student005).
 
 3.5 Click the **Catalog** icon
 
    [![](images/appdesignercatalog.png)](images/appdesignercatalog.png)
 
-3.6 Expand **Salesforce**  and click **Connect**
+3.6 Expand **Salesforce** . If there are existing connections shown in a drop down list  select **Add a new account ...** from that list.
 
-   [![](images/sfconnect.png)](images/sfconnect.png)
+  [![](images/addanewaccount.png)](images/addanewaccount.png)
+
+> **Note** If there are no existing connections shown click on **Connect***
 
 
 3.7 Enter the following values referring to the text file from  the previous section where you saved your Salesforce credentials.
@@ -140,9 +144,15 @@ App Connect Designer is a component of Cloud Pak for Integration that provides a
 
    [![](images/sfconnectionform.png)](images/sfconnectionform.png)
 
-> **NOTE**: If you receieve an error that the connection to Salesforce failed, then it is recommended to re-check the credentials and try again. You can re-enter the credentials for this account by clicking on the three dots next to the account name (typically this is **Account 1**), and clicking **Update Account** from the subsequent menu. The previous details are cleared, so you will need to enter them all again.   
+> **NOTE**: If you receive an error that the connection to Salesforce failed, then it is recommended to re-check the credentials and try again. You can re-enter the credentials for this account by clicking on the three dots next to the account name (typically this is in the form **Account n**), and clicking **Update Account** from the subsequent menu. The previous details are cleared, so you will need to enter them all again.   
 
-3.8 Click on **Connect**. The connection will be given a default name of the form *Account n*.
+3.8 Click on **Connect**. The connection will be given a default name of the form *Account n*.  Click on the 3 vertical dots next to the connection name and select **Rename Account**.
+
+   [![](images/renameaccount.png)](images/renameaccount.png)
+
+3.9 Enter your assigned username (e.g. *student005*) as the new account name and click on **Rename Account**.
+
+   [![](images/renameaccount2.png)](images/renameaccount2.png)
 
 ## Section 4: Create the flows in App Connect Designer
 
@@ -154,7 +164,7 @@ App Connect Designer is a component of Cloud Pak for Integration that provides a
 
   [![](images/newflow.png)](images/newflow.png)
 
-4.3 Name the flow `sfpush`   Name the model `Client`
+4.3 Name the flow `sfpushnnn` where `nnn` are the last 3 digits in your username.(e.g. if your username is `student005` name the flow `sfpush005`).  Name the model `Client`
 
   [![](images/flowname.png)](images/flowname.png)
 
@@ -205,7 +215,7 @@ App Connect Designer is a component of Cloud Pak for Integration that provides a
 
   [![](images/responsedata.png)](images/responsedata.png)
 
-4.11 Next you'll test the flow to make sure it works. Click on the middle part of the flow and then click on the edit icon.
+4.11 Next you'll test the flow to make sure it works. Click on Salesforce icon (the middle part of the flow) and then click on the edit icon.
 
   [![](images/testparams.png)](images/testparams.png)
 
@@ -231,7 +241,9 @@ App Connect Designer is a component of Cloud Pak for Integration that provides a
 
 4.15 Click **View details** to see the raw data returned from  the call to Salesforce (note this is not the same as the data returned by the flow which you defined in the **Response** stage of the flow).
 
-4.16 Click **Done**
+  [![](images/viewdetails.png)](images/viewdetails.png)
+
+4.16 Click **Done** (top right of screen)
 
 4.17 Next you'll build a reverse flow. One that will call an API in the TraderLite app whenever a Salesforce contact is updated Click on the **Catalog** icon and select the **APIs**
 
@@ -243,7 +255,7 @@ App Connect Designer is a component of Cloud Pak for Integration that provides a
 
 4.19  Back in App Connect click on **Add your API now**
 
-4.20  Import the file *sfsync.json*, and name the API *Salesforce sync*
+4.20  Import the file *sfsync.json*, and name the API *Salesforce sync nnn* where `nnn` are the last 3 digits in your username.(e.g. if your username is `student005`  the API should be called  `Salesforce sync 005`).
 
   [![](images/addapi.png)](images/addapi.png)
 
@@ -261,7 +273,9 @@ App Connect Designer is a component of Cloud Pak for Integration that provides a
 
 4.25 Click **New** and select **Event-driven flow**
 
-4.26 Name the flow `sfevents`,  expand the Salesforce section and select **Updated contact** under **Contacts**
+4.26 Name the flow `sfeventnnn` where `nnn` are the last 3 digits in your username.(e.g. if your username is `student005` name the flow `sfevent005`)
+
+4.27  Expand the Salesforce section and select your specific  account (e.g. `student005`). Under **Contacts** select  **Updated contact**
 
   [![](images/updatedcontact.png)](images/updatedcontact.png)
 
@@ -285,15 +299,15 @@ App Connect Designer is a component of Cloud Pak for Integration that provides a
 
 4.29 Click on the **Dashboard** icon at the left
 
-4.30 Export your `sfevents` flow by clicking on the 3 period icon and selecting **Export..** from the context menu.
+4.30 Export your `sfeventsnnn` flow by clicking on the 3 period icon and selecting **Export..** from the context menu.
 
   [![](images/exportevt.png)](images/exportevt.png)
 
 4.31 Select **Runtime flow asset (BAR)** and click **Export**
 
-4.32 Adjust the target folder if you wish and then click **Save**
+4.32 Click **Save**
 
-4.33 Repeat for the `sfpush` flow also selecting **Runtime flow asset (BAR)** and saving to your local system.
+4.33 Repeat for your  `sfpushnnn` flow also selecting **Runtime flow asset (BAR)** and saving to your local system.
 
 ## Section 5: Create an Integration Server instance and deploy your flows
 
@@ -301,46 +315,62 @@ In this step you'll create an Integration Server instance and deploy your flows 
 
 5.1 Go to your Workshop Information page and click on the **App Connect Dashboard** component link. (**Note:** if you no longer have the Workshop Information page available see [these instructions](../pre-work/README.md)).
 
-5.2 Select **Default Authentication** and login with your credentials if prompted
+5.2 If prompted to login enter the credentials on the Workshop Information page.
 
-5.3 Click **Create server**
+5.3 Click **Create a server**
 
   [![](images/dashboardui.png)](images/dashboardui.png)
 
-5.4 Select the **Quick start designer integration** tile and click **Next**
+5.4 Select the  **Quick start designer integration** tile and click **Next**
 
-5.5 Upload the `sfevents.bar` file and click **Next**
+  [![](images/qsdesint.png)](images/qsdesint.png)
+
+5.5 Upload your  `sfeventnnn.bar` file and click **Next**
 
   [![](images/sfeventsbar.png)](images/sfeventsbar.png)
 
-5.6 Select the **Accounts** file and leave the others unchecked. Click **Next**
+5.6 Wait until you see an existing configuration loaded (it can take a few seconds during which time it asks you to create a new config - ignore that) .  Once the config loads, select the **Accounts** type and leave the others unchecked. Click **Next**
 
   [![](images/accountfile.png)](images/accountfile.png)
 
 > **Note**: Without *Accounts* checked, your flow will  not work when deployed . This allows the secret with your Salesforce credentials to be accessible to the deployed flow.
 
-5.7 Name the server `sfevents` and click  **Create** . It will take a while for the server to provision so you can continue deploying the other flow. Click **Create server**
+5.7 Name the server `sfeventnnn` where `nnn` are the last 3 digits in your username.(e.g. if your username is `student005` name the server `sfevent005`)
 
-5.8 Select the **Quick start designer integration** tile and click **Next**
+5.8 Ensure that the  **Designer flows type** is set to **event-driven-or-api-flows**
+and click  **Create** .
 
-5.9 Upload the `sfpush.bar` file and click **Next**
+  [![](images/server-details.png)](images/server-details.png)
 
-5.10 Select the **Accounts** file and leave the others unchecked. Click **Next**
+5.9 It will take a while for the server to provision so you can continue deploying the other flow. Click **Create server**
+
+  [![](images/create-server2.png)](images/create-server2.png)
+
+5.10 Select the **Quick start designer integration** tile and click **Next**
+
+5.9 Upload your `sfpushnnn.bar` file and click **Next**
+
+5.10 Select the **Accounts** type and leave the others unchecked. Click **Next**
 
 > **Note**: Without *Accounts* checked, your flow will  not work when deployed . This allows the secret with your Salesforce credentials to be accessible to the deployed flow.
 
-5.11 Name the server `sfpush` and click and click **Create** .
+5.11 Name the server `sfpushnnn` where `nnn` are the last 3 digits in your username.(e.g. if your username is `student005` name the server `sfpush005`)
 
-5.12 Wait for both servers be in the **Started** state. They will take about 2 or 3 minutes.
+5.12 Ensure that the  **Designer flows type** is set to **api-flows**
+and click  **Create** .
 
-> Note: You may have to refresh the page to get the latest server status
+  [![](images/server-details2.png)](images/server-details2.png)
+
+5.13 Wait for both servers be in the **Ready** state. They will take about 2 or 3 minutes.
+
+> **Note:** You may have to refresh the page to get the latest server status
 
   [![](images/serversdeployed.png)](images/serversdeployed.png)
 
 
 ## Section 6: Get the REST endpoint of your App Connect Flow
 
-6.1 In the App Connect Dashboard click on the tile for the `sfpush` server
+6.1 In the App Connect Dashboard click on the tile for your `sfpushnnn` server
 
 6.2 Click on the API tile to see the details of the flow's API
 
@@ -356,7 +386,7 @@ In this step you'll create an Integration Server instance and deploy your flows 
 
 7.1 Go to the OpenShift console of your assigned cluster. Select the **student001** project. In the navigation on the left select **Installed Operators** and select the **TraderLite Operator**
 
-  [![](images/traderlite-operator.png)](images/traderlite-operator.png)
+  [![](images/select-traderlite-operator.png)](images/select-traderlite-operator.png)
 
 7.2 Click on the **TraderLite app** tab
 
@@ -378,7 +408,7 @@ In this step you'll create an Integration Server instance and deploy your flows 
 
 7.7 Wait until the new pod is in the  **Ready** state and the  previous pod has terminated before continuing.
 
-> **Note**: You will know the traderlite-portfolio-xxxxx pod is in a ready state when the `Ready` column shows `1/1`. You will also see that the created column will have a recent timestamp value.*
+> **Note**: You will know the traderlite-portfolio-xxxxx pod is in a ready state when the `Ready` column shows `1/1`. You will also see that the created column will have a recent timestamp value.
 
 7.8 In  the left navigation  click on **Routes** (in the **Networking** category) and then click on the icon next to the url for the **tradr** app (the UI for TraderLite)
 
@@ -398,11 +428,13 @@ In this step you'll create an Integration Server instance and deploy your flows 
 
   [![](images/new-portfolio.png)](images/new-portfolio.png)
 
-7.13 Click on the **Client Details** tab. Because the TraderLite app is now calling your *sfpush* flow whenever a new client is created, you should see a Salesforce Contact Id in the form of a link.
+7.13 Click on the **Client Details** tab. Because the TraderLite app is now calling your *sfpushnnn* flow whenever a new client is created, you should see a Salesforce Contact Id in the form of a link.
 
   [![](images/client-details.png)](images/client-details.png)
 
-7.14 Click on the Contact Id link to see the contact in Salesforce (you may be prompted for your Salesforce credentials)
+7.14 Right click on the Contact Id link and select **Open Link in New Tab** to see the contact in Salesforce (you may be prompted for your Salesforce credentials)
+
+  [![](images/client-id-link.png)](images/client-id-link.png)
 
 > **Note**: If the link does not work because of geo specific URLs for Salesforce, login in to Salesforce by yourself and look at the new contact. The easiest way to find the new contact is to enter the first and last name in the search bar in Salesforce.
 

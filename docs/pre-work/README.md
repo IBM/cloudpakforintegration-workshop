@@ -2,7 +2,7 @@
 
 ## Cloud Pak for Integration and RedHat OpenShift Kubernetes Service (ROKS) Access
 
-The `grant cluster` method will assign access permissions to a cluster or namespace in a cluster that was created prior to the workshop. Creating a cluster and provisioning the VMs and other resources and deploying the tools may take up to 15 minutes and longer if queued. Permissioning access to an existing cluster in contrast happens in 1 or 2 minutes depending on the number of concurrent requests.
+The `grant cluster` method will assign access permissions to a cluster or namespace in a cluster that was created prior to the workshop. Creating a cluster and provisioning the VMs and other resources and deploying the tools may take up to an hour and longer if queued. Permissioning access to an existing cluster in contrast happens in 1 or 2 minutes depending on the number of concurrent requests.
 
 You need an IBM Cloud account to be given access to a cluster.
 
@@ -23,11 +23,17 @@ To gain access to a cluster,
 
     > *Note: The lab key can be found on the session information page or by asking your instructor.*
 
-1. The instructions will ask to `Log in to this IBM Cloud account`
+1. The instructions will ask to check the email associated with your IBM Cloud account and click on the link in the invitation email.
 
     [![](images/congratulations.png)](images/congratulations.png)
 
-1. When you click the link to log in to the IBM Cloud account, the IBM Cloud overview page will load with an overview of all resources on the account. In the top right, you will see an active account listed. The active account should be the account on which the cluster is created, which is not your personal account. Click the account dropdown if you need to change the active account.
+1. This brings up a page like the following.  Click the **Join Account** button.
+
+    [![](images/joinaccount.png)](images/joinaccount.png)
+
+1. If prompted to login, click the **Log in** button, after logging in the IBM Cloud overview page will load with an overview of all resources on the account. In the top right, you will see an active account listed.
+
+   > The active account should be the account on which the cluster is created, which is not your personal account. Click the account dropdown if you need to change the active account.
 
 1. From the [IBM Cloud](https://cloud.ibm.com) overview page. Select *Clusters*.
 
@@ -49,7 +55,13 @@ The links, credentials and other resources you will need to complete the labs in
 
     [![](images/open-console.png)](images/open-console.png)
 
-1. In the left navigation select *Projects* (in the *Home* section) and then select the *student001* project.
+1. In the left navigation switch from the **Developer** view to the **Administrator** view
+
+    [![](images/admin-view.png)](images/admin-view.png)
+
+1.  select *Projects* (in the *Home* section) and then select your  ***studentnnn*** project.
+
+   > *Note*: Each student will be assigned to a different namespace on their assigned cluster with a name in the format studentnnn (e.g. student012)
 
     [![](images/select-project.png)](images/select-project.png)
 

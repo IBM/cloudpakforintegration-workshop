@@ -12,7 +12,7 @@
 
 The workshop information page contains the links, resources and credentials necessary to complete the labs in this workshop. To get to this webpage:
 
-1. Go to the OpenShift console of your assigned cluster. Select the **student001** project. In the navigation on the left, select **Routes** in the **Operators** section.
+1. Go to the OpenShift console of your assigned cluster. Select your  ***studentnnn*** project. In the navigation on the left, select **Routes** in the **Operators** section.
 
 1. Click on the icon next to the url for the **workshop-info** route. This will open the webpage in a new tab.
 
@@ -24,7 +24,7 @@ The traderlite application used in this workshop is installed as part of the API
 
 1. In a separate browser tab, go to the OpenShift console of your assigned cluster.
 
-1. Click on **Projects** in the left navigation and then click on the **student001** project in the list.
+1. Click on **Projects** in the left navigation and then click on your ***studentnnn*** project in the list.
 
     [![](../exercise-api-connect/images/select-traderlite-project.png)](../exercise-api-connect/images/select-traderlite-project.png)
 
