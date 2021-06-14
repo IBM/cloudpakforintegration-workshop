@@ -59,9 +59,10 @@ The links, credentials and other resources you will need to complete the labs in
 
     [![](images/admin-view.png)](images/admin-view.png)
 
-1.  select *Projects* (in the *Home* section) and then select your  ***studentnnn*** project.
+1.  Select *Projects* (in the *Home* section) and then select your  ***studentnnn*** project.
 
    > *Note*: Each student will be assigned to a different namespace on their assigned cluster with a name in the format studentnnn (e.g. student012)
+
 
     [![](images/select-project.png)](images/select-project.png)
 
