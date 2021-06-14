@@ -6,10 +6,11 @@ The `grant cluster` method will assign access permissions to a cluster or namesp
 
 You need an IBM Cloud account to be given access to a cluster.
 
-1. If you do not have an IBM Cloud account yet, register at [https://cloud.ibm.com/registration](https://cloud.ibm.com/registration),
-2. Or find instructions to create a new IBM Cloud account [here](https://github.com/IBM/workshop-setup/raw/master/docs/pdf/NEWACCOUNT.pdf),
+   - If you do not have an IBM Cloud account yet, register at [https://cloud.ibm.com/registration](https://cloud.ibm.com/registration)
 
-To gain access to a cluster,
+   - You can find detailed instructions to create a new IBM Cloud account [here](https://github.com/IBM/workshop-setup/raw/master/docs/pdf/NEWACCOUNT.pdf),
+
+To gain access to a cluster:
 
 1. Open the URL for the *Grant Cluster* application given to you for this workshop.
 
@@ -33,7 +34,7 @@ To gain access to a cluster,
 
 1. If prompted to login, click the **Log in** button, after logging in the IBM Cloud overview page will load with an overview of all resources on the account. In the top right, you will see an active account listed.
 
-   > The active account should be the account on which the cluster is created, which is not your personal account. Click the account dropdown if you need to change the active account.
+    > The active account should be the account on which the cluster is created, which is not your personal account. Click the account dropdown if you need to change the active account.
 
 1. From the [IBM Cloud](https://cloud.ibm.com) overview page. Select *Clusters*.
 
@@ -63,7 +64,7 @@ The links, credentials and other resources you will need to complete the labs in
 
     [![](images/select-project.png)](images/select-project.png)
 
-   > *Note*: Each student will be assigned to a different namespace on their assigned cluster with a name in the format studentnnn (e.g. student012)
+    > *Note*: Each student will be assigned to a different namespace on their assigned cluster with a name in the format studentnnn (e.g. student012)
 
 
 
