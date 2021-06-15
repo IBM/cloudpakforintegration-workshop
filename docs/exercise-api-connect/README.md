@@ -51,9 +51,6 @@ API Connect requires the [Firefox](https://www.mozilla.org/en-US/firefox/new/) b
 
 2.1 Go to your Workshop Information page and click on the API Connect component link.
 
-    [![](images/nav-to-apic.png)](images/nav-to-apic.png)
-
-
 2.2 Click on  **Enterprise LDAP** when prompted for an authentication type and then enter the credentials from your Workshop Information page.
 
     [![](images/nav-to-ldap.png)](images/nav-to-ldap.png)
