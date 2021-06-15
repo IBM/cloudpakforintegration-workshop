@@ -53,6 +53,7 @@ API Connect requires the [Firefox](https://www.mozilla.org/en-US/firefox/new/) b
 
     [![](images/nav-to-apic.png)](images/nav-to-apic.png)
 
+
     > **Note:** This Cloud Pak for Integration installation use self-signed certificates so you will have to click through any browser warnings and continue to the URL.
 
 2.2 Click on  **Enterprise LDAP** when prompted for an authentication type and then enter the credentials from your Workshop Information page.
