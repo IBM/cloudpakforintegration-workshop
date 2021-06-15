@@ -251,37 +251,47 @@ App Connect Designer is a component of Cloud Pak for Integration that provides a
 
    [sfsync.json](https://raw.githubusercontent.com/IBMStockTraderLite/traderlite-cp4i/master/appconnect/sfsync.json)
 
-4.19  Back in App Connect click on **Add your API now**
+4.19 Open the file *sfsync.json* with your favorite text editor
 
-4.20  Import the file *sfsync.json*, and name the API *Salesforce sync nnn* where `nnn` are the last 3 digits in your username.(e.g. if your username is `student005`  the API should be called  `Salesforce sync 005`).
+4.20 Modify the **host:** attribute by replacing the string `studentnnn` with your assigned username e.g. If your username is `student005` then the modified **host:** attribute should look like this:
+
+```
+  "host": "portfolio-appconn-access.student005.svc.cluster.local:8080",
+```
+
+4.21 Save the file
+
+4.22  Back in App Connect click on **Add your API now**
+
+4.23  Import the file *sfsync.json*, and name the API *Salesforce sync nnn* where `nnn` are the last 3 digits in your username.(e.g. if your username is `student005`  the API should be called  `Salesforce sync 005`).
 
   [![](images/addapi.png)](images/addapi.png)
 
-4.21 Click **Add API**
+4.24 Click **Add API**
 
-4.22 Click on the down arrow and then on **Connect**
+4.25 Click on the down arrow and then on **Connect**
 
   [![](images/connectapi.png)](images/connectapi.png)
 
-4.23 Accept the default values and click again **Connect** again
+4.26 Accept the default values and click again **Connect** again
 
-4.24 Click on the **Dashboard** icon
+4.27 Click on the **Dashboard** icon
 
   [![](images/dashboard2.png)](images/dashboard2.png)
 
-4.25 Click **New** and select **Event-driven flow**
+4.28 Click **New** and select **Event-driven flow**
 
-4.26 Name the flow `sfeventnnn` where `nnn` are the last 3 digits in your username.(e.g. if your username is `student005` name the flow `sfevent005`)
+4.29 Name the flow `sfeventnnn` where `nnn` are the last 3 digits in your username.(e.g. if your username is `student005` name the flow `sfevent005`)
 
-4.27  Expand the Salesforce section and select your specific  account (e.g. `student005`). Under **Contacts** select  **Updated contact**
+4.30  Expand the Salesforce section and select your specific  account (e.g. `student005`). Under **Contacts** select  **Updated contact**
 
   [![](images/updatedcontact.png)](images/updatedcontact.png)
 
-4.27 Click the **+** icon and then on the **APIs** tab. Expand your **Salesforce sync** API and click on **PUT /salesforce/contacts**
+4.31 Click the **+** icon and then on the **APIs** tab. Expand your **Salesforce sync** API and click on **PUT /salesforce/contacts**
 
   [![](images/sfsyncapi.png)](images/sfsyncapi.png)
 
-4.28 Click in the icon right next to the **ClientId** field.
+4.32 Click in the icon right next to the **ClientId** field.
 
    + Map the **ClientId** field to the Salesforce **ContactId** field
 
@@ -295,17 +305,17 @@ App Connect Designer is a component of Cloud Pak for Integration that provides a
 
   [![](images/fieldsmapped.png)](images/fieldsmapped.png)
 
-4.29 Click on the **Dashboard** icon at the left
+4.33 Click on the **Dashboard** icon at the left
 
-4.30 Export your `sfeventsnnn` flow by clicking on the 3 period icon and selecting **Export..** from the context menu.
+4.34 Export your `sfeventsnnn` flow by clicking on the 3 period icon and selecting **Export..** from the context menu.
 
   [![](images/exportevt.png)](images/exportevt.png)
 
-4.31 Select **Runtime flow asset (BAR)** and click **Export**
+4.35 Select **Runtime flow asset (BAR)** and click **Export**
 
-4.32 Click **Save**
+4.36 Click **Save**
 
-4.33 Repeat for your  `sfpushnnn` flow, also selecting **Runtime flow asset (BAR)** and saving to your local system.
+4.37 Repeat for your  `sfpushnnn` flow, also selecting **Runtime flow asset (BAR)** and saving to your local system.
 
 ## Section 5: Create an Integration Server instance and deploy your flows
 
