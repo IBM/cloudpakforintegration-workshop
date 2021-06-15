@@ -119,8 +119,6 @@ In this section you will install the TraderLite app to start storing transaction
 
 4.2 If prompted to login enter the credentials on the Workshop Information page.
 
-  [![](images/nav-to-mq.png)](images/nav-to-mq.png)
-
 4.3 Click on the **Manage QMTRADER** tile
 
   [![](images/manage-qmtrader-tile.png)](images/manager-qmtrader-tile.png)
