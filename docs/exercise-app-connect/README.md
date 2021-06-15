@@ -127,7 +127,7 @@ App Connect Designer is a component of Cloud Pak for Integration that provides a
 
   [![](images/addanewaccount.png)](images/addanewaccount.png)
 
-> **Note** If there are no existing connections shown click on **Connect***
+> **Note** If there are no existing connections shown click on **Connect**
 
 
 3.7 Enter the following values referring to the text file from  the previous section where you saved your Salesforce credentials.
@@ -172,7 +172,7 @@ App Connect Designer is a component of Cloud Pak for Integration that provides a
 
 4.5 Next you will add the properties of the input data for your flow.
 
-> **Note**: Name them exactly as instructed (including matching case) so that your flow will work with the *Stock Trader Lite* app.
+> **Note**: Name them exactly as instructed (including matching case) so that your flow will work with the *TraderLite* app.
 
    + Enter `ClientId` as the first property and then click **Add property +**
 
@@ -191,7 +191,7 @@ App Connect Designer is a component of Cloud Pak for Integration that provides a
 
 4.6 Click  **Operations** and then select **Create Client**
 
-   [![](images/operation.png)](images/operation.png)]
+   [![](images/operation.png)](images/operation.png)
 
 4.7 Click **Implement flow**
 
@@ -237,11 +237,9 @@ App Connect Designer is a component of Cloud Pak for Integration that provides a
 
 4.13 Click the "Try It" icon in the above screenshot. Verify that the operation returns a 200 HTTP status code.
 
-  [![](images/teststatus.png)](images/teststatus.png)
+   [![](images/viewdetails.png)](images/viewdetails.png)
 
 4.15 Click **View details** to see the raw data returned from  the call to Salesforce (note this is not the same as the data returned by the flow which you defined in the **Response** stage of the flow).
-
-  [![](images/viewdetails.png)](images/viewdetails.png)
 
 4.16 Click **Done** (top right of screen)
 
@@ -307,7 +305,7 @@ App Connect Designer is a component of Cloud Pak for Integration that provides a
 
 4.32 Click **Save**
 
-4.33 Repeat for your  `sfpushnnn` flow also selecting **Runtime flow asset (BAR)** and saving to your local system.
+4.33 Repeat for your  `sfpushnnn` flow, also selecting **Runtime flow asset (BAR)** and saving to your local system.
 
 ## Section 5: Create an Integration Server instance and deploy your flows
 
@@ -433,8 +431,6 @@ and click  **Create** .
   [![](images/client-details.png)](images/client-details.png)
 
 7.14 Right click on the Contact Id link and select **Open Link in New Tab** to see the contact in Salesforce (you may be prompted for your Salesforce credentials)
-
-  [![](images/client-id-link.png)](images/client-id-link.png)
 
 > **Note**: If the link does not work because of geo specific URLs for Salesforce, login in to Salesforce by yourself and look at the new contact. The easiest way to find the new contact is to enter the first and last name in the search bar in Salesforce.
 
