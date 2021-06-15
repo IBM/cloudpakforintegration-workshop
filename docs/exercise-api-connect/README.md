@@ -27,7 +27,7 @@ This lab is broken up into the following steps:
 
 1. [Test the API](#step-4-test-the-api)
 
-1. [Install the Trader Lite app](#step-5-install-the-trader-lite-app)
+1. [Install the TraderLite app](#step-5-install-the-traderlite-app)
 
 1. [Verify that the Trader Lite app is calling your API successfully](#step-6-verify-that-the-trader-lite-app-is-calling-your-api-successfully)
 
@@ -53,14 +53,14 @@ API Connect requires the [Firefox](https://www.mozilla.org/en-US/firefox/new/) b
 
     [![](images/nav-to-apic.png)](images/nav-to-apic.png)
 
-  **Note:** This Cloud Pak for Integration installation use self-signed certificates so you will have to click through any browser warnings and continue to the URL.
+    > **Note:** This Cloud Pak for Integration installation use self-signed certificates so you will have to click through any browser warnings and continue to the URL.
 
 2.2 Click on  **Enterprise LDAP** when prompted for an authentication type and then enter the credentials from your Workshop Information page.
 
     [![](images/nav-to-ldap.png)](images/nav-to-ldap.png)
 
 
-**Note:** the API Manager initial page takes times to load the first time. Please be patient on the first screen while it initializes.
+    >**Note:** the API Manager initial page takes times to load the first time. Please be patient on the first screen while it initializes.
 
 2.3 Click on the **Develop APIs and Products tile**
 
@@ -138,7 +138,11 @@ In the API designer, you have the ability to test the API immediately after crea
 
   [![](images/invoke.png)](images/invoke.png)
 
-4.3 Modify the **URL** field to include the request path passed in by the caller as well by appending `$(request.path)` to the **URL**. When you're done the field should be set to `$(target-url)$(request.path)`.
+4.3 Modify the **URL** field to include the request path passed in by the caller as well by appending `$(request.path)` to the **URL**. When you're done the field should be set to:
+
+   ```
+      $(target-url)$(request.path)
+   ```
 
   [![](images/invoke-edited.png)](images/invoke-edited.png)   
 
@@ -182,7 +186,7 @@ In the API designer, you have the ability to test the API immediately after crea
   [![](images/endpoint-client-id.png)](images/endpoint-client-id.png)
 
 
-## Step 5: Install TraderLite app
+## Step 5: Install the TraderLite app
 
 5.1 In a separate browser tab go to the OpenShift console URL  for the cluster assigned to you by for the workshop.
 
