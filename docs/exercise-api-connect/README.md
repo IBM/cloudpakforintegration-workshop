@@ -49,7 +49,7 @@ API Connect requires the [Firefox](https://www.mozilla.org/en-US/firefox/new/) b
 ## Step 2: Import the OpenAPI definition file into API Manager
 
 
-2.1 Go to your Workshop Information page and click on the API Connect component link. (**Note:** if you no longer have the Workshop Information page available see [these instructions](../pre-work/README.md)).
+2.1 Go to your Workshop Information page and click on the API Connect component link.
 
     [![](images/nav-to-apic.png)](images/nav-to-apic.png)
 
@@ -60,7 +60,7 @@ API Connect requires the [Firefox](https://www.mozilla.org/en-US/firefox/new/) b
 
 
     >**Note:** the API Manager initial page takes times to load the first time. Please be patient on the first screen while it initializes.
-    
+
 
 2.3 Click on the **Develop APIs and Products tile**
 
