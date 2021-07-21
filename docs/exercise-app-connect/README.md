@@ -123,11 +123,9 @@ App Connect Designer is a component of Cloud Pak for Integration that provides a
 
    [![](images/appdesignercatalog.png)](images/appdesignercatalog.png)
 
-3.6 Expand **Salesforce** . If there are existing connections shown in a drop down list  select **Add a new account ...** from that list.
+3.6 Expand **Salesforce** . We have created dummy accounts for you already.  Select the account corresponding to your username (e.g. *student005*)  and click on **Update Account**.
 
-  [![](images/addanewaccount.png)](images/addanewaccount.png)
-
-> **Note** If there are no existing connections shown click on **Connect**
+  [![](images/dummy-accounts.png)](images/dummy-accounts.png)
 
 
 3.7 Enter the following values referring to the text file from  the previous section where you saved your Salesforce credentials.
@@ -144,15 +142,10 @@ App Connect Designer is a component of Cloud Pak for Integration that provides a
 
    [![](images/sfconnectionform.png)](images/sfconnectionform.png)
 
-> **NOTE**: If you receive an error that the connection to Salesforce failed, then it is recommended to re-check the credentials and try again. You can re-enter the credentials for this account by clicking on the three dots next to the account name (typically this is in the form **Account n**), and clicking **Update Account** from the subsequent menu. The previous details are cleared, so you will need to enter them all again.   
+> **NOTE**: If you receive an error that the connection to Salesforce failed, then it is recommended to re-check the credentials and try again. You can re-enter the credentials for this account by clicking on the three dots next to the account name and clicking **Update Account** from the subsequent menu. The previous details are cleared, so you will need to enter them all again.   
 
-3.8 Click on **Connect**. The connection will be given a default name of the form *Account n*.  Click on the 3 vertical dots next to the connection name and select **Rename Account**.
+3.8 Click on **Connect**.
 
-   [![](images/renameaccount.png)](images/renameaccount.png)
-
-3.9 Enter your assigned username (e.g. *student005*) as the new account name and click on **Rename Account**.
-
-   [![](images/renameaccount2.png)](images/renameaccount2.png)
 
 ## Section 4: Create the flows in App Connect Designer
 
