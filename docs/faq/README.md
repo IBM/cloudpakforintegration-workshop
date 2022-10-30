@@ -1,16 +1,37 @@
 # Frequently Asked Questions & Helpful Tips / Tricks
 
+1. [How do I get to the workshop OpenShift console?](#your-workshop-openshift-cluster-console)
 1. [How do I get to the workshop information page?](#workshop-information-page)
 1. [I don't have the trader lite application, how can I install it?](#traderlite-application-installation)
-1. [I am receiving a `Your connection is not private` message, what should I do?](#accept-private-connection)
 
 >**Note:** You can click on any image in the instructions below to zoom in and see more details. When you do that just click on your browser's back button to return to the previous state.
 
 ***
 
+## Your workshop OpenShift cluster console 
+
+Open the OpenShift console on your workshop cluster:
+
+ > **Note:** You can click on any image in the instructions below to zoom in and see more details. When you do that just click on your  browser's back button to return to the previous state.
+
+1. Got to the [IBM Cloud](https://cloud.ibm.com) landing page. Click on the OpenShift cluster icon in the left navigation.
+
+    [![](images/cloud-roks.png)](images/cloud-roks.png)
+
+1. Select your workshop cluster.
+
+    [![](images/cloud-account.png)](images/cloud-account.png)
+
+1. Details for your cluster will load.
+
+1. Click on *OpenShift web console* to launch the console.
+
+    [![](images/open-console.png)](images/open-console.png)
+
+
 ## Workshop Information Page
 
-The workshop information page contains the links, resources and credentials necessary to complete the labs in this workshop. To get to this webpage:
+If you no longer have your workshop cluster OpenShift console open, follow the instructions in the  previous section and then return here. 
 
 1. Go to the OpenShift console of your assigned cluster. Select your  ***studentnnn*** project. In the navigation on the left, select **Routes** in the **Operators** section.
 
@@ -22,9 +43,9 @@ The workshop information page contains the links, resources and credentials nece
 
 The traderlite application used in this workshop is installed as part of the API Connect and/or the Salesforce integration labs. If you have not completed that lab, follow these steps to install an instance of the application.
 
-1. In a separate browser tab, go to the OpenShift console of your assigned cluster.
+1. In a separate browser tab, go to the OpenShift console of your workshop  cluster.
 
-1. Click on **Projects** in the left navigation and then click on your ***studentnnn*** project in the list.
+1. Click on **Projects** in the left navigation and then click on your ***student001*** project in the list.
 
     [![](../exercise-api-connect/images/select-traderlite-project.png)](../exercise-api-connect/images/select-traderlite-project.png)
 
@@ -46,12 +67,4 @@ The traderlite application used in this workshop is installed as part of the API
 
     [![](../exercise-api-connect/images/traderlite-pods-ready.png)](../exercise-api-connect/images/traderlite-pods-ready.png)
 
-## Accept Private Connection
 
-There are various components used in this workshop. When loading the UIs for these components you may receive a message in your browser that the connection is not private. To complete loading the UI:
-
-* Click the `Advanced` button below the warning message and then click the `Proceed to ....` link.
-
-    [![](images/private-connection-message.png)](images/private-connection-message.png)
-
-* You may receive this message more than once, follow the same steps to proceed to the UI.

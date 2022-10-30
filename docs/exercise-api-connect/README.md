@@ -6,9 +6,8 @@ The architecture of the app is shown below:
 
 [![](images/architecture.png)](images/architecture.png)
 
-* **Tradr** is a Node.js UI for the portfolio service
-
-* The **portfolio** microservice sits at the center of the application. This microservice:
+- **Tradr** is a Node.js UI for the portfolio service
+- The **portfolio** microservice sits at the center of the application. This microservice:
    * persists trade data using JDBC to a MariaDB database
    * invokes the **stock-quote** service that invokes an API defined in API Connect in CP4I to get stock quotes
    * calls the **trade-history** service to store trade data in a PostgreSQL database that can be queried for reporting purposes.
@@ -48,39 +47,43 @@ API Connect requires the [Firefox](https://www.mozilla.org/en-US/firefox/new/) b
 
 ## Step 2: Import the OpenAPI definition file into API Manager
 
+2.1 Go to the Workshop Information page using your Firefox browser
 
-2.1 Go to your Workshop Information page and click on the API Connect component link.
+  > **Note**: Access your workshop cluster and the Workshop Information page by following the instructions in the [FAQ](https://ibm.github.io/cloudpakforintegration-workshop/faq/).
+
+2.2 Go to your Workshop Information page and click on the API Connect component link.
 
    [![](images/nav-to-apic.png)](images/nav-to-apic.png)
 
    > **Note:** This Cloud Pak for Integration installation use self-signed certificates so you will have to click through any browser warnings and continue to the URL.
 
-2.2 Click on  **Enterprise LDAP** when prompted for an authentication type and then enter the credentials from your Workshop Information page.
+2.3 Click on  **IBM provided credentials (admin only)** when prompted for an authentication type and then enter the credentials from your Workshop Information page.
 
-   [![](images/nav-to-ldap.png)](images/nav-to-ldap.png)
+   [![](images/nav-to-cs.png)](images/nav-to-cs.png)
 
-   >**Note:** the API Manager initial page takes times to load the first time. Please be patient on the first screen while it initializes.
+2.4 Select the  **Common Services User Registry**
 
+   [![](images/nav-to-csur.png)](images/nav-to-csur.png)
 
-2.3 Click on the **Develop APIs and Products tile**
+2.5 Click on the **Develop APIs and Products tile**
 
    [![](images/api-manager.png)](images/api-manager.png)
 
-2.4 Click **Add API**
+2.6 Click **Add** and select **API (from REST,GraphQL or SOAP)** from the context menu
 
   [![](images/add-api.png)](images/add-api.png)
 
-2.5 On the next screen select **Existing OpenAPI** under **Import** and then click **Next**.
+2.7 On the next screen select **Existing OpenAPI** under **Import** and then click **Next**.
 
   [![](images/existing-api.png)](images/existing-api.png)
 
-2.6 Now choose **stock-quote-api.yaml** from your local file system and click **Next**.
+2.8 Now choose **stock-quote-api.yaml** from your local file system and click **Next**.
 
   [![](images/choose-file.png)](images/choose-file.png)
 
-2.7 **Do not** select **Activate API**. Click  **Next**
+2.9 **Do not** select **Activate API**. Click  **Next**
 
-2.8 The API should be imported successfully as shown below. Click **Edit API**.
+2.10 The API should be imported successfully as shown below. Click **Edit API**.
 
   [![](images/edit-api.png)](images/edit-api.png)
 
@@ -88,51 +91,59 @@ API Connect requires the [Firefox](https://www.mozilla.org/en-US/firefox/new/) b
 
 After importing the existing API, the first step is to configure basic security before exposing it to other developers. By creating a client key  you are able to identify the app using the services. Next, we will define the backend endpoints where the API is actually running. API Connect supports pointing to multiple backend endpoints to match your multiple build stage environments.
 
-3.1 Scroll down the screen and replace the **Host** address with `$(catalog.host)` to indicate that you want calls to the external API to go through API Connect.
+3.1 In the left navigation select  **Host**  and replace the hard coded endpoint address with `$(catalog.host)` to indicate that you want calls to the external API to go through API Connect.
 
   [![](images/catalog-host.png)](images/catalog-host.png)   
 
 3.2 Click **Save**
 
-3.3 In the Edit API screen click **Security Definitions** in the left navigation
+3.3 In the Edit API screen click **Security Schemes(0)** in the left navigation
 
-3.4 In the **Security Definition** section, click the **Add** button on the right. This will open a new view titled **API Security Definition**.
+3.4 In the **Security** section, click the **Add** button on the right and then click on **Create a security scheme**. 
 
-3.5 In the **Name** field, type `client-id`.
+  [![](images/security-scheme.png)](images/security-scheme.png)   
 
-3.6 Under **Type**, choose **API Key**. This will reveal additional settings.
+3.5 In the **Security Scheme Name(Key)** field, type `client-id`.
 
-3.7 For **Located In** choose **Header**. For **Key Type** choose **Client ID**
+3.6 Under **Security Definition Type**, choose **apiKey**. 
 
-3.8 Enter `X-IBM-Client-Id` as the **Parameter Name**.  Your screen should now look like the image below.
+3.6 Under **Key Type**, choose **client_id**. 
+
+3.7 For **Located In** choose **header**.
+
+3.8 Enter `X-IBM-Client-Id` as the **Variable Name**.  Your screen should now look like the image below.
 
   [![](images/edit-api-complete.png)](images/edit-api-complete.png)   
 
-3.9 Click the **Save** button to return to the **Security Definitions** section.
+3.9 Click the **Create** button and then click **Save**.
 
-3.10 Click **Security** in the left menu. Click **Add**. Select the **client-id** as shown below and then click **Save**.
+3.10 Next you'll require use of the Client Id to access your API. In the left Navigation select **Security(0)** and then click on **Create a Security Requirement** 
 
-  [![](images/security.png)](images/security.png)
+  [![](images/create-security-req.png)](images/create-security-req.png)   
 
-3.11 Next you'll define the endpoint for the external API. Click on **Properties** in the left menu.
+3.11 Select the Security Scheme you just created and the click **Create**.
 
-3.12 Click on the **target-url** property. Click **Add**.
+  [![](images/security-req.png)](images/security-req.png)   
 
-3.13 Choose the **sandbox** catalog and for the URL copy and paste the following URL:
+3.12 Click **Save**
+
+3.13 Next you'll define the endpoint for the external API. Select  the **Gateway** tab, expand **Properties**  in the left navigation.
+
+3.14 Click on the **target-url** property.
+
+3.15 Copy then paste the following URL into the **Property Value** field:
 
     https://stock-trader-quote.us-south.cf.appdomain.cloud
 
   [![](images/target-url.png)](images/target-url.png)
 
-3.14 Click **Save** to complete the configuration.
+3.16 Click **Save** to complete the configuration.
 
 ## Step 4: Test the API
 
-In the API designer, you have the ability to test the API immediately after creation in the **Assemble** view.
+In the API designer, you have the ability to test the API immediately after creation.
 
-4.1 On the top Navigation, click **Assemble**.
-
-  [![](images/assemble.png)](images/assemble.png)
+4.1 On the left  Navigation, click **Policies**.
 
 4.2 Click **invoke** in the flow designer. Note the window on the right with the configuration. The **invoke** node calls the **target-url** (ie the external service).
 
@@ -148,40 +159,32 @@ In the API designer, you have the ability to test the API immediately after crea
 
 4.4 Click **Save**
 
-4.5 Click the play icon as indicated in the image below.
+4.5 Toggle the **Offline** switch and then click on the **Test** tab
 
-  [![](images/play-icon.png)](images/play-icon.png)
+  [![](images/test-tab.png)](images/test-tab.png)
 
-4.6 Click **Activate API** to publish the API to the gateway for testing.
+4.6 The **Request** should be prefilled with the GET request to  **/stock-quote/djia**.
 
-  [![](images/activate-for-test.png)](images/activate-for-test.png)
+4.7 Note that your **client-id** is prefilled for you.
 
-4.7 After the API is published, click on the **Test** tab  
-
-  [![](images/api-published.png)](images/api-published.png)
-
-4.8 The **Request** should be prefilled with the GET request to  **/stock-quote/djia**.
-
-4.9 Note that your **client-id** is prefilled for you.
-
-4.10 Click **Send**.
+4.8 Click **Send**.
 
   [![](images/invoke-api.png)](images/invoke-api.png)
 
-4.11 If this is the first test of the API, you may  see a certificate exception. Simply click on the link provided. This will open a new tab and allow you to click through to accept the self signed certificate. **Note**: Stop when you get a `401` error code in the new tab.
+4.9 If this is the first test of the API, you may  see a certificate exception. Simply click on the link provided. This will open a new tab and allow you to click through to accept the self signed certificate. **Note**: Stop when you get a `401` error code in the new tab.
 
   [![](images/cert-exception.png)](images/cert-exception.png)
 
 
-4.12 Go back to the previous tab and click **Send** again.
+4.10 Go back to the previous tab and click **Send** again.
 
-4.13 Now you should see a **Response** section with Status code `200 OK` and the **Body** displaying the details of the *Dow Jones Industrial Average*.
+4.11 Now you should see a **Response** section with Status code `200 OK` and the **Body** displaying the details of the simulated *Dow Jones Industrial Average*.
 
   [![](images/response.png)](images/response.png)
 
-4.14 Next you'll get the *Client Id* and *Gateway endpoint* so you can test your API from the TraderLite app. Click on the **Endpoints** tab.
+4.12 Next you'll get the *Client Id* and *Gateway endpoint* so you can test your API from the TraderLite app. Click on the **Endpoint** tab.
 
-4.15  Copy the value of the  **api-gateway-service** URL and the **Client-Id**  to a local text file so it can be used in the Stock Trader application later (**Note:** this is a shortcut to the regular process of publishing the API and then subscribing to it as a consumer).
+4.13  Copy the value of the  **api-gateway-service** URL and the **Client-Id**  to a local text file so it can be used in the Stock Trader application later (**Note:** this is a shortcut to the regular process of publishing the API and then subscribing to it as a consumer).
 
   [![](images/endpoint-client-id.png)](images/endpoint-client-id.png)
 
@@ -193,7 +196,7 @@ In the API designer, you have the ability to test the API immediately after crea
 > **Note**: There is a link to your assigned cluster's console on your Workshop Information page. If you have closed it,  you can access it following the instructions in the [FAQ](https://ibm.github.io/cloudpakforintegration-workshop/faq/).
 
 
-5.2 Click on **Projects** in the left navigation and then click on your ***studentnnn*** project in the list
+5.2 Click on **Projects** in the left navigation and then click on your ***student001*** project in the list
 
   [![](images/select-traderlite-project.png)](images/select-traderlite-project.png)
 
@@ -228,7 +231,7 @@ In the API designer, you have the ability to test the API immediately after crea
 
   [![](images/stock-trader-login.png)](images/stock-trader-login.png)
 
-6.3 If the DJIA summary has data then congratulations ! It means that the API you created in API Connect is working !
+6.3 If the simulated  DJIA summary has data then congratulations ! It means that the API you created in API Connect is working !
 
   [![](images/djia-success.png)](images/djia-success.png)
 

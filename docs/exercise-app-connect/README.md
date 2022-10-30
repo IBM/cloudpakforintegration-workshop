@@ -89,19 +89,30 @@ In this section you'll create a *Connected App* in Salesforce so that the App Co
 
    + Set the **Callback URL** to `https://www.ibm.com`
 
-   + Under **Selected OAuth Scopes** select  **Access and manage your data (api)** and click the arrow under the **Add** label
+   + Under **Selected OAuth Scopes** select  **Manage user data via APIs (api)** and click the arrow under the **Add** label
 
   [![](images/sfoauth.png)](images/sfoauth.png)
 
-2.8 Scroll down to the bottom of the web page and click **Save**
+2.8 Scroll down to the bottom of the web page and click **Save**.  You should see a message indicting that the Connected App can take up to 10 minutes to take effect. Click **Continue**.
 
-2.9 Copy the **Consumer Key** and **Consumer Secret** to a text file.  You will need them later to connect to Salesforce.
+2.9 In the **API (Enable OAuth Settings)** section click on **Manage Consumer Details**
 
-2.10 Click on your user name and select **My Settings**. On the left under the **Personal** section click on **Reset My Security Token**. Click on the **Reset Security Token** button.
+  [![](images/manage-consumer-details.png)](images/manage-consumer-details.png)
+
+2.10 You should be prompted for a Two-Factor Authentication prompt for a Verification code. Ener the code you received and click **Verify**
+
+  [![](images/sf-2fa-code.png)](images/sf-2fa-code.png)
+
+2.11 Copy the **Consumer Key** and **Consumer Secret** to a text file.  You will need them later to connect to Salesforce.
+
+  [![](images/key-and-secret.png)](images/key-and-secret.png)
+
+
+2.12 Click on your user name and select **My Settings**. On the left under the **Personal** section click on **Reset My Security Token**. Click on the **Reset Security Token** button.
 
  [![](images/reset-security-token.png)](images/reset-security-token.png)
 
-2.11 Check your email for the email address that you use as your Salesforce username. You should receive an email from  Salesforce with the subject **Your new Salesforce security token**. Copy the **Security Token** to the same text file that you used for the  **Consumer Key** and **Consumer Secret**
+2.13 Check your email for the email address that you use as your Salesforce username. You should receive an email from  Salesforce with the subject **Your new Salesforce security token**. Copy the **Security Token** to the same text file that you used for the  **Consumer Key** and **Consumer Secret**
 
   [![](images/sfsectoken.png)](images/sfsectoken.png)
 
@@ -123,10 +134,11 @@ App Connect Designer is a component of Cloud Pak for Integration that provides a
 
    [![](images/appdesignercatalog.png)](images/appdesignercatalog.png)
 
-3.6 Expand **Salesforce** . We have created dummy accounts for you already.  Select the account corresponding to your username (e.g. *student005*)  and click on **Update Account**.
+3.6 Expand **Salesforce**  and then click **Connect** 
 
-  [![](images/dummy-accounts.png)](images/dummy-accounts.png)
+   [![](images/sf-connect.png)](images/sf-connect.png)
 
+3.7 For **Authorization method**  select **Provide a username,password, and client credentials (OAUTH2...** and click **Continue**
 
 3.7 Enter the following values referring to the text file from  the previous section where you saved your Salesforce credentials.
 
@@ -157,7 +169,7 @@ App Connect Designer is a component of Cloud Pak for Integration that provides a
 
   [![](images/newflow.png)](images/newflow.png)
 
-4.3 Name the flow `sfpushnnn` where `nnn` are the last 3 digits in your username.(e.g. if your username is `student005` name the flow `sfpush005`).  Name the model `Client`
+4.3 Name the flow `sfpush001`.  Name the model `Client`
 
   [![](images/flowname.png)](images/flowname.png)
 
@@ -228,7 +240,7 @@ App Connect Designer is a component of Cloud Pak for Integration that provides a
 
   [![](images/edittestparams.png)](images/edittestparams.png)
 
-4.13 Click the "Try It" icon in the above screenshot. Verify that the operation returns a 200 HTTP status code.
+4.13 Click the **Auto match fields** link and then the  "Try It" icon shown in the above screenshot. Click **Continue** when prompted and then verify that the operation returns a 200 HTTP status code.
 
    [![](images/viewdetails.png)](images/viewdetails.png)
 
@@ -244,39 +256,33 @@ App Connect Designer is a component of Cloud Pak for Integration that provides a
 
    [sfsync.json](https://raw.githubusercontent.com/IBMStockTraderLite/traderlite-cp4i/master/appconnect/sfsync.json)
 
-4.19 Open the file *sfsync.json* with your favorite text editor
+4.19  Click on the **+** icon to add the API
 
-4.20 Modify the **host:** attribute by replacing the string `studentnnn` with your assigned username e.g. If your username is `student005` then the modified **host:** attribute should look like this:
+   [![](images/add-api-icon.png)](images/add-api-icon.png)
 
-```
-  "host": "portfolio-appconn-access.student005.svc.cluster.local:8080",
-```
+4.20  Import the file *sfsync.json* and click **Next**.
 
-4.21 Save the file
-
-4.22  Back in App Connect click on **Add your API now**
-
-4.23  Import the file *sfsync.json*, and name the API *Salesforce sync nnn* where `nnn` are the last 3 digits in your username.(e.g. if your username is `student005`  the API should be called  `Salesforce sync 005`).
+4.21 Name the API *TraderLite Salesforce Sync* 
 
   [![](images/addapi.png)](images/addapi.png)
 
-4.24 Click **Add API**
+4.22 Click **Add API**
 
-4.25 Click on the down arrow and then on **Connect**
+4.23 Click on the down arrow and then on **Connect**
 
   [![](images/connectapi.png)](images/connectapi.png)
 
-4.26 Accept the default values and click again **Connect** again
+4.24 Accept the default values and click  **Connect** again
 
-4.27 Click on the **Dashboard** icon
+4.25 Click on the **Dashboard** icon
 
   [![](images/dashboard2.png)](images/dashboard2.png)
 
-4.28 Click **New** and select **Event-driven flow**
+4.26 Click **New** and select **Event-driven flow**
 
-4.29 Name the flow `sfeventnnn` where `nnn` are the last 3 digits in your username.(e.g. if your username is `student005` name the flow `sfevent005`)
+4.29 Name the flow `sfevent001`,                    
 
-4.30  Expand the Salesforce section and select your specific  account (e.g. `student005`). Under **Contacts** select  **Updated contact**
+4.30  Expand the Salesforce section and select your specific  account (e.g. `Account 1`). Under **Contacts** select  **Updated contact**
 
   [![](images/updatedcontact.png)](images/updatedcontact.png)
 
@@ -300,7 +306,7 @@ App Connect Designer is a component of Cloud Pak for Integration that provides a
 
 4.33 Click on the **Dashboard** icon at the left
 
-4.34 Export your `sfeventsnnn` flow by clicking on the 3 period icon and selecting **Export..** from the context menu.
+4.34 Export your `sfevent001` flow by clicking on the 3 period icon and selecting **Export..** from the context menu.
 
   [![](images/exportevt.png)](images/exportevt.png)
 
@@ -308,7 +314,7 @@ App Connect Designer is a component of Cloud Pak for Integration that provides a
 
 4.36 Click **Save**
 
-4.37 Repeat for your  `sfpushnnn` flow, also selecting **Runtime flow asset (BAR)** and saving to your local system.
+4.37 Repeat for your  `sfpush001` flow, also selecting **Runtime flow asset (BAR)** and saving to your local system.
 
 ## Section 5: Create an Integration Server instance and deploy your flows
 
@@ -322,11 +328,11 @@ In this step you'll create an Integration Server instance and deploy your flows 
 
   [![](images/dashboardui.png)](images/dashboardui.png)
 
-5.4 Select the  **Quick start designer integration** tile and click **Next**
+5.4 Select the  **Quick start integration** tile and click **Next**
 
   [![](images/qsdesint.png)](images/qsdesint.png)
 
-5.5 Upload your  `sfeventnnn.bar` file and click **Next**
+5.5 Upload your  `sfevent001.bar` file and click **Next**
 
   [![](images/sfeventsbar.png)](images/sfeventsbar.png)
 
@@ -336,10 +342,9 @@ In this step you'll create an Integration Server instance and deploy your flows 
 
 > **Note**: Without *Accounts* checked, your flow will  not work when deployed . This allows the secret with your Salesforce credentials to be accessible to the deployed flow.
 
-5.7 Name the server `sfeventnnn` where `nnn` are the last 3 digits in your username.(e.g. if your username is `student005` name the server `sfevent005`)
+5.7 Name the server `sfevent001`.
 
-5.8 Ensure that the  **Designer flows type** is set to **event-driven-or-api-flows**
-and click  **Create** .
+5.8 Ensure that the **Designer flows mode** is set to **local**, the  **Designer flows type** is set to **event-driven-or-api-flows** and click  **Create** .
 
   [![](images/server-details.png)](images/server-details.png)
 
@@ -347,18 +352,17 @@ and click  **Create** .
 
   [![](images/create-server2.png)](images/create-server2.png)
 
-5.10 Select the **Quick start designer integration** tile and click **Next**
+5.10 Select the **Quick start integration** tile and click **Next**
 
-5.9 Upload your `sfpushnnn.bar` file and click **Next**
+5.9 Upload your `sfpush001.bar` file and click **Next**
 
 5.10 Select the **Accounts** type and leave the others unchecked. Click **Next**
 
 > **Note**: Without *Accounts* checked, your flow will  not work when deployed . This allows the secret with your Salesforce credentials to be accessible to the deployed flow.
 
-5.11 Name the server `sfpushnnn` where `nnn` are the last 3 digits in your username.(e.g. if your username is `student005` name the server `sfpush005`)
+5.11 Name the server `sfpush001`.
 
-5.12 Ensure that the  **Designer flows type** is set to **api-flows**
-and click  **Create** .
+5.12 Ensure that the **Designer flows mode** is set to **local**, the  **Designer flows type** is set to **api-flows** and click  **Create** .
 
   [![](images/server-details2.png)](images/server-details2.png)
 
@@ -371,7 +375,7 @@ and click  **Create** .
 
 ## Section 6: Get the REST endpoint of your App Connect Flow
 
-6.1 In the App Connect Dashboard click on the tile for your `sfpushnnn` server
+6.1 In the App Connect Dashboard click on the tile for your `sfpush001` server
 
 6.2 Click on the API tile to see the details of the flow's API
 
@@ -397,7 +401,7 @@ and click  **Create** .
 
   [![](images/select-traderlite-crd.png)](images/select-traderlite-crd.png)
 
-7.4 Scroll down to line 62 and change the **enabled**" field value to *true*  and paste the endpoint of your API flow that you saved earlier as the **url** value on line 66.
+7.4 Scroll down to line 443 and change the **enabled** field value to *true*  and paste the endpoint of your API flow that you saved earlier as the **url** value on line 447.
 
   [![](images/enable-sf-integration.png)](images/enable-sf-integration.png)
 
@@ -437,9 +441,11 @@ and click  **Create** .
 
 > **Note**: If the link does not work because of geo specific URLs for Salesforce, login in to Salesforce by yourself and look at the new contact. The easiest way to find the new contact is to enter the first and last name in the search bar in Salesforce.
 
+  [![](images/edit-contact.png)](images/edit-contact.png)
+
 7.15 Now test your reverse flow (i.e. when a contact is modified in Salesforce). Click on the **Edit** button for the contact and change  the mobile number. Click **Save**.
 
-  [![](images/edit-contact.png)](images/edit-contact.png)
+  [![](images/edit-contact2.png)](images/edit-contact2.png)
 
 7.16 Go back to the tab with the TraderLite app and refresh the page with the Client Details. Click on the **Client Details** tab and verify that the phone number has been updated with the new value you added in Salesforce.
 
