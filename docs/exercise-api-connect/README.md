@@ -8,10 +8,10 @@ The architecture of the app is shown below:
 
 - **Tradr** is a Node.js UI for the portfolio service
 - The **portfolio** microservice sits at the center of the application. This microservice:
-   * persists trade data using JDBC to a MariaDB database
-   * invokes the **stock-quote** service that invokes an API defined in API Connect in CP4I to get stock quotes
-   * calls the **trade-history** service to store trade data in a PostgreSQL database that can be queried for reporting purposes.
-   * calls the **trade-history** service to get aggregated historical trade data.
+    * persists trade data using JDBC to a MariaDB database
+    * invokes the **stock-quote** service that invokes an API defined in API Connect in CP4I to get stock quotes
+    * calls the **trade-history** service to store trade data in a PostgreSQL database that can be queried for reporting purposes.
+    * calls the **trade-history** service to get aggregated historical trade data.
 
 
 This lab is broken up into the following steps:
