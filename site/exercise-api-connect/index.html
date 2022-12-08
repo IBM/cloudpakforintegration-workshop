@@ -493,11 +493,13 @@
 <p><a href="images/architecture.png"><img alt="" src="images/architecture.png" /></a></p>
 <ul>
 <li><strong>Tradr</strong> is a Node.js UI for the portfolio service</li>
-<li>The <strong>portfolio</strong> microservice sits at the center of the application. This microservice:</li>
+<li>The <strong>portfolio</strong> microservice sits at the center of the application. This microservice:<ul>
 <li>persists trade data using JDBC to a MariaDB database</li>
 <li>invokes the <strong>stock-quote</strong> service that invokes an API defined in API Connect in CP4I to get stock quotes</li>
 <li>calls the <strong>trade-history</strong> service to store trade data in a PostgreSQL database that can be queried for reporting purposes.</li>
 <li>calls the <strong>trade-history</strong> service to get aggregated historical trade data.</li>
+</ul>
+</li>
 </ul>
 <p>This lab is broken up into the following steps:</p>
 <ol>
