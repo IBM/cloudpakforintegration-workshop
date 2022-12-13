@@ -605,15 +605,12 @@
 <p>3.1 Go to your Workshop Information page and click on the App Connect Designer component link. (<strong>Note:</strong> if you no longer have the Workshop Information page available see <a href="../pre-work/">these instructions</a>).</p>
 <p><a href="images/nav-to-des.png"><img alt="" src="images/nav-to-des.png" /></a></p>
 <p>3.2 If prompted to login enter the credentials on the Workshop Information page</p>
-<blockquote>
-<p><strong>Note</strong> You will be sharing this instance of App Connect Designer with other students so you will see their work as you navigate through the tool. You will use a naming scheme for the artifacts that you create that starts with your assigned username (e.g. student005).</p>
-</blockquote>
-<p>3.5 Click the <strong>Catalog</strong> icon</p>
+<p>3.3 Click the <strong>Catalog</strong> icon</p>
 <p><a href="images/appdesignercatalog.png"><img alt="" src="images/appdesignercatalog.png" /></a></p>
-<p>3.6 Expand <strong>Salesforce</strong>  and then click <strong>Connect</strong> </p>
+<p>3.4 Expand <strong>Salesforce</strong>  and then click <strong>Connect</strong> </p>
 <p><a href="images/sf-connect.png"><img alt="" src="images/sf-connect.png" /></a></p>
-<p>3.7 For <strong>Authorization method</strong>  select <strong>Provide a username,password, and client credentials (OAUTH2...</strong> and click <strong>Continue</strong></p>
-<p>3.7 Enter the following values referring to the text file from  the previous section where you saved your Salesforce credentials.</p>
+<p>3.5 For <strong>Authorization method</strong>  select <strong>Provide a username,password, and client credentials (OAUTH2...</strong> and click <strong>Continue</strong></p>
+<p>3.6 Enter the following values referring to the text file from  the previous section where you saved your Salesforce credentials.</p>
 <ul>
 <li>
 <p>For the <strong>Login URL</strong> enter <code>https://login.salesforce.com</code></p>
@@ -635,7 +632,7 @@
 <blockquote>
 <p><strong>NOTE</strong>: If you receive an error that the connection to Salesforce failed, then it is recommended to re-check the credentials and try again. You can re-enter the credentials for this account by clicking on the three dots next to the account name and clicking <strong>Update Account</strong> from the subsequent menu. The previous details are cleared, so you will need to enter them all again.   </p>
 </blockquote>
-<p>3.8 Click on <strong>Connect</strong>.</p>
+<p>3.7 Click on <strong>Connect</strong>.</p>
 <h2 id="section-4-create-the-flows-in-app-connect-designer">Section 4: Create the flows in App Connect Designer<a class="headerlink" href="#section-4-create-the-flows-in-app-connect-designer" title="Permanent link">&para;</a></h2>
 <p>4.1 In App Connect Designer, click the <strong>Dashboard</strong> icon.</p>
 <p><a href="images/dashboard.png"><img alt="" src="images/dashboard.png" /></a></p>
@@ -694,7 +691,7 @@
 <p><a href="images/testparams.png"><img alt="" src="images/testparams.png" /></a></p>
 <p>4.12 Click on <strong>Request body parameters</strong> and then edit the input parameters that will be used in the test.</p>
 <blockquote>
-<p><strong>Note</strong>: Salesforce does enforce formatting for telephone numbers and email addresses so use valid formatting for those. Click the test icon.</p>
+<p><strong>Note</strong>: Salesforce does enforce formatting for telephone numbers and email addresses so use valid formatting for those.</p>
 </blockquote>
 <ul>
 <li>
@@ -716,30 +713,30 @@
 <p><a href="images/edittestparams.png"><img alt="" src="images/edittestparams.png" /></a></p>
 <p>4.13 Click the <strong>Auto match fields</strong> link and then the  "Try It" icon shown in the above screenshot. Click <strong>Continue</strong> when prompted and then verify that the operation returns a 200 HTTP status code.</p>
 <p><a href="images/viewdetails.png"><img alt="" src="images/viewdetails.png" /></a></p>
-<p>4.15 Click <strong>View details</strong> to see the raw data returned from  the call to Salesforce (note this is not the same as the data returned by the flow which you defined in the <strong>Response</strong> stage of the flow).</p>
-<p>4.16 Click <strong>Done</strong> (top right of screen)</p>
-<p>4.17 Next you'll build a reverse flow. One that will call an API in the TraderLite app whenever a Salesforce contact is updated Click on the <strong>Catalog</strong> icon and select the <strong>APIs</strong></p>
+<p>4.14 Click <strong>View details</strong> to see the raw data returned from  the call to Salesforce (note this is not the same as the data returned by the flow which you defined in the <strong>Response</strong> stage of the flow).</p>
+<p>4.15 Click <strong>Done</strong> (top right of screen)</p>
+<p>4.16 Next you'll build a reverse flow. One that will call an API in the TraderLite app whenever a Salesforce contact is updated Click on the <strong>Catalog</strong> icon and select the <strong>APIs</strong></p>
 <p><a href="images/catalogapis.png"><img alt="" src="images/catalogapis.png" /></a></p>
-<p>4.18 In your browser right click on the following link, right click and select <strong>Save Link As ...</strong> from the context menu. Save the file <em>sfsync.json</em> to  your local system. This is an OpenAPI definition of the API in TraderLite that will update client data.</p>
+<p>4.17 In your browser right click on the following link, right click and select <strong>Save Link As ...</strong> from the context menu. Save the file <em>sfsync.json</em> to  your local system. This is an OpenAPI definition of the API in TraderLite that will update client data.</p>
 <p><a href="https://raw.githubusercontent.com/IBMStockTraderLite/traderlite-cp4i/master/appconnect/sfsync.json">sfsync.json</a></p>
-<p>4.19  Click on the <strong>+</strong> icon to add the API</p>
+<p>4.18  Click on the <strong>+</strong> icon to add the API</p>
 <p><a href="images/add-api-icon.png"><img alt="" src="images/add-api-icon.png" /></a></p>
-<p>4.20  Import the file <em>sfsync.json</em> and click <strong>Next</strong>.</p>
-<p>4.21 Name the API <em>TraderLite Salesforce Sync</em> </p>
+<p>4.19  Import the file <em>sfsync.json</em> and click <strong>Next</strong>.</p>
+<p>4.20 Name the API <em>TraderLite Salesforce Sync</em> </p>
 <p><a href="images/addapi.png"><img alt="" src="images/addapi.png" /></a></p>
-<p>4.22 Click <strong>Add API</strong></p>
-<p>4.23 Click on the down arrow and then on <strong>Connect</strong></p>
+<p>4.21 Click <strong>Add API</strong></p>
+<p>4.22 Click on the down arrow and then on <strong>Connect</strong></p>
 <p><a href="images/connectapi.png"><img alt="" src="images/connectapi.png" /></a></p>
-<p>4.24 Accept the default values and click  <strong>Connect</strong> again</p>
-<p>4.25 Click on the <strong>Dashboard</strong> icon</p>
+<p>4.23 Accept the default values and click  <strong>Connect</strong> again</p>
+<p>4.24 Click on the <strong>Dashboard</strong> icon</p>
 <p><a href="images/dashboard2.png"><img alt="" src="images/dashboard2.png" /></a></p>
-<p>4.26 Click <strong>New</strong> and select <strong>Event-driven flow</strong></p>
-<p>4.29 Name the flow <code>sfevent001</code>,                    </p>
-<p>4.30  Expand the Salesforce section and select your specific  account (e.g. <code>Account 1</code>). Under <strong>Contacts</strong> select  <strong>Updated contact</strong></p>
+<p>4.25 Click <strong>New</strong> and select <strong>Event-driven flow</strong></p>
+<p>4.26 Name the flow <code>sfevent001</code>,                    </p>
+<p>4.27  Expand the Salesforce section and select your specific  account (e.g. <code>Account 1</code>). Under <strong>Contacts</strong> select  <strong>Updated contact</strong></p>
 <p><a href="images/updatedcontact.png"><img alt="" src="images/updatedcontact.png" /></a></p>
-<p>4.31 Click the <strong>+</strong> icon and then on the <strong>APIs</strong> tab. Expand your <strong>Salesforce sync</strong> API and click on <strong>PUT /salesforce/contacts</strong></p>
+<p>4.28 Click the <strong>+</strong> icon and then on the <strong>APIs</strong> tab. Expand your <strong>Salesforce sync</strong> API and click on <strong>PUT /salesforce/contacts</strong></p>
 <p><a href="images/sfsyncapi.png"><img alt="" src="images/sfsyncapi.png" /></a></p>
-<p>4.32 Click in the icon right next to the <strong>ClientId</strong> field.</p>
+<p>4.29 Click in the icon right next to the <strong>ClientId</strong> field.</p>
 <ul>
 <li>
 <p>Map the <strong>ClientId</strong> field to the Salesforce <strong>ContactId</strong> field</p>
@@ -758,12 +755,12 @@
 </li>
 </ul>
 <p><a href="images/fieldsmapped.png"><img alt="" src="images/fieldsmapped.png" /></a></p>
-<p>4.33 Click on the <strong>Dashboard</strong> icon at the left</p>
-<p>4.34 Export your <code>sfevent001</code> flow by clicking on the 3 period icon and selecting <strong>Export..</strong> from the context menu.</p>
+<p>4.30 Click on the <strong>Dashboard</strong> icon at the left</p>
+<p>4.31 Export your <code>sfevent001</code> flow by clicking on the 3 period icon and selecting <strong>Export..</strong> from the context menu.</p>
 <p><a href="images/exportevt.png"><img alt="" src="images/exportevt.png" /></a></p>
-<p>4.35 Select <strong>Runtime flow asset (BAR)</strong> and click <strong>Export</strong></p>
-<p>4.36 Click <strong>Save</strong></p>
-<p>4.37 Repeat for your  <code>sfpush001</code> flow, also selecting <strong>Runtime flow asset (BAR)</strong> and saving to your local system.</p>
+<p>4.32 Select <strong>Runtime flow asset (BAR)</strong> and click <strong>Export</strong></p>
+<p>4.33 Click <strong>Save</strong></p>
+<p>4.34 Repeat for your  <code>sfpush001</code> flow, also selecting <strong>Runtime flow asset (BAR)</strong> and saving to your local system.</p>
 <h2 id="section-5-create-an-integration-server-instance-and-deploy-your-flows">Section 5: Create an Integration Server instance and deploy your flows<a class="headerlink" href="#section-5-create-an-integration-server-instance-and-deploy-your-flows" title="Permanent link">&para;</a></h2>
 <p>In this step you'll create an Integration Server instance and deploy your flows to it.</p>
 <p>5.1 Go to your Workshop Information page and click on the <strong>App Connect Dashboard</strong> component link. (<strong>Note:</strong> if you no longer have the Workshop Information page available see <a href="../pre-work/">these instructions</a>).</p>
@@ -785,15 +782,15 @@
 <p>5.9 It will take a while for the server to provision so you can continue deploying the other flow. Click <strong>Create server</strong></p>
 <p><a href="images/create-server2.png"><img alt="" src="images/create-server2.png" /></a></p>
 <p>5.10 Select the <strong>Quick start integration</strong> tile and click <strong>Next</strong></p>
-<p>5.9 Upload your <code>sfpush001.bar</code> file and click <strong>Next</strong></p>
-<p>5.10 Select the <strong>Accounts</strong> type and leave the others unchecked. Click <strong>Next</strong></p>
+<p>5.11 Upload your <code>sfpush001.bar</code> file and click <strong>Next</strong></p>
+<p>5.12 Select the <strong>Accounts</strong> type and leave the others unchecked. Click <strong>Next</strong></p>
 <blockquote>
 <p><strong>Note</strong>: Without <em>Accounts</em> checked, your flow will  not work when deployed . This allows the secret with your Salesforce credentials to be accessible to the deployed flow.</p>
 </blockquote>
-<p>5.11 Name the server <code>sfpush001</code>.</p>
-<p>5.12 Ensure that the <strong>Designer flows mode</strong> is set to <strong>local</strong>, the  <strong>Designer flows type</strong> is set to <strong>api-flows</strong> and click  <strong>Create</strong> .</p>
+<p>5.13 Name the server <code>sfpush001</code>.</p>
+<p>5.14 Ensure that the <strong>Designer flows mode</strong> is set to <strong>local</strong>, the  <strong>Designer flows type</strong> is set to <strong>api-flows</strong> and click  <strong>Create</strong> .</p>
 <p><a href="images/server-details2.png"><img alt="" src="images/server-details2.png" /></a></p>
-<p>5.13 Wait for both servers be in the <strong>Ready</strong> state. They will take about 2 or 3 minutes.</p>
+<p>5.15 Wait for both servers be in the <strong>Ready</strong> state. They will take about 2 or 3 minutes.</p>
 <blockquote>
 <p><strong>Note:</strong> You may have to refresh the page to get the latest server status</p>
 </blockquote>

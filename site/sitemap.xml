@@ -2,37 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://ibm.github.io/cloudpakforintegration-workshop/</loc>
-         <lastmod>2022-10-30</lastmod>
+         <lastmod>2022-12-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ibm.github.io/cloudpakforintegration-workshop/exercise-api-connect/</loc>
-         <lastmod>2022-10-30</lastmod>
+         <lastmod>2022-12-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ibm.github.io/cloudpakforintegration-workshop/exercise-app-connect/</loc>
-         <lastmod>2022-10-30</lastmod>
+         <lastmod>2022-12-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ibm.github.io/cloudpakforintegration-workshop/exercise-event-streaming/</loc>
-         <lastmod>2022-10-30</lastmod>
+         <lastmod>2022-12-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ibm.github.io/cloudpakforintegration-workshop/faq/</loc>
-         <lastmod>2022-10-30</lastmod>
+         <lastmod>2022-12-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ibm.github.io/cloudpakforintegration-workshop/instructor-guide/</loc>
-         <lastmod>2022-10-30</lastmod>
+         <lastmod>2022-12-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ibm.github.io/cloudpakforintegration-workshop/pre-work/</loc>
-         <lastmod>2022-10-30</lastmod>
+         <lastmod>2022-12-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
