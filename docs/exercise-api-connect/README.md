@@ -57,7 +57,7 @@ API Connect requires the [Firefox](https://www.mozilla.org/en-US/firefox/new/) b
 
    > **Note:** This Cloud Pak for Integration installation use self-signed certificates so you will have to click through any browser warnings and continue to the URL.
 
-2.3 Click on  **IBM provided credentials (admin only)** when prompted for an authentication type and then enter the credentials from your Workshop Information page.
+2.3 Select  **IBM provided credentials (admin only)** from the **Log in with** drop down  and then enter the credentials from your Workshop Information page.
 
    [![](images/nav-to-cs.png)](images/nav-to-cs.png)
 

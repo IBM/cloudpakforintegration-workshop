@@ -210,11 +210,11 @@ App Connect Designer is a component of Cloud Pak for Integration that provides a
 
    [![](images/implementflow1.png)](images/implementflow1.png)
 
-4.9 Next you'll map the properties from  your model to the Salesforce Contact properties. The properties have the same names as their Salesforce equivalents so click on **Auto match fields** to complete the mapping
+4.9 Next you'll map the properties from  your model to the Salesforce Contact properties. The properties have the same names as their Salesforce equivalents so click on **Preview 6 mapping suggestions** and then **Apply suggestions** to complete the mapping.
 
   [![](images/automatchfields.png)](images/automatchfields.png)
 
-4.10 Click on **Response** to configure what will be returned by the flow. Click in the text box for the **Client Id** property and then click on the icon just to the right of the field. Select the **Contact Id** property of the Salesforce contact.
+4.10 Click on **Response** to configure what will be returned by the flow. Click in the text box for the **Client Id** property and then click on the suggested mapping  to  **Contact ID**.
 
   [![](images/responsedata.png)](images/responsedata.png)
 
@@ -238,15 +238,15 @@ App Connect Designer is a component of Cloud Pak for Integration that provides a
 
   [![](images/edittestparams.png)](images/edittestparams.png)
 
-4.13 Click the **Auto match fields** link and then the  "Try It" icon shown in the above screenshot. Click **Continue** when prompted and then verify that the operation returns a 200 HTTP status code.
+4.13 Click the "Try It" icon shown in the above screenshot. Click **Continue** when prompted and then verify that the operation returns a 200 HTTP status code.
 
    [![](images/viewdetails.png)](images/viewdetails.png)
 
-4.14 Click **View details** to see the raw data returned from  the call to Salesforce (note this is not the same as the data returned by the flow which you defined in the **Response** stage of the flow).
+4.14 Click **View details** to see the raw data returned from  the call to Salesforce.
 
 4.15 Click **Done** (top right of screen)
 
-4.16 Next you'll build a reverse flow. One that will call an API in the TraderLite app whenever a Salesforce contact is updated Click on the **Catalog** icon and select the **APIs**
+4.16 Next you'll build a reverse flow. One that will call an API in the TraderLite app whenever a Salesforce contact is updated Click on the **Catalog** icon and then click on **+** to add your API. 
 
   [![](images/catalogapis.png)](images/catalogapis.png)
 
@@ -254,65 +254,51 @@ App Connect Designer is a component of Cloud Pak for Integration that provides a
 
    [sfsync.json](https://raw.githubusercontent.com/IBMStockTraderLite/traderlite-cp4i/master/appconnect/sfsync.json)
 
-4.18  Click on the **+** icon to add the API
+4.18  Select **OpenAPI** as the **Document type** and drag or select the  *sfsync.json* file you just downloaded
 
    [![](images/add-api-icon.png)](images/add-api-icon.png)
 
-4.19  Import the file *sfsync.json* and click **Next**.
+4.19 Click **Next** and then click **Import API**
 
-4.20 Name the API *TraderLite Salesforce Sync* 
-
-  [![](images/addapi.png)](images/addapi.png)
-
-4.21 Click **Add API**
-
-4.22 Click on the down arrow and then on **Connect**
+4.20 Scroll down to your imported API (**Salesforce Sync for Trader Lit**), click on the down arrow and then on **Connect**
 
   [![](images/connectapi.png)](images/connectapi.png)
 
-4.23 Accept the default values and click  **Connect** again
+4.21 Accept the default values and click  **Connect** again
 
-4.24 Click on the **Dashboard** icon
+4.22 Click on the **Dashboard** icon
 
   [![](images/dashboard2.png)](images/dashboard2.png)
 
-4.25 Click **New** and select **Event-driven flow**
+4.23 Click **New** and select **Event-driven flow**
 
-4.26 Name the flow `sfevent001`,                    
+4.24 Name the flow `sfevent001`,                    
 
-4.27  Expand the Salesforce section and select your specific  account (e.g. `Account 1`). Under **Contacts** select  **Updated contact**
+4.25  Expand the Salesforce section and select your specific  account (e.g. `Account 1`). Under **Contacts** select  **Updated contact**
 
   [![](images/updatedcontact.png)](images/updatedcontact.png)
 
-4.28 Click the **+** icon and then on the **APIs** tab. Expand your **Salesforce sync** API and click on **PUT /salesforce/contacts**
+4.26 Click the **+** icon. Expand your **Salesforce Sync for Trader Lit** API and click on **PUT /salesforce/contacts**
 
   [![](images/sfsyncapi.png)](images/sfsyncapi.png)
 
-4.29 Click in the icon right next to the **ClientId** field.
+4.27 Click **Preview 4 mapping suggestions** to start  the field mappings between the Salesforce contact and your API.
 
-   + Map the **ClientId** field to the Salesforce **ContactId** field
-
-   + Map the **FirstName** field to the Salesforce **FirstName** field
-
-   + Map the **LastName** field to the Salesforce **LastName** field
-
-   + Map the **Email** field to the Salesforce **Email** field
-
-   + Map the **MobilePhone** field to the Salesforce **MobilePhone** field
+4.28 Place yur cursor in the **ClientId** field and select the Salesforce **Contact ID** field
 
   [![](images/fieldsmapped.png)](images/fieldsmapped.png)
 
-4.30 Click on the **Dashboard** icon at the left
+4.29 Click on the **Dashboard** icon at the left
 
-4.31 Export your `sfevent001` flow by clicking on the 3 period icon and selecting **Export..** from the context menu.
+4.30 Export your `sfevent001` flow by clicking on the 3 period icon and selecting **Export..** from the context menu.
 
   [![](images/exportevt.png)](images/exportevt.png)
 
-4.32 Select **Runtime flow asset (BAR)** and click **Export**
+4.31 Select **Runtime flow asset (BAR)** and click **Export**
 
-4.33 Click **Save**
+4.32 Click **Save**
 
-4.34 Repeat for your  `sfpush001` flow, also selecting **Runtime flow asset (BAR)** and saving to your local system.
+4.33 Repeat for your  `sfpush001` flow, also selecting **Runtime flow asset (BAR)** and saving to your local system.
 
 ## Section 5: Create an Integration Server instance and deploy your flows
 
