@@ -683,9 +683,9 @@
 </li>
 </ul>
 <p><a href="images/implementflow1.png"><img alt="" src="images/implementflow1.png" /></a></p>
-<p>4.9 Next you'll map the properties from  your model to the Salesforce Contact properties. The properties have the same names as their Salesforce equivalents so click on <strong>Auto match fields</strong> to complete the mapping</p>
+<p>4.9 Next you'll map the properties from  your model to the Salesforce Contact properties. The properties have the same names as their Salesforce equivalents so click on <strong>Preview 6 mapping suggestions</strong> and then <strong>Apply suggestions</strong> to complete the mapping.</p>
 <p><a href="images/automatchfields.png"><img alt="" src="images/automatchfields.png" /></a></p>
-<p>4.10 Click on <strong>Response</strong> to configure what will be returned by the flow. Click in the text box for the <strong>Client Id</strong> property and then click on the icon just to the right of the field. Select the <strong>Contact Id</strong> property of the Salesforce contact.</p>
+<p>4.10 Click on <strong>Response</strong> to configure what will be returned by the flow. Click in the text box for the <strong>Client Id</strong> property and then click on the suggested mapping  to  <strong>Contact ID</strong>.</p>
 <p><a href="images/responsedata.png"><img alt="" src="images/responsedata.png" /></a></p>
 <p>4.11 Next you'll test the flow to make sure it works. Click on Salesforce icon (the middle part of the flow) and then click on the edit icon.</p>
 <p><a href="images/testparams.png"><img alt="" src="images/testparams.png" /></a></p>
@@ -711,56 +711,37 @@
 </li>
 </ul>
 <p><a href="images/edittestparams.png"><img alt="" src="images/edittestparams.png" /></a></p>
-<p>4.13 Click the <strong>Auto match fields</strong> link and then the  "Try It" icon shown in the above screenshot. Click <strong>Continue</strong> when prompted and then verify that the operation returns a 200 HTTP status code.</p>
+<p>4.13 Click the "Try It" icon shown in the above screenshot. Click <strong>Continue</strong> when prompted and then verify that the operation returns a 200 HTTP status code.</p>
 <p><a href="images/viewdetails.png"><img alt="" src="images/viewdetails.png" /></a></p>
-<p>4.14 Click <strong>View details</strong> to see the raw data returned from  the call to Salesforce (note this is not the same as the data returned by the flow which you defined in the <strong>Response</strong> stage of the flow).</p>
+<p>4.14 Click <strong>View details</strong> to see the raw data returned from  the call to Salesforce.</p>
 <p>4.15 Click <strong>Done</strong> (top right of screen)</p>
-<p>4.16 Next you'll build a reverse flow. One that will call an API in the TraderLite app whenever a Salesforce contact is updated Click on the <strong>Catalog</strong> icon and select the <strong>APIs</strong></p>
+<p>4.16 Next you'll build a reverse flow. One that will call an API in the TraderLite app whenever a Salesforce contact is updated Click on the <strong>Catalog</strong> icon and then click on <strong>+</strong> to add your API. </p>
 <p><a href="images/catalogapis.png"><img alt="" src="images/catalogapis.png" /></a></p>
 <p>4.17 In your browser right click on the following link, right click and select <strong>Save Link As ...</strong> from the context menu. Save the file <em>sfsync.json</em> to  your local system. This is an OpenAPI definition of the API in TraderLite that will update client data.</p>
 <p><a href="https://raw.githubusercontent.com/IBMStockTraderLite/traderlite-cp4i/master/appconnect/sfsync.json">sfsync.json</a></p>
-<p>4.18  Click on the <strong>+</strong> icon to add the API</p>
+<p>4.18  Select <strong>OpenAPI</strong> as the <strong>Document type</strong> and drag or select the  <em>sfsync.json</em> file you just downloaded</p>
 <p><a href="images/add-api-icon.png"><img alt="" src="images/add-api-icon.png" /></a></p>
-<p>4.19  Import the file <em>sfsync.json</em> and click <strong>Next</strong>.</p>
-<p>4.20 Name the API <em>TraderLite Salesforce Sync</em> </p>
-<p><a href="images/addapi.png"><img alt="" src="images/addapi.png" /></a></p>
-<p>4.21 Click <strong>Add API</strong></p>
-<p>4.22 Click on the down arrow and then on <strong>Connect</strong></p>
+<p>4.19 Click <strong>Next</strong> and then click <strong>Import API</strong></p>
+<p>4.20 Scroll down to your imported API (<strong>Salesforce Sync for Trader Lit</strong>), click on the down arrow and then on <strong>Connect</strong></p>
 <p><a href="images/connectapi.png"><img alt="" src="images/connectapi.png" /></a></p>
-<p>4.23 Accept the default values and click  <strong>Connect</strong> again</p>
-<p>4.24 Click on the <strong>Dashboard</strong> icon</p>
+<p>4.21 Accept the default values and click  <strong>Connect</strong> again</p>
+<p>4.22 Click on the <strong>Dashboard</strong> icon</p>
 <p><a href="images/dashboard2.png"><img alt="" src="images/dashboard2.png" /></a></p>
-<p>4.25 Click <strong>New</strong> and select <strong>Event-driven flow</strong></p>
-<p>4.26 Name the flow <code>sfevent001</code>,                    </p>
-<p>4.27  Expand the Salesforce section and select your specific  account (e.g. <code>Account 1</code>). Under <strong>Contacts</strong> select  <strong>Updated contact</strong></p>
+<p>4.23 Click <strong>New</strong> and select <strong>Event-driven flow</strong></p>
+<p>4.24 Name the flow <code>sfevent001</code>,                    </p>
+<p>4.25  Expand the Salesforce section and select your specific  account (e.g. <code>Account 1</code>). Under <strong>Contacts</strong> select  <strong>Updated contact</strong></p>
 <p><a href="images/updatedcontact.png"><img alt="" src="images/updatedcontact.png" /></a></p>
-<p>4.28 Click the <strong>+</strong> icon and then on the <strong>APIs</strong> tab. Expand your <strong>Salesforce sync</strong> API and click on <strong>PUT /salesforce/contacts</strong></p>
+<p>4.26 Click the <strong>+</strong> icon. Expand your <strong>Salesforce Sync for Trader Lit</strong> API and click on <strong>PUT /salesforce/contacts</strong></p>
 <p><a href="images/sfsyncapi.png"><img alt="" src="images/sfsyncapi.png" /></a></p>
-<p>4.29 Click in the icon right next to the <strong>ClientId</strong> field.</p>
-<ul>
-<li>
-<p>Map the <strong>ClientId</strong> field to the Salesforce <strong>ContactId</strong> field</p>
-</li>
-<li>
-<p>Map the <strong>FirstName</strong> field to the Salesforce <strong>FirstName</strong> field</p>
-</li>
-<li>
-<p>Map the <strong>LastName</strong> field to the Salesforce <strong>LastName</strong> field</p>
-</li>
-<li>
-<p>Map the <strong>Email</strong> field to the Salesforce <strong>Email</strong> field</p>
-</li>
-<li>
-<p>Map the <strong>MobilePhone</strong> field to the Salesforce <strong>MobilePhone</strong> field</p>
-</li>
-</ul>
+<p>4.27 Click <strong>Preview 4 mapping suggestions</strong> to start  the field mappings between the Salesforce contact and your API.</p>
+<p>4.28 Place yur cursor in the <strong>ClientId</strong> field and select the Salesforce <strong>Contact ID</strong> field</p>
 <p><a href="images/fieldsmapped.png"><img alt="" src="images/fieldsmapped.png" /></a></p>
-<p>4.30 Click on the <strong>Dashboard</strong> icon at the left</p>
-<p>4.31 Export your <code>sfevent001</code> flow by clicking on the 3 period icon and selecting <strong>Export..</strong> from the context menu.</p>
+<p>4.29 Click on the <strong>Dashboard</strong> icon at the left</p>
+<p>4.30 Export your <code>sfevent001</code> flow by clicking on the 3 period icon and selecting <strong>Export..</strong> from the context menu.</p>
 <p><a href="images/exportevt.png"><img alt="" src="images/exportevt.png" /></a></p>
-<p>4.32 Select <strong>Runtime flow asset (BAR)</strong> and click <strong>Export</strong></p>
-<p>4.33 Click <strong>Save</strong></p>
-<p>4.34 Repeat for your  <code>sfpush001</code> flow, also selecting <strong>Runtime flow asset (BAR)</strong> and saving to your local system.</p>
+<p>4.31 Select <strong>Runtime flow asset (BAR)</strong> and click <strong>Export</strong></p>
+<p>4.32 Click <strong>Save</strong></p>
+<p>4.33 Repeat for your  <code>sfpush001</code> flow, also selecting <strong>Runtime flow asset (BAR)</strong> and saving to your local system.</p>
 <h2 id="section-5-create-an-integration-server-instance-and-deploy-your-flows">Section 5: Create an Integration Server instance and deploy your flows<a class="headerlink" href="#section-5-create-an-integration-server-instance-and-deploy-your-flows" title="Permanent link">&para;</a></h2>
 <p>In this step you'll create an Integration Server instance and deploy your flows to it.</p>
 <p>5.1 Go to your Workshop Information page and click on the <strong>App Connect Dashboard</strong> component link. (<strong>Note:</strong> if you no longer have the Workshop Information page available see <a href="../pre-work/">these instructions</a>).</p>
