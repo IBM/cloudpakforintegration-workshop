@@ -1,4 +1,4 @@
-# Enterprise-grade integration with Cloud Pak for Integration v2022.4
+# Enterprise-grade integration with Cloud Pak for Integration v2023.2
 
 Welcome to our workshop! In this workshop we'll be looking at various parts of the Cloud Pak for Integration platform. The goals of this workshop are:
 
