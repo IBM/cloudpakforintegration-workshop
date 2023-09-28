@@ -41,9 +41,9 @@ This lab is broken up into the following steps:
 ## Step 1: Uninstall the TraderLite  app
 If you've completed the API Connect and/or the Salesforce integration labs then you will have the app running already. For this lab it's easier to install the app from  scratch so you can use the OpenShift GUI environment (as opposed to editing the yaml file of an existing instance) to select all the options needed for this app. If the app is *NOT* installed skip to **Step 2**.
 
-1.1 Go to the OpenShift console of your workshop cluster. Select your  ***student001*** project. In the navigation on the left select **Installed Operators** in the **Operators** section and select the **TraderLite Operator**
+1.1 Go to the OpenShift console of your workshop cluster. Select your  ***student1*** project. In the navigation on the left select **Installed Operators** in the **Operators** section and select the **TraderLite Operator**
 
-  [![](images/traderlite-operator.png)](images/traderlite-operator.png)
+  [![](images/select-traderlite-operator.png)](images/select-traderlite-operator.png)
 
 1.2 Click on the **TraderLite app** tab
 
@@ -69,9 +69,11 @@ If you've completed the API Connect and/or the Salesforce integration labs then 
 
   [![](images/create-topic.png)](images/create-topic.png)
 
-2.4 Name the topic `student001`. Click **Next**.
+2.4 Name the topic `student1`. Click **Next**.
 
-2.5 Leave the default for message retention and click **Next**.
+2.5 Leave the default for partitions and click **Next**.
+
+2.6 Leave the default for message retention and click **Next**.
 
 2.6 Leave the default for replicas and click **Create topic**.
 
@@ -83,7 +85,7 @@ If you've completed the API Connect and/or the Salesforce integration labs then 
 
 In this section you will install the TraderLite app to start storing transactions as MQ messages, without setting up the KafkaConnect part that will move the transactions out of MQ, into Event Streams and then into MongoDB. This demonstrates how MQ can serve as a reliable store and forward buffer especially during temporary network disruption.
 
-3.1 Go to the OpenShift console of your workshop cluster. Select your  ***student001*** project. 
+3.1 Go to the OpenShift console of your workshop cluster. Select your  ***student1*** project. 
 
 3.2 Click on **Installed Operators** (in the **Operators** section) in the left navigation and then click on the **TraderLite Operator** in the list.
 
@@ -97,11 +99,11 @@ In this section you will install the TraderLite app to start storing transaction
 
 3.5 Set the following values:
 
-   + Under **Kafka Access** select the **student001** topic
+   + Under **Kafka Access** select the **student1** topic
 
    + Enable **KafkaIntegration**
 
-   + Under **Mqaccess** select the **STUDENT001.QUEUE** queue
+   + Under **Mqaccess** select the **STUDENT1.QUEUE** queue
 
   [![](images/traderlite-create-values.png)](images/traderlite-create-values.png)
 
@@ -150,7 +152,7 @@ In this section you will install the TraderLite app to start storing transaction
 
   [![](images/manage-qmtrader-tile.png)](images/manager-qmtrader-tile.png)
 
-5.4 Click on the **STUDENT001.QUEUE** queue.
+5.4 Click on the **STUDENT1.QUEUE** queue.
 
   [![](images/trader-queue.png)](images/trader-queue.png)
 
@@ -172,7 +174,7 @@ In this section you will configure the TraderLite app to start moving the transa
 
 6.3 Click on the 3 periods to the right of the existing TraderLite CRD and select **Edit TraderLite** from the context menu.
 
-6.4 Scroll down to line 432 and set **Kafka Connect enabled** to  **true** (leave all the other values unchanged).
+6.4 Scroll down to line 151 and set **Kafka Connect enabled** to  **true** (leave all the other values unchanged).
 
   [![](images/kafka-connect-enabled.png)](images/kafka-connect-enabled.png)
 
@@ -215,7 +217,7 @@ In this section you will configure the TraderLite app to start moving the transa
 
   [![](images/topics-icon.png)](images/topics-icon.png)
 
-8.3 Click on topic **student001**
+8.3 Click on topic **student1**
 
   [![](images/topic-name.png)](images/topic-name.png)
 

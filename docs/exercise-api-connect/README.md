@@ -33,7 +33,7 @@ This lab is broken up into the following steps:
 1. [Summary](#summary)
 
 ## Prerequisites
-API Connect requires the [Firefox](https://www.mozilla.org/en-US/firefox/new/) browser (version > 78.9.0) in order to use the testing capabilities during API development (Step #4 of this lab) so it is recommended that you complete this entire lab using Firefox.
+The labs have been tested with recent versions of **Firefox** and **Chrome** so it is recommended that you complete this entire lab using one of these browsers.
 
 ## Step 1: Download the OpenAPI definition file for the external Stock Quote service
 
@@ -69,7 +69,7 @@ API Connect requires the [Firefox](https://www.mozilla.org/en-US/firefox/new/) b
 
    [![](images/api-manager.png)](images/api-manager.png)
 
-2.6 Click **Add** and select **API (from REST,GraphQL or SOAP)** from the context menu
+2.6 Click **Add** and select **API** from the context menu
 
   [![](images/add-api.png)](images/add-api.png)
 
@@ -99,45 +99,43 @@ After importing the existing API, the first step is to configure basic security 
 
 3.3 In the Edit API screen click **Security Schemes(0)** in the left navigation
 
-3.4 In the **Security** section, click the **Add** button on the right and then click on **Create a security scheme**. 
+3.4 Click the **Add** button on the right and then click on **Create a security scheme**. 
 
   [![](images/security-scheme.png)](images/security-scheme.png)   
 
-3.5 In the **Security Scheme Name(Key)** field, type `client-id`.
+3.5 In the **Security Definition Name(Key)** field, type `client-id`.
 
 3.6 Under **Security Definition Type**, choose **apiKey**. 
 
 3.6 Under **Key Type**, choose **client_id**. 
 
-3.7 For **Located In** choose **header**.
-
-3.8 Enter `X-IBM-Client-Id` as the **Variable Name**.  Your screen should now look like the image below.
+3.7 For **Located In** choose **header**. Your screen should now look like the image below.
 
   [![](images/edit-api-complete.png)](images/edit-api-complete.png)   
 
-3.9 Click the **Create** button and then click **Save**.
+3.8 Click the **Create** button and then click **Save**.
 
-3.10 Next you'll require use of the Client Id to access your API. In the left Navigation select **Security(0)** and then click on **Create a Security Requirement** 
+3.9 Next you'll require use of the Client Id to access your API. In the left Navigation select **Security(0)** and then click on **Create a Security Requirement** 
 
   [![](images/create-security-req.png)](images/create-security-req.png)   
 
-3.11 Select the Security Scheme you just created and the click **Create**.
+3.10 Select the Security Scheme you just created and the click **Create**.
 
   [![](images/security-req.png)](images/security-req.png)   
 
-3.12 Click **Save**
+3.11 Click **Save**
 
-3.13 Next you'll define the endpoint for the external API. Select  the **Gateway** tab, expand **Properties**  in the left navigation.
+3.12 Next you'll define the endpoint for the external API. Select  the **Gateway** tab, expand **Properties**  in the left navigation.
 
-3.14 Click on the **target-url** property.
+3.13 Click on the **target-url** property.
 
-3.15 Copy then paste the following URL into the **Property Value** field:
+3.14 Copy then paste the following URL into the **Property Value** field:
 
-    https://stock-trader-quote.us-south.cf.appdomain.cloud
+    https://stocktrader.ibmc.buildlab.cloud
 
   [![](images/target-url.png)](images/target-url.png)
 
-3.16 Click **Save** to complete the configuration.
+3.15 Click **Save** to complete the configuration.
 
 ## Step 4: Test the API
 
@@ -196,7 +194,7 @@ In the API designer, you have the ability to test the API immediately after crea
 > **Note**: There is a link to your assigned cluster's console on your Workshop Information page. If you have closed it,  you can access it following the instructions in the [FAQ](https://ibm.github.io/cloudpakforintegration-workshop/faq/).
 
 
-5.2 Click on **Projects** in the left navigation and then click on your ***student001*** project in the list
+5.2 Click on **Projects** in the left navigation and then click on your ***student1*** project in the list
 
   [![](images/select-traderlite-project.png)](images/select-traderlite-project.png)
 
