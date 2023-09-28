@@ -5,7 +5,7 @@
 
 The links, credentials and other resources you will need to complete the labs in this workshop have all been consolidated on one `Workshop Information` application. This application is pre-deployed on your cluster and can be accessed using the following steps:
 
-1.  From the OpenShift console  select *Projects* (in the *Home* section) and then select the ***student001*** project.
+1.  From the OpenShift console  select *Projects* (in the *Home* section) and then select the ***student1*** project.
 
     [![](images/select-project.png)](images/select-project.png)
 
