@@ -238,7 +238,9 @@ App Connect Designer is a component of Cloud Pak for Integration that provides a
 
 4.16 Next you'll build a reverse flow. One that will call an API in the TraderLite app whenever a Salesforce contact is updated. In your browser right click on the following link, right click and select **Save Link As ...** from the context menu. Save the file *sfsync.json* to your local system. This is an OpenAPI definition of the API in TraderLite that will update client data.
 
-4.17 back in App Connect Desigber click on the **Catalog** icon and then click on **+** to add your API. 
+  [sfsync.json](https://raw.githubusercontent.com/IBMStockTraderLite/traderlite-cp4i/master/appconnect/sfsync.json)
+  
+4.17 back in App Connect Designer click on the **Catalog** icon and then click on **+** to add your API. 
 
   [![](images/catalogapis.png)](images/catalogapis.png)
 
